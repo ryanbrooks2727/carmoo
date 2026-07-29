@@ -241,7 +241,7 @@ export default function Home() {
 
             {/* Sell card */}
             <div className="rounded-2xl p-8" style={{ backgroundColor: "#ffffff", border: "1.5px solid rgba(0,0,0,0.1)", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}>
-              <p className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: "rgba(0,0,0,0.35)" }}>Selling</p>
+              <p className="text-2xl font-semibold uppercase mb-3" style={{ color: "#111111", letterSpacing: "0.03em" }}>Selling</p>
               <p style={{ fontSize: "1.05rem", color: "#111111", marginBottom: "1.5rem", lineHeight: 1.45 }}>Get <strong style={{ fontWeight: 600 }}>more for your car</strong> than anywhere else online</p>
               <div className="flex gap-2 items-stretch">
                 <div className="flex items-center rounded-lg overflow-hidden flex-1" style={{ border: "2px solid #f5c400" }}>
@@ -268,7 +268,7 @@ export default function Home() {
 
             {/* Buy card */}
             <div className="rounded-2xl p-8 flex flex-col justify-between" style={{ backgroundColor: "#111111" }}>
-              <p className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.35)" }}>Buying</p>
+              <p className="text-2xl font-semibold uppercase mb-3" style={{ color: "#00bf63", letterSpacing: "0.03em" }}>Buying</p>
               <p style={{ fontSize: "1.05rem", color: "#ffffff", marginBottom: "1.5rem", lineHeight: 1.45 }}>Cars priced <strong style={{ fontWeight: 600 }}>below dealers</strong> — with a <strong style={{ fontWeight: 600 }}>longer warranty</strong></p>
               <a href="#how-it-works"
                 className="block text-center font-medium text-sm px-4 py-3 rounded-xl transition-opacity hover:opacity-80"
