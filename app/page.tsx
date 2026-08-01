@@ -265,11 +265,28 @@ export default function Home() {
                 <stop offset="80%" stopColor="#e6e0f8" />
                 <stop offset="100%" stopColor="#fbe2ee" />
               </linearGradient>
+              <clipPath id="heroClip">
+                <path d="M6,0 L113,0 C140,0 160,5 175,13 L183,13 C193,15 200,20 200,30 L200,70 C200,80 193,85 183,87 L175,87 C160,95 140,100 113,100 L6,100 C3,100 0,97 0,94 L0,6 C0,3 3,0 6,0 Z" />
+              </clipPath>
             </defs>
             <path
               d="M6,0 L113,0 C140,0 160,5 175,13 L183,13 C193,15 200,20 200,30 L200,70 C200,80 193,85 183,87 L175,87 C160,95 140,100 113,100 L6,100 C3,100 0,97 0,94 L0,6 C0,3 3,0 6,0 Z"
               fill="url(#heroBgGradient)"
             />
+            <g clipPath="url(#heroClip)">
+              {[123, 136, 149, 162, 175, 188].map((cx, i) => (
+                <rect
+                  key={i}
+                  x={cx - 1.4}
+                  y={-60}
+                  width={2.8}
+                  height={220}
+                  fill="#ffffff"
+                  opacity={0.4}
+                  transform={`rotate(-22 ${cx} 50)`}
+                />
+              ))}
+            </g>
           </svg>
 
           {/* Tabbed Buying/Selling card + car image, balanced as a pair */}
@@ -316,8 +333,8 @@ export default function Home() {
                   </>
                 ) : (
                   <>
-                    <h3 style={{ fontSize: "1.9rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.75rem" }}>Sell my car for the max.</h3>
-                    <p style={{ fontSize: "0.95rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.5rem", lineHeight: 1.5 }}>On average <strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than Motorway &amp; <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than WBAC.</p>
+                    <h3 style={{ fontSize: "1.9rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.75rem" }}>Sell my car for the max</h3>
+                    <p style={{ fontSize: "0.95rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.5rem", lineHeight: 1.5 }}>On average <strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than motorway &amp; <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than wbac</p>
                     <div className="flex gap-2 items-stretch">
                       <div className="flex items-center rounded-lg overflow-hidden flex-1" style={{ border: "2px solid #e8e3da" }}>
                         <div className="px-3 py-3 font-medium text-xs" style={{ backgroundColor: "#f6f3ed", color: "#111111" }}>GB</div>
