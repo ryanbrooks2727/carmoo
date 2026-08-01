@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const Brand = () => <span style={{ fontFamily: "var(--font-comfortaa), sans-serif" }}>Carmoo</span>;
+const Brand = () => <span style={{ fontFamily: "var(--font-brand), sans-serif", fontWeight: 700, textTransform: "lowercase" }}>carmoo</span>;
 
 const CartoonCar = () => (
   <svg viewBox="0 0 220 210" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", overflow: "visible" }}>
@@ -53,6 +53,50 @@ const CartoonCar = () => (
   </svg>
 );
 
+const MarketSpectrum = () => (
+  <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto" }}>
+    {/* baseline */}
+    <line x1="60" y1="150" x2="940" y2="150" stroke="rgba(0,0,0,0.15)" strokeWidth="3" strokeLinecap="round" />
+    <text x="60" y="120" fontSize="13" fontWeight="600" fill="rgba(0,0,0,0.35)" letterSpacing="0.05em">LOWER VALUE</text>
+    <text x="940" y="120" textAnchor="end" fontSize="13" fontWeight="600" fill="rgba(0,0,0,0.35)" letterSpacing="0.05em">HIGHER VALUE</text>
+
+    {/* Trade-in / part-ex */}
+    <circle cx="160" cy="150" r="7" fill="#9ca3af" />
+    <line x1="160" y1="150" x2="160" y2="182" stroke="#9ca3af" strokeWidth="2" />
+    <text x="160" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#6b7280">Trade-in / Part-Ex</text>
+    <text x="160" y="225" textAnchor="middle" fontSize="13" fill="#9ca3af">Lowest offer</text>
+
+    {/* Online instant-offer platforms */}
+    <circle cx="390" cy="150" r="7" fill="#9ca3af" />
+    <line x1="390" y1="150" x2="390" y2="182" stroke="#9ca3af" strokeWidth="2" />
+    <text x="390" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#6b7280">Motorway / WBAC</text>
+    <text x="390" y="225" textAnchor="middle" fontSize="13" fill="#9ca3af">Online instant offers</text>
+
+    {/* carmoo — private market value */}
+    <line x1="650" y1="95" x2="650" y2="150" stroke="#111111" strokeWidth="2.5" />
+    <rect x="572" y="52" width="156" height="38" rx="19" fill="#111111" />
+    <text x="650" y="77" textAnchor="middle" fontSize="16" fontWeight="700" fill="#ffffff" letterSpacing="0.03em">carmoo</text>
+    <circle cx="650" cy="150" r="11" fill="#111111" stroke="#ffffff" strokeWidth="3" />
+    <text x="650" y="204" textAnchor="middle" fontSize="17" fontWeight="700" fill="#111111">Private Market Value</text>
+    <text x="650" y="225" textAnchor="middle" fontSize="13" fill="rgba(0,0,0,0.5)">The fair price — for everyone</text>
+
+    {/* Dealership retail */}
+    <circle cx="880" cy="150" r="7" fill="#9ca3af" />
+    <line x1="880" y1="150" x2="880" y2="182" stroke="#9ca3af" strokeWidth="2" />
+    <text x="880" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#6b7280">Dealership Retail</text>
+    <text x="880" y="225" textAnchor="middle" fontSize="13" fill="#9ca3af">Highest price</text>
+
+    {/* Diverging callouts from the carmoo point */}
+    <line x1="650" y1="150" x2="470" y2="290" stroke="#00bf63" strokeWidth="2" />
+    <circle cx="470" cy="290" r="4" fill="#00bf63" />
+    <text x="470" y="315" textAnchor="middle" fontSize="15" fontWeight="700" fill="#00bf63">Sellers earn more here</text>
+
+    <line x1="650" y1="150" x2="830" y2="290" stroke="#111111" strokeWidth="2" />
+    <circle cx="830" cy="290" r="4" fill="#111111" />
+    <text x="830" y="315" textAnchor="middle" fontSize="15" fontWeight="700" fill="#111111">Buyers pay less here</text>
+  </svg>
+);
+
 const LightningStrike = () => (
   <div style={{ position: "relative", display: "inline-block" }}>
     <style>{`
@@ -70,60 +114,56 @@ const LightningStrike = () => (
 
 const faqs = [
   {
-    q: "What types of vehicles are listed on Carmoo?",
-    a: "Carmoo is exclusively for electric vehicles. Every car listed on the platform is a private EV — no petrol, no diesel, no hybrids. We believe the future is electric and we've built the simplest, most trustworthy way to buy and sell within it.",
+    q: "What types of vehicles are listed on carmoo?",
+    a: "Right now, carmoo is open to all vehicles — petrol, diesel, hybrid and electric. As we grow and introduce our warranty program, we'll transition to an EV-only marketplace. For now, our focus is building trust and momentum across the board.",
   },
   {
-    q: "What warranty is included?",
-    a: "Every car purchased through Carmoo comes with a 2-year warranty and breakdown cover as standard. To maintain it, buyers must hold an active telematics-based insurance policy — we provide details of our partner insurers who offer competitive rates and handle everything including fitting. The vehicle must also be kept serviced in line with the manufacturer's guidelines. Both conditions are set out in the welcome pack at the point of purchase. Meet them and the warranty stands for the full two years.",
+    q: "Do you offer a warranty?",
+    a: "Not yet — but it's firmly on our roadmap. Right now, carmoo is focused on connecting buyers and sellers directly for free, with every listing quality-checked before it goes live. As we grow, we're planning to introduce a 2-year warranty and breakdown cover as standard, alongside our move to an EV-only marketplace.",
   },
   {
-    q: "Are there any servicing requirements to keep the warranty valid?",
-    a: "Yes — as a condition of the 2-year warranty, the vehicle must be maintained and serviced in accordance with the manufacturer's guidelines. For an electric vehicle this is typically straightforward; there's no engine oil, no timing belt, no clutch to worry about. A periodic check-up is usually all that's required. The good news is you don't need to track it yourself — the car will tell you when a service is due. When it does, it's essential that you book it in promptly and have it carried out. Ignoring a service notification and failing to act on it may void the warranty, so it's important to treat it as a priority the moment the car flags it. The specific requirements for your vehicle will be clearly set out in the welcome pack provided at the point of purchase.",
-  },
-  {
-    q: "What is the telematics condition?",
-    a: "To benefit from the 2-year warranty, buyers are required to hold an active insurance policy that includes telematics. We work with a number of partner insurance companies that use telematics as standard, and we'll provide every buyer with details of these partners at the point of purchase. Because we're able to direct high volumes of customers to our insurance partners, they can offer our buyers significantly reduced premiums in return — so you get cheaper insurance as part of the deal. The insurance company handles the fitting of the telematics unit, so there's nothing for you to organise. The logic is simple: drivers who are insured on a telematics policy drive more carefully. That means less wear and tear on the vehicle, fewer warranty claims, and a much better ownership experience all round. It's a condition that protects everyone — including you.",
-  },
-  {
-    q: "How does Carmoo vet vehicles before listing?",
-    a: "Every EV that applies to be listed goes through our assessment process. We check the ownership history, verify the V5, review the service and charging history, and assess the overall condition and presentation of the car. We only approve vehicles that meet our standard — so if it's on Carmoo, it's earned its place.",
+    q: "How does carmoo vet vehicles before listing?",
+    a: "Every vehicle that applies to be listed gets a quick review from us — we look at the ownership history, overall condition and how it's presented. It's a lighter check than a full inspection, but it's enough to filter out low-quality vehicles before they ever reach a buyer. As we grow, we plan to make this vetting process more thorough.",
   },
   {
     q: "What vehicles are eligible to be listed?",
-    a: "To maintain the quality of our platform and ensure every car is one we can confidently back with a 2-year warranty, we only accept vehicles registered in 2018 or later and with fewer than 80,000 miles on the clock. This isn't arbitrary — it's how we keep the standard high and make sure every buyer gets a car that's genuinely worth buying. If your vehicle falls outside these criteria, we won't be able to list it, but these thresholds allow us to stand behind every sale we facilitate.",
+    a: "To keep the standard high, we currently ask that vehicles are registered in 2018 or later with fewer than 80,000 miles on the clock. It's a simple bar, but it helps make sure every buyer is looking at a car that's genuinely worth buying. As we grow and move toward an EV-only platform with warranty cover, these criteria will evolve alongside it.",
   },
   {
     q: "How much can I save compared to a dealer?",
-    a: "On average, buyers save around £2,000 compared to buying the same EV from a dealership. You're buying directly from a private owner — no dealer margin, no forecourt markup. Just a fair price for a properly vetted car.",
+    a: "On average, buyers save around £2,000 compared to buying the same car from a dealership. You're buying directly from a private owner — no dealer margin, no forecourt markup. Just a fair price for a properly vetted vehicle.",
   },
   {
-    q: "How much more will I get for my EV compared to a trade buyer?",
-    a: "Sellers typically earn around £2,600 more through Carmoo than they would through part exchange, and approximately £1,000 more than selling through 'instant offer' dealer bidding sites. You're selling directly to a genuine buyer who wants your car — not a middleman looking to make a margin on it.",
+    q: "How much more will I get for my car compared to a trade buyer?",
+    a: "Sellers typically earn around £2,500 more through carmoo than they would through We Buy Any Car or a dealer part-exchange, and approximately £1,000 more than selling through Motorway. You're selling directly to a genuine buyer who wants your car — not a middleman looking to make a margin on it.",
   },
   {
     q: "How does the selling process work?",
-    a: "Simple. Tell us about your EV, we assess it, and if it meets our standard we'll help you create a clean, clear listing. Verified buyers come to you — no tyre kickers, no time wasters. We guide you through every step from listing to handover.",
+    a: "Simple. Tell us about your car, we give it a quick review, and if it meets our standard we'll help you create a clean, clear listing. Genuine buyers come to you directly — no dealer middlemen skimming a margin. We guide you through every step from listing to handover.",
   },
   {
     q: "How does the buying process work?",
-    a: "Browse verified EV listings, find the one you want, and we'll arrange the viewing. Every listing comes with a warranty, full ownership verification and a clear history. We walk you through insurance, tax and V5 transfer so nothing gets missed.",
+    a: "Browse quality-checked listings, find the one you want, and get in touch directly with the seller to arrange a viewing. Every listing has been reviewed by us first, so you're not browsing blind. We walk you through insurance, tax and V5 transfer so nothing gets missed.",
   },
   {
     q: "Do you offer finance?",
-    a: "Yes. We offer competitive low APR finance options to help make your EV purchase as straightforward as possible. Rather than having to arrange finance separately, we can handle it as part of the buying process — so you can focus on finding the right car, not chasing the right rate.",
+    a: "Not yet. Right now, buying on carmoo is a direct purchase between you and the seller — arrange your own finance if you need it. Low APR finance is on our roadmap alongside our warranty program as we grow.",
   },
   {
-    q: "Is Carmoo free to use?",
-    a: "Advertising your EV on Carmoo is completely free — and it always will be. No listing fees, no hidden charges, no catches. We believe sellers shouldn't have to pay to find a buyer, so we've made it free as a permanent commitment, not a promotion.",
+    q: "Is carmoo free to use?",
+    a: "Advertising your vehicle on carmoo is completely free — and it always will be. No listing fees, no hidden charges, no catches. We believe sellers shouldn't have to pay to find a buyer, so we've made it free as a permanent commitment, not a promotion.",
   },
   {
-    q: "Why only electric vehicles?",
-    a: "Because EVs represent the future of private car ownership — and they're uniquely well-suited to a platform like ours. With far fewer moving parts than a combustion engine, a well-maintained electric car is a remarkably low-risk private purchase. No engine wear, no gearbox issues, no clutch. Add a warranty on top and buying privately has never been more straightforward.",
+    q: "Will carmoo become EV-only?",
+    a: "Yes — eventually. We believe electric is the future of private car ownership, and EVs are uniquely well-suited to a platform like ours: far fewer moving parts, lower risk, easier to warranty. Right now we're open to all vehicles while we build trust and momentum, but as we introduce our warranty program we'll transition to an EV-only marketplace.",
   },
   {
-    q: "When is Carmoo launching?",
+    q: "When is carmoo launching?",
     a: "We're launching in the South West first, then rolling out nationally. Get in touch and we'll let you know as soon as we're live in your area.",
+  },
+  {
+    q: "Why did you start carmoo?",
+    a: "We noticed a neglected market: good, honest people selling great cars who deserved more than online auction-style sites offered them, and equally honest buyers wanting those same cars at a better price than any dealership. That's why we created carmoo — to bring those two groups together in a way that actually works.",
   },
 ];
 
@@ -131,6 +171,8 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [heroTab, setHeroTab] = useState<"buying" | "selling">("buying");
+  const [valueTab, setValueTab] = useState<"selling" | "buying">("selling");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const [valForm, setValForm] = useState({ name: "", email: "", phone: "", reg: "", mileage: "", year: "", condition: "", finance: "" });
@@ -189,129 +231,248 @@ export default function Home() {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "210px 210px",
                 backgroundPosition: "-61px -98px",
-              }} aria-label="Carmoo" />
+              }} aria-label="carmoo" />
             </a>
             <div style={{ width: "1px", height: "16px", backgroundColor: "rgba(0,0,0,0.15)", flexShrink: 0 }} />
-            <span className="hidden md:block text-xs font-medium uppercase tracking-widest" style={{ color: "rgba(0,0,0,0.35)", letterSpacing: "0.1em" }}>Exclusively EV</span>
+            <span className="hidden md:block text-xs font-medium tracking-widest" style={{ color: "rgba(0,0,0,0.35)", letterSpacing: "0.1em" }}>A better deal</span>
           </div>
           <div className="flex items-center gap-6">
             <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>How it works</a>
-            <a href="#valuation" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Sell your EV</a>
-            <a href="#warranty" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Warranty</a>
+            <a href="#valuation" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Sell your car</a>
+            <a href="#quality" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Our vetting</a>
             <a href="#faq" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>FAQ</a>
-            <a href="#waitlist" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Contact</a>
             <a href="#waitlist" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Get in touch</a>
           </div>
         </div>
       </nav>
 
-      {/* HERO */}
-      <section style={{
-        overflow: "hidden",
-        minHeight: "88vh",
-        maxHeight: "88vh",
-        position: "relative",
-        backgroundColor: "#ffffff",
-        display: "flex",
-        alignItems: "center",
-      }}>
-        {/* Hero photo — right side, fading in */}
-        <div style={{
-          position: "absolute",
-          top: 0, right: 0, bottom: 0,
-          width: "48%",
-          zIndex: 1,
-          backgroundImage: "url('/hero-bg.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center left",
-          backgroundRepeat: "no-repeat",
-          maskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.9) 60%, black 100%)",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.9) 60%, black 100%)",
-          opacity: 0.5,
-        }} />
+      {/* HERO + MARKET SPECTRUM (merged) */}
+      <section className="px-6" style={{ marginTop: "96px", position: "relative" }}>
 
-        {/* Content */}
-        <div style={{ position: "relative", zIndex: 2, width: "56%", paddingLeft: "8%", paddingRight: "4%", paddingTop: "40px" }}>
+        <div className="mx-auto" style={{ width: "fit-content", maxWidth: "100%", position: "relative" }}>
 
-          <h1 className="font-extralight" style={{ fontSize: "clamp(3.2rem, 6vw, 5.5rem)", color: "#111111", lineHeight: 1.05, letterSpacing: "-0.04em", marginBottom: "1.25rem" }}>
-            Buy for less.<br />Sell for more.
-          </h1>
+          <svg
+            viewBox="0 0 200 100"
+            preserveAspectRatio="none"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0 }}
+          >
+            <defs>
+              <linearGradient id="heroBgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#fde2e2" />
+                <stop offset="20%" stopColor="#fdf0d5" />
+                <stop offset="40%" stopColor="#e3f5e1" />
+                <stop offset="60%" stopColor="#dceefb" />
+                <stop offset="80%" stopColor="#e6e0f8" />
+                <stop offset="100%" stopColor="#fbe2ee" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M20,0 L180,0 C193,0 200,7 200,20 L200,55 C200,68 194,74 183,74 L133,74 C112,74 100,84 92,100 L20,100 C7,100 0,93 0,80 L0,20 C0,7 7,0 20,0 Z"
+              fill="url(#heroBgGradient)"
+            />
+          </svg>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", maxWidth: "620px" }}>
+          {/* Tabbed Buying/Selling card + car image, balanced as a pair */}
+          <div className="flex items-center justify-center gap-10" style={{ position: "relative", zIndex: 1, padding: "56px 72px" }}>
+            <div className="flex-shrink-0" style={{ width: "440px", maxWidth: "100%" }}>
 
-            {/* Sell card */}
-            <div className="rounded-2xl p-8" style={{ backgroundColor: "#ffffff", border: "1.5px solid rgba(0,0,0,0.1)", boxShadow: "0 4px 24px rgba(0,0,0,0.07)" }}>
-              <p className="text-2xl font-semibold uppercase mb-3" style={{ color: "#111111", letterSpacing: "0.03em" }}>Selling</p>
-              <p style={{ fontSize: "1.05rem", color: "#111111", marginBottom: "1.5rem", lineHeight: 1.45 }}>Get <strong style={{ fontWeight: 600 }}>more for your car</strong> than anywhere else online</p>
-              <div className="flex gap-2 items-stretch">
-                <div className="flex items-center rounded-lg overflow-hidden flex-1" style={{ border: "2px solid #f5c400" }}>
-                  <div className="px-3 py-3 font-medium text-xs" style={{ backgroundColor: "#f5c400", color: "#000" }}>GB</div>
-                  <input
-                    type="text"
-                    placeholder="YOUR REG"
-                    value={valForm.reg}
-                    onChange={e => setValForm({ ...valForm, reg: e.target.value.toUpperCase() })}
-                    maxLength={8}
-                    className="flex-1 px-2 py-3 text-sm font-medium text-center tracking-widest outline-none uppercase"
-                    style={{ backgroundColor: "#f5c400", color: "#000", letterSpacing: "0.12em" }}
-                  />
-                </div>
+              {/* Tabs */}
+              <div className="flex">
                 <button
-                  onClick={() => { const el = document.getElementById("valuation"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}
-                  className="font-medium text-sm px-4 py-3 rounded-lg transition-opacity hover:opacity-80 whitespace-nowrap"
-                  style={{ backgroundColor: "#111111", color: "#fff" }}
+                  onClick={() => setHeroTab("selling")}
+                  className="flex-1 text-center font-semibold uppercase text-sm py-4 transition-colors cursor-pointer"
+                  style={{
+                    color: heroTab === "selling" ? "#111111" : "rgba(0,0,0,0.4)",
+                    borderBottom: heroTab === "selling" ? "2px solid #111111" : "1px solid rgba(0,0,0,0.15)",
+                    letterSpacing: "0.03em",
+                  }}
                 >
-                  Value my car
+                  Sell
+                </button>
+                <button
+                  onClick={() => setHeroTab("buying")}
+                  className="flex-1 text-center font-semibold uppercase text-sm py-4 transition-colors cursor-pointer"
+                  style={{
+                    color: heroTab === "buying" ? "#111111" : "rgba(0,0,0,0.4)",
+                    borderBottom: heroTab === "buying" ? "2px solid #111111" : "1px solid rgba(0,0,0,0.15)",
+                    letterSpacing: "0.03em",
+                  }}
+                >
+                  Buy
                 </button>
               </div>
+
+              {/* Tab content */}
+              <div className="p-8">
+                {heroTab === "buying" ? (
+                  <>
+                    <h3 style={{ fontSize: "1.7rem", fontWeight: 500, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.01em", marginBottom: "0.75rem" }}>Buy my new car for less.</h3>
+                    <p style={{ fontSize: "0.95rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.5rem", lineHeight: 1.5 }}>Safe, vetted listings — with warranty options. Buy for <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 less</strong> than at dealerships (on average).</p>
+                    <a href="#how-it-works"
+                      className="block text-center font-medium text-sm px-4 py-3 rounded-xl transition-opacity hover:opacity-80"
+                      style={{ backgroundColor: "#111111", color: "#fff" }}>
+                      Browse cars
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <h3 style={{ fontSize: "1.9rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.75rem" }}>Sell my car for the max.</h3>
+                    <p style={{ fontSize: "0.95rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.5rem", lineHeight: 1.5 }}>On average <strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than Motorway &amp; <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than WBAC.</p>
+                    <div className="flex gap-2 items-stretch">
+                      <div className="flex items-center rounded-lg overflow-hidden flex-1" style={{ border: "2px solid #e8e3da" }}>
+                        <div className="px-3 py-3 font-medium text-xs" style={{ backgroundColor: "#f6f3ed", color: "#111111" }}>GB</div>
+                        <input
+                          type="text"
+                          placeholder="YOUR REG"
+                          value={valForm.reg}
+                          onChange={e => setValForm({ ...valForm, reg: e.target.value.toUpperCase() })}
+                          maxLength={8}
+                          className="flex-1 px-2 py-3 text-sm font-medium text-center tracking-widest outline-none uppercase"
+                          style={{ backgroundColor: "#faf8f4", color: "#111111", letterSpacing: "0.12em" }}
+                        />
+                      </div>
+                      <button
+                        onClick={() => { const el = document.getElementById("valuation"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}
+                        className="font-medium text-sm px-4 py-3 rounded-lg transition-opacity hover:opacity-80 whitespace-nowrap"
+                        style={{ backgroundColor: "#111111", color: "#fff" }}
+                      >
+                        Value my car
+                      </button>
+                    </div>
+                  </>
+                )}
+
+                {/* Trustpilot badge */}
+                <div className="flex items-center gap-2" style={{ marginTop: "1.25rem" }}>
+                  <div className="flex" style={{ gap: "2px" }}>
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <svg key={i} viewBox="0 0 24 24" width="16" height="16" style={{ backgroundColor: "#00b67a" }}>
+                        <polygon points="12,2 14.9,9 22,9.2 16.3,13.9 18.3,21 12,16.9 5.7,21 7.7,13.9 2,9.2 9.1,9" fill="#ffffff" />
+                      </svg>
+                    ))}
+                  </div>
+                  <span className="font-semibold text-sm" style={{ color: "#111111" }}>Trustpilot</span>
+                </div>
+              </div>
+
             </div>
 
-            {/* Buy card */}
-            <div className="rounded-2xl p-8 flex flex-col justify-between" style={{ backgroundColor: "#111111" }}>
-              <p className="text-2xl font-semibold uppercase mb-3" style={{ color: "#00bf63", letterSpacing: "0.03em" }}>Buying</p>
-              <p style={{ fontSize: "1.05rem", color: "#ffffff", marginBottom: "1.5rem", lineHeight: 1.45 }}>Cars priced <strong style={{ fontWeight: 600 }}>below dealers</strong> — with a <strong style={{ fontWeight: 600 }}>longer warranty</strong></p>
-              <a href="#how-it-works"
-                className="block text-center font-medium text-sm px-4 py-3 rounded-xl transition-opacity hover:opacity-80"
-                style={{ backgroundColor: "#ffffff", color: "#111111" }}>
-                Browse EVs
-              </a>
+            {/* Car image */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div className="hidden md:block flex-shrink-0" style={{ width: "300px", height: "300px", overflow: "hidden", position: "relative" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/x1M.png" alt="carmoo car" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: "460px", maxWidth: "none", height: "auto" }} />
             </div>
-
           </div>
+
         </div>
       </section>
 
       {/* VALUE PROPOSITION */}
       <section className="py-20 px-6" style={{ backgroundColor: "#ffffff", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
         <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row">
+          <p className="text-sm font-semibold uppercase text-center" style={{ color: "rgba(0,0,0,0.4)", letterSpacing: "0.08em", marginBottom: "2rem" }}>Why choose <Brand />?</p>
+          <div className="flex flex-col md:flex-row gap-8 md:gap-16">
 
-            {/* Selling */}
-            <div className="flex-1 py-4 md:pr-16 md:border-r" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
-              <p className="text-xs font-medium uppercase tracking-widest mb-5" style={{ color: "rgba(0,0,0,0.35)" }}>For sellers</p>
-              <h3 className="text-3xl md:text-4xl font-light mb-5" style={{ letterSpacing: "-0.03em", lineHeight: 1.1 }}>More money.<br />Every time.</h3>
-              <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "2rem", fontSize: "1rem" }}>
-                When you sell through Carmoo, your car reaches genuine verified buyers — not a trade buyer looking to flip it for profit. That's why sellers consistently get more through us than through part exchange, dealer trade-in, or any instant offer site.
-              </p>
-              <a href="#how-it-works" className="font-medium text-sm" style={{ color: "#111111", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}>
-                How selling works
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+            {/* Tab selector */}
+            <div className="flex md:flex-col gap-6 md:gap-3 flex-shrink-0" style={{ width: "160px" }}>
+              <button
+                onClick={() => setValueTab("selling")}
+                className="text-left transition-colors"
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 600,
+                  color: valueTab === "selling" ? "#111111" : "rgba(0,0,0,0.35)",
+                  borderLeft: valueTab === "selling" ? "3px solid #111111" : "3px solid transparent",
+                  paddingLeft: "16px",
+                  paddingTop: "4px",
+                  paddingBottom: "4px",
+                }}
+              >
+                Selling
+              </button>
+              <button
+                onClick={() => setValueTab("buying")}
+                className="text-left transition-colors"
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 600,
+                  color: valueTab === "buying" ? "#111111" : "rgba(0,0,0,0.35)",
+                  borderLeft: valueTab === "buying" ? "3px solid #111111" : "3px solid transparent",
+                  paddingLeft: "16px",
+                  paddingTop: "4px",
+                  paddingBottom: "4px",
+                }}
+              >
+                Buying
+              </button>
             </div>
 
-            {/* Buying */}
-            <div className="flex-1 py-4 md:pl-16 mt-12 md:mt-0">
-              <p className="text-xs font-medium uppercase tracking-widest mb-5" style={{ color: "rgba(0,0,0,0.35)" }}>For buyers</p>
-              <h3 className="text-3xl md:text-4xl font-light mb-5" style={{ letterSpacing: "-0.03em", lineHeight: 1.1 }}>Pay less.<br />Get more.</h3>
-              <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "2rem", fontSize: "1rem" }}>
-                Every car on Carmoo is priced below what a dealer would charge for the same vehicle — and every purchase comes with a 2-year warranty and breakdown cover as standard. No extras. No catches. Just a better deal.
-              </p>
-              <a href="#how-it-works" className="font-medium text-sm" style={{ color: "#111111", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}>
-                How buying works
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+            {/* Content */}
+            <div className="flex-1">
+              {valueTab === "selling" ? (
+                <>
+                  <p className="text-xs font-medium uppercase tracking-widest mb-5" style={{ color: "rgba(0,0,0,0.35)" }}>For sellers</p>
+                  <h3 className="text-3xl md:text-4xl font-light mb-5" style={{ letterSpacing: "-0.03em", lineHeight: 1.1 }}>More money.<br />Every time.</h3>
+                  <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem" }}>
+                    Sell direct to genuine buyers — for more than trade-in, Motorway or We Buy Any Car.
+                  </p>
+                  <div className="grid grid-cols-3 gap-4 mb-8">
+                    {[
+                      ["1", "Get a free valuation", "/step-valuation.jpg"],
+                      ["2", "Get approved & listed", "/step-approved.jpg"],
+                      ["3", "Sell with confidence", "/step-handover.jpg"],
+                    ].map(([num, title, img]) => (
+                      <div key={num}>
+                        <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        </div>
+                        <div className="rounded-full flex items-center justify-center font-medium text-white mb-1" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
+                        <p className="font-medium text-xs" style={{ color: "#111111" }}>{title}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <a href="#how-it-works" className="font-medium text-sm" style={{ color: "#111111", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                    How selling works
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                </>
+              ) : (
+                <>
+                  <p className="text-xs font-medium uppercase tracking-widest mb-5" style={{ color: "rgba(0,0,0,0.35)" }}>For buyers</p>
+                  <h3 className="text-3xl md:text-4xl font-light mb-5" style={{ letterSpacing: "-0.03em", lineHeight: 1.1 }}>Pay less.<br />Get more.</h3>
+                  <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem" }}>
+                    Priced below dealers, listed direct by the owner.
+                  </p>
+                  <div className="grid grid-cols-3 gap-4 mb-8">
+                    {[
+                      ["1", "Browse checked listings", "/step-valuation.jpg"],
+                      ["2", "Arrange a viewing", "/step-approved.jpg"],
+                      ["3", "Buy directly", "/step-handover.jpg"],
+                    ].map(([num, title, img]) => (
+                      <div key={num}>
+                        <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        </div>
+                        <div className="rounded-full flex items-center justify-center font-medium text-white mb-1" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
+                        <p className="font-medium text-xs" style={{ color: "#111111" }}>{title}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <a href="#how-it-works" className="font-medium text-sm" style={{ color: "#111111", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                    How buying works
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                </>
+              )}
             </div>
 
+          </div>
+
+          <div className="max-w-4xl mx-auto" style={{ marginTop: "4rem" }}>
+            <MarketSpectrum />
           </div>
         </div>
       </section>
@@ -319,13 +480,13 @@ export default function Home() {
       {/* STATS BAR */}
       <section className="py-12 px-6" style={{ backgroundColor: "#111111" }}>
         <div className="max-w-4xl mx-auto">
-          <p className="text-center text-white font-medium text-xl md:text-2xl mb-10">Selling your EV? You&apos;re leaving money on the table.</p>
+          <p className="text-center text-white font-medium text-xl md:text-2xl mb-10">Selling your car? You&apos;re leaving money on the table.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-10">
             {[
               ["Always Free", "List your car. Pay nothing. Ever."],
-              ["£2,600 More", "Than part exchange. In your pocket."],
-              ["£1,000 More", "Than 'instant offer' dealer bidding sites."],
-              ["Low APR Finance", "Available for every buyer we introduce."],
+              ["£2,500 More", "Than We Buy Any Car or trade-in."],
+              ["£1,000 More", "Than Motorway."],
+              ["Quality Checked", "Every car reviewed before it's listed."],
             ].map(([stat, label]) => (
               <div key={label}>
                 <p className="text-white text-2xl md:text-3xl font-medium mb-2">{stat}</p>
@@ -334,7 +495,7 @@ export default function Home() {
             ))}
           </div>
           <p className="text-center text-white font-medium text-base md:text-lg max-w-2xl mx-auto">
-            Same security as a dealership. Same warranty. Same vetting. Without the middleman taking their cut.
+            Every listing checked before it goes live. Direct from the owner. Without the middleman taking their cut.
           </p>
         </div>
       </section>
@@ -345,9 +506,9 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
             <div>
               <h2 className="text-4xl md:text-5xl font-light mb-6">Built on belief.</h2>
-              <p className="text-lg mb-5 leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>We believe electric is the future of car ownership — and we&apos;re building the platform that future deserves. One that puts trust back into a market that has lost too much of it.</p>
-              <p className="text-lg mb-5 leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>Every seller is vetted. Every car is assessed. And every sale is backed by our industry-first two-year warranty on private vehicles.</p>
-              <p className="text-lg leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>Dealerships have always charged for the security they offer. We offer the same — without the middleman. That margin goes back to the seller and the buyer, where it belongs.</p>
+              <p className="text-lg mb-5 leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>We believe electric is the future of car ownership — and we&apos;re building toward a platform that fully embraces it. Right now we&apos;re open to all vehicles while we build trust and momentum; as we grow, we&apos;ll transition to an EV-only marketplace backed by a full warranty program.</p>
+              <p className="text-lg mb-5 leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>Every seller is reviewed and every car is quality-checked before it&apos;s listed. A full warranty and finance program is on the horizon as we grow.</p>
+              <p className="text-lg leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>Dealerships have always charged for the reassurance they offer. We&apos;re building that same trust — through vetting, transparency and a warranty program on the way — without the middleman margin. That value goes back to the seller and the buyer, where it belongs.</p>
             </div>
             <div style={{ borderRadius: "20px", overflow: "hidden", aspectRatio: "4/3" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -356,9 +517,9 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-4">
             {([
-              [<svg key="bolt" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:28,height:28}}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>, "Electric is the future", "We're not hedging our bets. We believe in where this is going — and we're fully committed to making private EV ownership the smart choice."],
-              [<svg key="search" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:28,height:28}}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>, "Every car earns its place", "We assess every vehicle before it goes live. If it doesn't meet our standard, it doesn't get listed. No exceptions."],
-              [<svg key="shield" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:28,height:28}}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, "Restoring trust in car sales", "Private car buying has a reputation problem. We're here to fix that — with rigorous vetting, full transparency, and a warranty to back it all up."],
+              [<svg key="bolt" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:28,height:28}}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>, "Electric is the future", "We're not hedging our bets on where the market's going. Right now we're open to all vehicles, but as we grow we'll move to an EV-only platform — because we believe that's where private car ownership is headed."],
+              [<svg key="search" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:28,height:28}}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>, "Every car earns its place", "We give every vehicle a quick review before it goes live. If it doesn't meet our standard, it doesn't get listed."],
+              [<svg key="shield" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:28,height:28}}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, "Restoring trust in car sales", "Private car buying has a reputation problem. We're here to fix that — with careful vetting, full transparency, and a warranty and finance program on the way as we grow."],
             ] as [React.ReactNode, string, string][]).map(([icon, title, desc]) => (
               <div key={title} className="rounded-2xl p-8 text-left" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)" }}>
                 <div className="mb-4">{icon}</div>
@@ -383,12 +544,12 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h3 className="text-2xl font-light mb-8 pb-4 border-b" style={{ color: "#111111", borderColor: "#111111" }}>Selling your EV</h3>
+              <h3 className="text-2xl font-light mb-8 pb-4 border-b" style={{ color: "#111111", borderColor: "#111111" }}>Selling your car</h3>
               <div className="space-y-8">
                 {[
-                  ["1", "Tell us about your car", "Submit your EV for assessment. To be eligible, your vehicle must be registered in 2018 or later and have fewer than 80,000 miles on the clock. We then review the ownership history, battery condition, service record and overall presentation."],
-                  ["2", "Get approved & listed", "If your car meets our standard, we create a clean, simple listing. Only quality EVs make it onto the platform."],
-                  ["3", "Connect with verified buyers", "Serious, identity-verified buyers reach out. No tyre kickers, no time wasters."],
+                  ["1", "Tell us about your car", "Submit your car's details and photos. We take a quick look at the ownership history and overall condition to make sure it's one we're happy to put in front of buyers."],
+                  ["2", "Get approved & listed", "If your car meets our standard, we create a clean, simple listing. Only quality vehicles make it onto the platform."],
+                  ["3", "Connect with genuine buyers", "Interested buyers reach out directly through your listing. No dealer middlemen, no trade-in lowballing."],
                   ["4", "Sell with confidence", "We guide you through every step of the handover — V5, payment, everything covered."],
                 ].map(([num, title, desc]) => (
                   <div key={num} className="flex gap-5">
@@ -402,13 +563,13 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <h3 className="text-2xl font-light mb-8 pb-4 border-b" style={{ color: "#00bf63", borderColor: "#00bf63" }}>Buying an EV</h3>
+              <h3 className="text-2xl font-light mb-8 pb-4 border-b" style={{ color: "#00bf63", borderColor: "#00bf63" }}>Buying a car</h3>
               <div className="space-y-8">
                 {[
-                  ["1", "Browse verified listings", "Every EV on Carmoo has been assessed, ownership-verified and battery-checked. Browse with confidence."],
+                  ["1", "Browse checked listings", "Every car on carmoo has been reviewed by us before it's listed, so you're never browsing blind."],
                   ["2", "Find your car", "Clean listings. Honest descriptions. No fluff, no filler — just the information you actually need."],
-                  ["3", "We arrange the viewing", "We coordinate everything between you and the seller. Simple, quick and straightforward."],
-                  ["4", "Buy with a warranty — and finance if you need it", "Every purchase comes with a Carmoo 2-year warranty as standard. We also offer competitive low APR finance, so you can drive away with peace of mind and a payment plan that works for you."],
+                  ["3", "Arrange a viewing", "We put you directly in touch with the seller to arrange a viewing that works for you both."],
+                  ["4", "Buy directly, more on the horizon", "Right now you buy directly from the seller, backed by a quality-checked listing. A full warranty and finance program is on our roadmap as we grow, alongside our move to an EV-only marketplace — get in early, before it arrives."],
                 ].map(([num, title, desc]) => (
                   <div key={num} className="flex gap-5">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center font-medium text-white flex-shrink-0 mt-1 text-sm" style={{ backgroundColor: "#00bf63" }}>{num}</div>
@@ -424,8 +585,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WARRANTY */}
-      <section id="warranty" className="py-24 px-6" style={{ backgroundColor: "#f6f6f6" }}>
+      {/* QUALITY */}
+      <section id="quality" className="py-24 px-6" style={{ backgroundColor: "#f6f6f6" }}>
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
             <div style={{ borderRadius: "20px", overflow: "hidden", aspectRatio: "4/3" }}>
@@ -433,23 +594,23 @@ export default function Home() {
               <img src="/ev-charging.jpg" alt="EV charging cable" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
             <div>
-              <p className="text-sm font-medium uppercase tracking-widest mb-4" style={{ color: "#111111" }}>The Carmoo Warranty</p>
-              <h2 className="text-4xl md:text-5xl font-light mb-6">Every car. Covered.</h2>
+              <p className="text-sm font-medium uppercase tracking-widest mb-4" style={{ color: "#111111" }}>Quality checked</p>
+              <h2 className="text-4xl md:text-5xl font-light mb-6">Checked before it&apos;s listed.</h2>
               <p className="text-lg mb-5 leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>
-                Every EV purchased through <Brand /> comes with a 2-year warranty and breakdown cover as standard. Not an optional extra. Not a premium add-on. Included.
+                Every vehicle submitted to <Brand />{" "}gets a quick review before it goes live — we look at the ownership history and overall condition so you&apos;re never browsing something that shouldn&apos;t be there. It&apos;s not a full inspection, but it&apos;s enough to keep the standard high.
               </p>
               <p className="text-lg leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>
-                To make this possible, every buyer holds a telematics-based insurance policy through one of our partner insurers — who fit the unit and offer our buyers reduced premiums in return. The vehicle must also be serviced to manufacturer guidelines, which for an EV is typically just a periodic check-up.
+                A full 2-year warranty and breakdown cover — plus finance options — are on our roadmap as we grow, alongside our move to an EV-only marketplace. For now, buying and selling on <Brand />{" "}means dealing directly, without the dealer markup, on a platform that&apos;s actually checking what gets listed.
               </p>
             </div>
           </div>
           <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-3 gap-4">
             {([
-              [<svg key="w" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:26,height:26}}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, "2 years warranty cover", "Included with every purchase as standard — an industry first for private vehicle sales."],
-              [<svg key="b" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:26,height:26}}><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>, "Breakdown cover included", "Every Carmoo car comes with breakdown cover as standard. If you break down, we've got you covered — no extras, no surprises."],
-              [<svg key="i" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:26,height:26}}><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>, "Cheaper insurance included", "As a warranty condition, buyers must hold a telematics insurance policy. We partner with insurers who fit the unit and offer our customers reduced premiums — so your cover costs less and your warranty is protected."],
-              [<svg key="p" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:26,height:26}}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>, "Peace of mind from day one", "Drive away knowing you're covered — for longer than any dealer will offer."],
+              [<svg key="w" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:26,height:26}}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, "Every vehicle reviewed", "We check ownership history and condition before a listing goes live — so low-quality vehicles don't make the cut."],
+              [<svg key="b" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:26,height:26}}><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>, "Direct from the owner", "No trade middlemen, no forecourt markup. You deal with the person who actually owns the car."],
+              [<svg key="i" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:26,height:26}}><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>, "Always free to list", "Advertising your vehicle on carmoo costs nothing — and it always will."],
+              [<svg key="p" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:26,height:26}}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>, "Warranty, finance & EV-only on the horizon", "As we grow, we're bringing a full warranty and finance program to every purchase, and moving to an EV-only marketplace. Early adopters get in before it arrives."],
             ] as [React.ReactNode, string, string][]).map(([icon, title, desc]) => (
               <div key={title} className="rounded-2xl p-8" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)" }}>
                 <div className="mb-3">{icon}</div>
@@ -468,7 +629,7 @@ export default function Home() {
           <div className="text-center mb-12">
             <p className="text-sm font-medium uppercase tracking-widest mb-4" style={{ color: "#111111" }}>Thinking of selling?</p>
             <h2 className="text-4xl md:text-5xl font-light mb-4">Get your free valuation.</h2>
-            <p className="text-xl" style={{ color: "rgba(0,0,0,0.5)" }}>Fill in the details below and we&apos;ll come back to you with what your EV is worth on the Carmoo platform.</p>
+            <p className="text-xl" style={{ color: "rgba(0,0,0,0.5)" }}>Fill in the details below and we&apos;ll come back to you with what your car is worth on the <Brand /> platform.</p>
           </div>
           {valSubmitted ? (
             <div className="rounded-3xl p-10 text-center" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)" }}>
@@ -593,7 +754,7 @@ export default function Home() {
       <footer className="py-12 px-6" style={{ borderTop: "1px solid rgba(0,0,0,0.08)", backgroundColor: "#ffffff" }}>
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <Image src="/july23black.svg" alt="Carmoo" width={120} height={32} />
+            <Image src="/july23black.svg" alt="carmoo" width={120} height={32} />
           </div>
           <div className="flex gap-8 text-sm" style={{ color: "rgba(0,0,0,0.4)" }}>
             <a href="#how-it-works" className="hover:text-black transition-colors">How it works</a>
