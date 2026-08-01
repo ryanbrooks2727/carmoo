@@ -265,10 +265,16 @@ export default function Home() {
             <defs>
               <linearGradient id="heroBgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#f2554d" />
-                <stop offset="20%" stopColor="#f7c331" />
-                <stop offset="40%" stopColor="#3fcc55" />
-                <stop offset="60%" stopColor="#3a92ed" />
-                <stop offset="80%" stopColor="#7a52e6" />
+                <stop offset="16.66%" stopColor="#f2554d" />
+                <stop offset="16.66%" stopColor="#f7c331" />
+                <stop offset="33.33%" stopColor="#f7c331" />
+                <stop offset="33.33%" stopColor="#3fcc55" />
+                <stop offset="50%" stopColor="#3fcc55" />
+                <stop offset="50%" stopColor="#3a92ed" />
+                <stop offset="66.66%" stopColor="#3a92ed" />
+                <stop offset="66.66%" stopColor="#7a52e6" />
+                <stop offset="83.33%" stopColor="#7a52e6" />
+                <stop offset="83.33%" stopColor="#ec3fa8" />
                 <stop offset="100%" stopColor="#ec3fa8" />
               </linearGradient>
               <clipPath id="heroClip">
