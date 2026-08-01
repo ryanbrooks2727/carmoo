@@ -247,7 +247,7 @@ export default function Home() {
       </nav>
 
       {/* HERO + MARKET SPECTRUM (merged) */}
-      <section className="px-6" style={{ marginTop: "96px", position: "relative" }}>
+      <section className="px-6" style={{ marginTop: "115px", position: "relative" }}>
 
         <div className="mx-auto" style={{ width: "fit-content", maxWidth: "100%", position: "relative" }}>
 
@@ -290,29 +290,33 @@ export default function Home() {
           </svg>
 
           {/* Tabbed Buying/Selling card + car image, balanced as a pair */}
-          <div className="flex items-center justify-center gap-10" style={{ position: "relative", zIndex: 1, padding: "56px 72px" }}>
-            <div className="flex-shrink-0" style={{ width: "440px", maxWidth: "100%" }}>
+          <div className="flex items-center justify-center" style={{ position: "relative", zIndex: 1, padding: "67px 86px", gap: "48px" }}>
+            <div className="flex-shrink-0" style={{ width: "528px", maxWidth: "100%" }}>
 
               {/* Tabs */}
               <div className="flex">
                 <button
                   onClick={() => setHeroTab("selling")}
-                  className="flex-1 text-center font-semibold uppercase text-sm py-4 transition-colors cursor-pointer"
+                  className="flex-1 text-center font-semibold uppercase text-sm transition-colors cursor-pointer"
                   style={{
                     color: heroTab === "selling" ? "#111111" : "rgba(0,0,0,0.4)",
                     borderBottom: heroTab === "selling" ? "2px solid #111111" : "1px solid rgba(0,0,0,0.15)",
                     letterSpacing: "0.03em",
+                    paddingTop: "19px",
+                    paddingBottom: "19px",
                   }}
                 >
                   Sell
                 </button>
                 <button
                   onClick={() => setHeroTab("buying")}
-                  className="flex-1 text-center font-semibold uppercase text-sm py-4 transition-colors cursor-pointer"
+                  className="flex-1 text-center font-semibold uppercase text-sm transition-colors cursor-pointer"
                   style={{
                     color: heroTab === "buying" ? "#111111" : "rgba(0,0,0,0.4)",
                     borderBottom: heroTab === "buying" ? "2px solid #111111" : "1px solid rgba(0,0,0,0.15)",
                     letterSpacing: "0.03em",
+                    paddingTop: "19px",
+                    paddingBottom: "19px",
                   }}
                 >
                   Buy
@@ -320,38 +324,38 @@ export default function Home() {
               </div>
 
               {/* Tab content */}
-              <div className="p-8">
+              <div style={{ padding: "38px" }}>
                 {heroTab === "buying" ? (
                   <>
-                    <h3 style={{ fontSize: "1.7rem", fontWeight: 500, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.01em", marginBottom: "0.75rem" }}>Buy my new car for less.</h3>
-                    <p style={{ fontSize: "0.95rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.5rem", lineHeight: 1.5 }}>Safe, vetted listings — with warranty options. Buy for <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 less</strong> than at dealerships (on average).</p>
+                    <h3 style={{ fontSize: "2.04rem", fontWeight: 500, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.01em", marginBottom: "0.9rem" }}>Buy my new car for less.</h3>
+                    <p style={{ fontSize: "1.14rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.8rem", lineHeight: 1.5 }}>Safe, vetted listings — with warranty options. Buy for <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 less</strong> than at dealerships (on average).</p>
                     <a href="#how-it-works"
-                      className="block text-center font-medium text-sm px-4 py-3 rounded-xl transition-opacity hover:opacity-80"
-                      style={{ backgroundColor: "#111111", color: "#fff" }}>
+                      className="block text-center font-medium rounded-xl transition-opacity hover:opacity-80"
+                      style={{ backgroundColor: "#111111", color: "#fff", fontSize: "1.05rem", padding: "17px 19px" }}>
                       Browse cars
                     </a>
                   </>
                 ) : (
                   <>
-                    <h3 style={{ fontSize: "1.9rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.75rem" }}>Sell my car for the max</h3>
-                    <p style={{ fontSize: "0.95rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.5rem", lineHeight: 1.5 }}>On average <strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than motorway &amp; <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than wbac</p>
-                    <div className="flex gap-2 items-stretch">
+                    <h3 style={{ fontSize: "2.28rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.9rem" }}>Sell my car for the max</h3>
+                    <p style={{ fontSize: "1.14rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.8rem", lineHeight: 1.5 }}>On average <strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than motorway &amp; <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than wbac</p>
+                    <div className="flex items-stretch" style={{ gap: "10px" }}>
                       <div className="flex items-center rounded-lg overflow-hidden flex-1" style={{ border: "2px solid #e8e3da" }}>
-                        <div className="px-3 py-3 font-medium text-xs" style={{ backgroundColor: "#f6f3ed", color: "#111111" }}>GB</div>
+                        <div className="font-medium text-xs" style={{ backgroundColor: "#f6f3ed", color: "#111111", padding: "14px 17px" }}>GB</div>
                         <input
                           type="text"
                           placeholder="YOUR REG"
                           value={valForm.reg}
                           onChange={e => setValForm({ ...valForm, reg: e.target.value.toUpperCase() })}
                           maxLength={8}
-                          className="flex-1 px-2 py-3 text-sm font-medium text-center tracking-widest outline-none uppercase"
-                          style={{ backgroundColor: "#faf8f4", color: "#111111", letterSpacing: "0.12em" }}
+                          className="flex-1 font-medium text-center tracking-widest outline-none uppercase"
+                          style={{ backgroundColor: "#faf8f4", color: "#111111", letterSpacing: "0.12em", fontSize: "1.05rem", padding: "14px 10px" }}
                         />
                       </div>
                       <button
                         onClick={() => { const el = document.getElementById("valuation"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}
-                        className="font-medium text-sm px-4 py-3 rounded-lg transition-opacity hover:opacity-80 whitespace-nowrap"
-                        style={{ backgroundColor: "#111111", color: "#fff" }}
+                        className="font-medium rounded-lg transition-opacity hover:opacity-80 whitespace-nowrap"
+                        style={{ backgroundColor: "#111111", color: "#fff", fontSize: "1.05rem", padding: "17px 19px" }}
                       >
                         Value my car
                       </button>
@@ -360,15 +364,15 @@ export default function Home() {
                 )}
 
                 {/* Trustpilot badge */}
-                <div className="flex items-center gap-2" style={{ marginTop: "1.25rem" }}>
+                <div className="flex items-center" style={{ marginTop: "1.5rem", gap: "10px" }}>
                   <div className="flex" style={{ gap: "2px" }}>
                     {[0, 1, 2, 3, 4].map((i) => (
-                      <svg key={i} viewBox="0 0 24 24" width="16" height="16" style={{ backgroundColor: "#00b67a" }}>
+                      <svg key={i} viewBox="0 0 24 24" width="19" height="19" style={{ backgroundColor: "#00b67a" }}>
                         <polygon points="12,2 14.9,9 22,9.2 16.3,13.9 18.3,21 12,16.9 5.7,21 7.7,13.9 2,9.2 9.1,9" fill="#ffffff" />
                       </svg>
                     ))}
                   </div>
-                  <span className="font-semibold text-sm" style={{ color: "#111111" }}>Trustpilot</span>
+                  <span className="font-semibold" style={{ color: "#111111", fontSize: "1.05rem" }}>Trustpilot</span>
                 </div>
               </div>
 
@@ -376,9 +380,9 @@ export default function Home() {
 
             {/* Car image */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <div className="hidden md:block flex-shrink-0" style={{ width: "300px", height: "300px", overflow: "hidden", position: "relative" }}>
+            <div className="hidden md:block flex-shrink-0" style={{ width: "360px", height: "360px", overflow: "hidden", position: "relative" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/x1M.png" alt="carmoo car" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: "460px", maxWidth: "none", height: "auto" }} />
+              <img src="/x1M.png" alt="carmoo car" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: "552px", maxWidth: "none", height: "auto" }} />
             </div>
           </div>
 
