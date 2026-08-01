@@ -264,52 +264,56 @@ export default function Home() {
           >
             <defs>
               <linearGradient id="heroBgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#f2554d" />
-                <stop offset="16.66%" stopColor="#f2554d" />
-                <stop offset="16.66%" stopColor="#f7c331" />
-                <stop offset="33.33%" stopColor="#f7c331" />
-                <stop offset="33.33%" stopColor="#3fcc55" />
-                <stop offset="50%" stopColor="#3fcc55" />
-                <stop offset="50%" stopColor="#3a92ed" />
-                <stop offset="66.66%" stopColor="#3a92ed" />
-                <stop offset="66.66%" stopColor="#7a52e6" />
-                <stop offset="83.33%" stopColor="#7a52e6" />
-                <stop offset="83.33%" stopColor="#ec3fa8" />
-                <stop offset="100%" stopColor="#ec3fa8" />
+                <stop offset="0%" stopColor="#f2f2f2" />
+                <stop offset="16.66%" stopColor="#f2f2f2" />
+                <stop offset="16.66%" stopColor="#f2f2f2" />
+                <stop offset="33.33%" stopColor="#f2f2f2" />
+                <stop offset="33.33%" stopColor="#f2f2f2" />
+                <stop offset="53.15%" stopColor="#f2f2f2" />
+                <stop offset="53.15%" stopColor="#f2f2f2" />
+                <stop offset="66.66%" stopColor="#f2f2f2" />
+                <stop offset="66.66%" stopColor="#f2f2f2" />
+                <stop offset="83.33%" stopColor="#f2f2f2" />
+                <stop offset="83.33%" stopColor="#f2f2f2" />
+                <stop offset="100%" stopColor="#f2f2f2" />
               </linearGradient>
               <clipPath id="heroClip">
-                <path d="M6,0 L194,0 C197,0 200,3 200,6 L200,94 C200,97 197,100 194,100 L6,100 C3,100 0,97 0,94 L0,6 C0,3 3,0 6,0 Z" />
+                <path d="M0,0 L194,0 C197,0 200,3 200,6 L200,94 C200,97 197,100 194,100 L0,100 Z" />
+              </clipPath>
+              <clipPath id="stripeVClip">
+                <rect x="-50" y="16.317" width="300" height="67.366" />
+              </clipPath>
+              <clipPath id="stripeVClipTopTrim">
+                <rect x="-50" y="17.095" width="300" height="67.365" />
+              </clipPath>
+              <clipPath id="stripeVClipBottomTrim">
+                <rect x="-50" y="16.317" width="300" height="65.811" />
               </clipPath>
             </defs>
             <path
-              d="M6,0 L194,0 C197,0 200,3 200,6 L200,94 C200,97 197,100 194,100 L6,100 C3,100 0,97 0,94 L0,6 C0,3 3,0 6,0 Z"
+              d="M0,0 L194,0 C197,0 200,3 200,6 L200,94 C200,97 197,100 194,100 L0,100 Z"
               fill="url(#heroBgGradient)"
             />
             <g clipPath="url(#heroClip)">
-              {[123, 136, 149, 162, 175, 188, 201, 214].map((cx, i, arr) => {
-                const isLast = i === arr.length - 1;
-                if (isLast) {
-                  const w = 26;
-                  return (
-                    <g key={i}>
-                      <rect x={cx - w / 2} y={-60} width={w} height={110} fill="#ffffff" transform={`rotate(-22 ${cx} 50)`} />
-                      <rect x={cx - w / 2} y={50} width={w} height={110} fill="#ffffff" transform={`rotate(22 ${cx} 50)`} />
-                    </g>
-                  );
-                }
+              {[140.74, 153.74, 166.74].map((cx, i) => {
+                const clipId = i === 0 ? "stripeVClipTopTrim" : i === 2 ? "stripeVClipBottomTrim" : "stripeVClip";
                 return (
-                  <rect
-                    key={i}
-                    x={cx - 1.4}
-                    y={-60}
-                    width={2.8}
-                    height={220}
-                    fill="#ffffff"
-                    opacity={0.4}
-                    transform={`rotate(-22 ${cx} 50)`}
-                  />
+                  <g key={i} clipPath={`url(#${clipId})`}>
+                    <rect
+                      x={cx - 1.4}
+                      y={-60}
+                      width={2.8}
+                      height={220}
+                      fill={i % 2 === 0 ? "#7a52e6" : "#ec3fa8"}
+                      transform={`rotate(-22 ${cx} 50)`}
+                    />
+                  </g>
                 );
               })}
+              <g>
+                <rect x={214 - 13} y={-60} width={26} height={110} fill="#ffffff" transform="rotate(-22 214 50)" />
+                <rect x={214 - 13} y={50} width={26} height={110} fill="#ffffff" transform="rotate(22 214 50)" />
+              </g>
             </g>
           </svg>
 
