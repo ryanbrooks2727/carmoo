@@ -220,34 +220,40 @@ export default function Home() {
     <main style={{ backgroundColor: "#ffffff", color: "#111111", fontFamily: "var(--font-comfortaa), sans-serif" }}>
 
       {/* NAVBAR */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-4"}`} style={{ backgroundColor: "rgba(255,255,255,0.95)", zIndex: 20000, boxShadow: "0 1px 8px rgba(0,0,0,0.08)" }}>
-        <div className="max-w-6xl mx-auto flex items-center justify-between" style={{ paddingLeft: "120px", paddingRight: "120px" }}>
+      <nav className={`fixed left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-4"}`} style={{ top: "19px", backgroundColor: "rgba(255,255,255,0.95)", zIndex: 20000 }}>
+        <div className="max-w-6xl mx-auto flex items-center justify-between" style={{ paddingLeft: "63px", paddingRight: "24px" }}>
           <div className="flex items-center gap-3">
             <a href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
               <div style={{
-                width: "144px",
-                height: "25px",
+                width: "182px",
+                height: "32.23px",
                 backgroundImage: "url('/july23black.svg')",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "316px 316px",
-                backgroundPosition: "-91px -148px",
+                backgroundSize: "398.13px 398.13px",
+                backgroundPosition: "-115.65px -185.79px",
               }} aria-label="carmoo" />
             </a>
-            <div style={{ width: "1px", height: "21px", backgroundColor: "rgba(0,0,0,0.15)", flexShrink: 0 }} />
-            <span className="hidden md:block text-base font-medium tracking-widest" style={{ color: "rgba(0,0,0,0.35)", letterSpacing: "0.1em" }}>A better deal</span>
           </div>
           <div className="flex items-center gap-6">
-            <a href="#how-it-works" className="text-lg font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>How it works</a>
-            <a href="#valuation" className="text-lg font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Sell your car</a>
-            <a href="#quality" className="text-lg font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Our vetting</a>
-            <a href="#faq" className="text-lg font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>FAQ</a>
-            <a href="#waitlist" className="text-lg font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Get in touch</a>
+            <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>How it works</a>
+            <a href="#valuation" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Sell your car</a>
+            <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Buy a car</a>
+            <a href="#quality" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Our vetting</a>
+            <a href="#faq" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>FAQ</a>
+            <a href="#waitlist" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Get in touch</a>
+            <a href="#" className="text-sm font-medium hidden md:flex items-center" style={{ color: "rgba(0,0,0,0.6)", gap: "6px" }}>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+              </svg>
+              Sign in
+            </a>
           </div>
         </div>
       </nav>
 
       {/* HERO + MARKET SPECTRUM (merged) */}
-      <section className="px-6" style={{ marginTop: "115px", position: "relative" }}>
+      <section className="px-6" style={{ marginTop: "105px", position: "relative" }}>
 
         <div className="mx-auto" style={{ width: "fit-content", maxWidth: "100%", position: "relative" }}>
 
@@ -258,12 +264,12 @@ export default function Home() {
           >
             <defs>
               <linearGradient id="heroBgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#fde2e2" />
-                <stop offset="20%" stopColor="#fdf0d5" />
-                <stop offset="40%" stopColor="#e3f5e1" />
-                <stop offset="60%" stopColor="#dceefb" />
-                <stop offset="80%" stopColor="#e6e0f8" />
-                <stop offset="100%" stopColor="#fbe2ee" />
+                <stop offset="0%" stopColor="#f2554d" />
+                <stop offset="20%" stopColor="#f7c331" />
+                <stop offset="40%" stopColor="#3fcc55" />
+                <stop offset="60%" stopColor="#3a92ed" />
+                <stop offset="80%" stopColor="#7a52e6" />
+                <stop offset="100%" stopColor="#ec3fa8" />
               </linearGradient>
               <clipPath id="heroClip">
                 <path d="M6,0 L194,0 C197,0 200,3 200,6 L200,94 C200,97 197,100 194,100 L6,100 C3,100 0,97 0,94 L0,6 C0,3 3,0 6,0 Z" />
@@ -274,24 +280,36 @@ export default function Home() {
               fill="url(#heroBgGradient)"
             />
             <g clipPath="url(#heroClip)">
-              {[123, 136, 149, 162, 175, 188].map((cx, i) => (
-                <rect
-                  key={i}
-                  x={cx - 1.4}
-                  y={-60}
-                  width={2.8}
-                  height={220}
-                  fill="#ffffff"
-                  opacity={0.4}
-                  transform={`rotate(-22 ${cx} 50)`}
-                />
-              ))}
+              {[123, 136, 149, 162, 175, 188, 201, 214].map((cx, i, arr) => {
+                const isLast = i === arr.length - 1;
+                if (isLast) {
+                  const w = 26;
+                  return (
+                    <g key={i}>
+                      <rect x={cx - w / 2} y={-60} width={w} height={110} fill="#ffffff" transform={`rotate(-22 ${cx} 50)`} />
+                      <rect x={cx - w / 2} y={50} width={w} height={110} fill="#ffffff" transform={`rotate(22 ${cx} 50)`} />
+                    </g>
+                  );
+                }
+                return (
+                  <rect
+                    key={i}
+                    x={cx - 1.4}
+                    y={-60}
+                    width={2.8}
+                    height={220}
+                    fill="#ffffff"
+                    opacity={0.4}
+                    transform={`rotate(-22 ${cx} 50)`}
+                  />
+                );
+              })}
             </g>
           </svg>
 
           {/* Tabbed Buying/Selling card + car image, balanced as a pair */}
-          <div className="flex items-center justify-center" style={{ position: "relative", zIndex: 1, padding: "67px 86px", gap: "48px" }}>
-            <div className="flex-shrink-0" style={{ width: "528px", maxWidth: "100%" }}>
+          <div className="flex items-center justify-center" style={{ position: "relative", zIndex: 1, padding: "34px 93px", gap: "52px" }}>
+            <div className="flex-shrink-0" style={{ width: "571px", maxWidth: "100%" }}>
 
               {/* Tabs */}
               <div className="flex">
@@ -302,8 +320,8 @@ export default function Home() {
                     color: heroTab === "selling" ? "#111111" : "rgba(0,0,0,0.4)",
                     borderBottom: heroTab === "selling" ? "2px solid #111111" : "1px solid rgba(0,0,0,0.15)",
                     letterSpacing: "0.03em",
-                    paddingTop: "19px",
-                    paddingBottom: "19px",
+                    paddingTop: "21px",
+                    paddingBottom: "21px",
                   }}
                 >
                   Sell
@@ -315,8 +333,8 @@ export default function Home() {
                     color: heroTab === "buying" ? "#111111" : "rgba(0,0,0,0.4)",
                     borderBottom: heroTab === "buying" ? "2px solid #111111" : "1px solid rgba(0,0,0,0.15)",
                     letterSpacing: "0.03em",
-                    paddingTop: "19px",
-                    paddingBottom: "19px",
+                    paddingTop: "21px",
+                    paddingBottom: "21px",
                   }}
                 >
                   Buy
@@ -324,24 +342,24 @@ export default function Home() {
               </div>
 
               {/* Tab content */}
-              <div style={{ padding: "38px" }}>
+              <div style={{ padding: "41px" }}>
                 {heroTab === "buying" ? (
                   <>
-                    <h3 style={{ fontSize: "2.04rem", fontWeight: 500, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.01em", marginBottom: "0.9rem" }}>Buy my new car for less.</h3>
-                    <p style={{ fontSize: "1.14rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.8rem", lineHeight: 1.5 }}>Safe, vetted listings — with warranty options. Buy for <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 less</strong> than at dealerships (on average).</p>
+                    <h3 style={{ fontSize: "2.21rem", fontWeight: 500, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>Buy my new car for less.</h3>
+                    <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}>Safe, vetted listings — with warranty options. Buy for <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 less</strong> than at dealerships (on average).</p>
                     <a href="#how-it-works"
                       className="block text-center font-medium rounded-xl transition-opacity hover:opacity-80"
-                      style={{ backgroundColor: "#111111", color: "#fff", fontSize: "1.05rem", padding: "17px 19px" }}>
-                      Browse cars
+                      style={{ backgroundColor: "#111111", color: "#fff", fontSize: "1.13rem", padding: "18px 21px" }}>
+                      Browse cars <span style={{ fontSize: "1.3em", verticalAlign: "middle" }}>&gt;</span>
                     </a>
                   </>
                 ) : (
                   <>
-                    <h3 style={{ fontSize: "2.28rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.9rem" }}>Sell my car for the max</h3>
-                    <p style={{ fontSize: "1.14rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.8rem", lineHeight: 1.5 }}>On average <strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than motorway &amp; <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than wbac</p>
-                    <div className="flex items-stretch" style={{ gap: "10px" }}>
+                    <h3 style={{ fontSize: "2.47rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>Sell my car for the max</h3>
+                    <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}>On average <strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than motorway &amp; <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than wbac</p>
+                    <div className="flex items-stretch" style={{ gap: "11px" }}>
                       <div className="flex items-center rounded-lg overflow-hidden flex-1" style={{ border: "2px solid #e8e3da" }}>
-                        <div className="font-medium text-xs" style={{ backgroundColor: "#f6f3ed", color: "#111111", padding: "14px 17px" }}>GB</div>
+                        <div className="font-medium text-xs" style={{ backgroundColor: "#f6f3ed", color: "#111111", padding: "15px 18px" }}>GB</div>
                         <input
                           type="text"
                           placeholder="YOUR REG"
@@ -349,30 +367,30 @@ export default function Home() {
                           onChange={e => setValForm({ ...valForm, reg: e.target.value.toUpperCase() })}
                           maxLength={8}
                           className="flex-1 font-medium text-center tracking-widest outline-none uppercase"
-                          style={{ backgroundColor: "#faf8f4", color: "#111111", letterSpacing: "0.12em", fontSize: "1.05rem", padding: "14px 10px" }}
+                          style={{ backgroundColor: "#faf8f4", color: "#111111", letterSpacing: "0.12em", fontSize: "1.13rem", padding: "15px 11px" }}
                         />
                       </div>
                       <button
                         onClick={() => { const el = document.getElementById("valuation"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}
                         className="font-medium rounded-lg transition-opacity hover:opacity-80 whitespace-nowrap"
-                        style={{ backgroundColor: "#111111", color: "#fff", fontSize: "1.05rem", padding: "17px 19px" }}
+                        style={{ backgroundColor: "#111111", color: "#fff", fontSize: "1.13rem", padding: "18px 21px" }}
                       >
-                        Value my car &gt;
+                        Value my car <span style={{ fontSize: "1.3em", verticalAlign: "middle" }}>&gt;</span>
                       </button>
                     </div>
                   </>
                 )}
 
                 {/* Trustpilot badge */}
-                <div className="flex items-center" style={{ marginTop: "1.5rem", gap: "10px" }}>
+                <div className="flex items-center" style={{ marginTop: "1.62rem", gap: "11px" }}>
                   <div className="flex" style={{ gap: "2px" }}>
                     {[0, 1, 2, 3, 4].map((i) => (
-                      <svg key={i} viewBox="0 0 24 24" width="19" height="19" style={{ backgroundColor: "#00b67a" }}>
+                      <svg key={i} viewBox="0 0 24 24" width="21" height="21" style={{ backgroundColor: "#00b67a" }}>
                         <polygon points="12,2 14.9,9 22,9.2 16.3,13.9 18.3,21 12,16.9 5.7,21 7.7,13.9 2,9.2 9.1,9" fill="#ffffff" />
                       </svg>
                     ))}
                   </div>
-                  <span className="font-semibold" style={{ color: "#111111", fontSize: "1.05rem" }}>Trustpilot</span>
+                  <span className="font-semibold" style={{ color: "#111111", fontSize: "1.13rem" }}>Trustpilot</span>
                 </div>
               </div>
 
@@ -380,9 +398,9 @@ export default function Home() {
 
             {/* Car image */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <div className="hidden md:block flex-shrink-0" style={{ width: "360px", height: "360px", overflow: "hidden", position: "relative" }}>
+            <div className="hidden md:block flex-shrink-0" style={{ width: "389px", height: "389px", overflow: "hidden", position: "relative" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/x1M.png" alt="carmoo car" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: "552px", maxWidth: "none", height: "auto" }} />
+              <img src="/x1M.png" alt="carmoo car" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: "596px", maxWidth: "none", height: "auto" }} />
             </div>
           </div>
 
@@ -391,105 +409,99 @@ export default function Home() {
 
       {/* VALUE PROPOSITION */}
       <section className="py-20 px-6" style={{ backgroundColor: "#ffffff", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
-        <div className="max-w-5xl mx-auto">
-          <p className="text-sm font-semibold uppercase text-center" style={{ color: "rgba(0,0,0,0.4)", letterSpacing: "0.08em", marginBottom: "2rem" }}>Why choose <Brand />?</p>
-          <div className="flex flex-col md:flex-row gap-8 md:gap-16">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="font-light" style={{ fontSize: "2.75rem", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "0.75rem" }}>Why choose <Brand />?</h2>
+          <p style={{ color: "rgba(0,0,0,0.5)", fontSize: "1.05rem", marginBottom: "2.5rem" }}>We&apos;ve noticed a gap in the market.</p>
 
-            {/* Tab selector */}
-            <div className="flex md:flex-col gap-6 md:gap-3 flex-shrink-0" style={{ width: "160px" }}>
-              <button
-                onClick={() => setValueTab("selling")}
-                className="text-left transition-colors"
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: 600,
-                  color: valueTab === "selling" ? "#111111" : "rgba(0,0,0,0.35)",
-                  borderLeft: valueTab === "selling" ? "3px solid #111111" : "3px solid transparent",
-                  paddingLeft: "16px",
-                  paddingTop: "4px",
-                  paddingBottom: "4px",
-                }}
-              >
-                Selling
-              </button>
-              <button
-                onClick={() => setValueTab("buying")}
-                className="text-left transition-colors"
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: 600,
-                  color: valueTab === "buying" ? "#111111" : "rgba(0,0,0,0.35)",
-                  borderLeft: valueTab === "buying" ? "3px solid #111111" : "3px solid transparent",
-                  paddingLeft: "16px",
-                  paddingTop: "4px",
-                  paddingBottom: "4px",
-                }}
-              >
-                Buying
-              </button>
-            </div>
+          {/* Tab selector */}
+          <div className="flex items-center justify-center gap-10" style={{ marginBottom: "3rem" }}>
+            <button
+              onClick={() => setValueTab("selling")}
+              className="font-semibold uppercase transition-colors cursor-pointer"
+              style={{
+                fontSize: "0.95rem",
+                letterSpacing: "0.05em",
+                color: valueTab === "selling" ? "#111111" : "rgba(0,0,0,0.35)",
+                borderBottom: valueTab === "selling" ? "2px solid #111111" : "2px solid transparent",
+                paddingBottom: "10px",
+              }}
+            >
+              Selling
+            </button>
+            <button
+              onClick={() => setValueTab("buying")}
+              className="font-semibold uppercase transition-colors cursor-pointer"
+              style={{
+                fontSize: "0.95rem",
+                letterSpacing: "0.05em",
+                color: valueTab === "buying" ? "#111111" : "rgba(0,0,0,0.35)",
+                borderBottom: valueTab === "buying" ? "2px solid #111111" : "2px solid transparent",
+                paddingBottom: "10px",
+              }}
+            >
+              Buying
+            </button>
+          </div>
 
-            {/* Content */}
-            <div className="flex-1">
-              {valueTab === "selling" ? (
-                <>
-                  <p className="text-xs font-medium uppercase tracking-widest mb-5" style={{ color: "rgba(0,0,0,0.35)" }}>For sellers</p>
-                  <h3 className="text-3xl md:text-4xl font-light mb-5" style={{ letterSpacing: "-0.03em", lineHeight: 1.1 }}>More money.<br />Every time.</h3>
-                  <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem" }}>
-                    Sell direct to genuine buyers — for more than trade-in, Motorway or We Buy Any Car.
-                  </p>
-                  <div className="grid grid-cols-3 gap-4 mb-8">
-                    {[
-                      ["1", "Get a free valuation", "/step-valuation.jpg"],
-                      ["2", "Get approved & listed", "/step-approved.jpg"],
-                      ["3", "Sell with confidence", "/step-handover.jpg"],
-                    ].map(([num, title, img]) => (
-                      <div key={num}>
-                        <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                        </div>
-                        <div className="rounded-full flex items-center justify-center font-medium text-white mb-1" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
-                        <p className="font-medium text-xs" style={{ color: "#111111" }}>{title}</p>
+          {/* Content */}
+          <div className="max-w-2xl mx-auto">
+            {valueTab === "selling" ? (
+              <>
+                <p className="text-xs font-medium uppercase tracking-widest mb-5" style={{ color: "rgba(0,0,0,0.35)" }}>For sellers</p>
+                <h3 className="text-3xl md:text-4xl font-light mb-5" style={{ letterSpacing: "-0.03em", lineHeight: 1.1 }}>More money. Every time.</h3>
+                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem" }}>
+                  Sell direct to genuine buyers — for more than trade-in, Motorway or We Buy Any Car.
+                </p>
+                <div className="grid grid-cols-3 gap-4 mb-8">
+                  {[
+                    ["1", "Get a free valuation", "/step-valuation.jpg"],
+                    ["2", "Get approved & listed", "/step-approved.jpg"],
+                    ["3", "Sell with confidence", "/step-handover.jpg"],
+                  ].map(([num, title, img]) => (
+                    <div key={num}>
+                      <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
-                    ))}
-                  </div>
-                  <a href="#how-it-works" className="font-medium text-sm" style={{ color: "#111111", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}>
-                    How selling works
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                  </a>
-                </>
-              ) : (
-                <>
-                  <p className="text-xs font-medium uppercase tracking-widest mb-5" style={{ color: "rgba(0,0,0,0.35)" }}>For buyers</p>
-                  <h3 className="text-3xl md:text-4xl font-light mb-5" style={{ letterSpacing: "-0.03em", lineHeight: 1.1 }}>Pay less.<br />Get more.</h3>
-                  <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem" }}>
-                    Priced below dealers, listed direct by the owner.
-                  </p>
-                  <div className="grid grid-cols-3 gap-4 mb-8">
-                    {[
-                      ["1", "Browse checked listings", "/step-valuation.jpg"],
-                      ["2", "Arrange a viewing", "/step-approved.jpg"],
-                      ["3", "Buy directly", "/step-handover.jpg"],
-                    ].map(([num, title, img]) => (
-                      <div key={num}>
-                        <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                        </div>
-                        <div className="rounded-full flex items-center justify-center font-medium text-white mb-1" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
-                        <p className="font-medium text-xs" style={{ color: "#111111" }}>{title}</p>
+                      <div className="rounded-full flex items-center justify-center font-medium text-white mb-1 mx-auto" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
+                      <p className="font-medium text-xs" style={{ color: "#111111" }}>{title}</p>
+                    </div>
+                  ))}
+                </div>
+                <a href="#how-it-works" className="font-medium text-sm" style={{ color: "#111111", textDecoration: "none", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "6px" }}>
+                  How selling works
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </>
+            ) : (
+              <>
+                <p className="text-xs font-medium uppercase tracking-widest mb-5" style={{ color: "rgba(0,0,0,0.35)" }}>For buyers</p>
+                <h3 className="text-3xl md:text-4xl font-light mb-5" style={{ letterSpacing: "-0.03em", lineHeight: 1.1 }}>Pay less. Get more.</h3>
+                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem" }}>
+                  Priced below dealers, listed direct by the owner.
+                </p>
+                <div className="grid grid-cols-3 gap-4 mb-8">
+                  {[
+                    ["1", "Browse checked listings", "/step-valuation.jpg"],
+                    ["2", "Arrange a viewing", "/step-approved.jpg"],
+                    ["3", "Buy directly", "/step-handover.jpg"],
+                  ].map(([num, title, img]) => (
+                    <div key={num}>
+                      <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
-                    ))}
-                  </div>
-                  <a href="#how-it-works" className="font-medium text-sm" style={{ color: "#111111", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}>
-                    How buying works
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                  </a>
-                </>
-              )}
-            </div>
-
+                      <div className="rounded-full flex items-center justify-center font-medium text-white mb-1 mx-auto" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
+                      <p className="font-medium text-xs" style={{ color: "#111111" }}>{title}</p>
+                    </div>
+                  ))}
+                </div>
+                <a href="#how-it-works" className="font-medium text-sm" style={{ color: "#111111", textDecoration: "none", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "6px" }}>
+                  How buying works
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </>
+            )}
           </div>
 
           <div className="max-w-4xl mx-auto" style={{ marginTop: "4rem" }}>
