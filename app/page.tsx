@@ -357,7 +357,7 @@ export default function Home() {
                         className="font-medium rounded-lg transition-opacity hover:opacity-80 whitespace-nowrap"
                         style={{ backgroundColor: "#111111", color: "#fff", fontSize: "1.05rem", padding: "17px 19px" }}
                       >
-                        Value my car
+                        Value my car &gt;
                       </button>
                     </div>
                   </>
