@@ -220,28 +220,28 @@ export default function Home() {
     <main style={{ backgroundColor: "#ffffff", color: "#111111", fontFamily: "var(--font-comfortaa), sans-serif" }}>
 
       {/* NAVBAR */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-1" : "py-2"}`} style={{ backgroundColor: "rgba(255,255,255,0.95)", zIndex: 20000, boxShadow: "0 1px 8px rgba(0,0,0,0.08)" }}>
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-3"}`} style={{ backgroundColor: "rgba(255,255,255,0.95)", zIndex: 20000, boxShadow: "0 1px 8px rgba(0,0,0,0.08)" }}>
+        <div className="max-w-6xl mx-auto flex items-center justify-between" style={{ paddingLeft: "120px", paddingRight: "120px" }}>
           <div className="flex items-center gap-3">
             <a href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
               <div style={{
-                width: "96px",
-                height: "17px",
+                width: "120px",
+                height: "21px",
                 backgroundImage: "url('/july23black.svg')",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "210px 210px",
-                backgroundPosition: "-61px -98px",
+                backgroundSize: "263px 263px",
+                backgroundPosition: "-76px -123px",
               }} aria-label="carmoo" />
             </a>
-            <div style={{ width: "1px", height: "16px", backgroundColor: "rgba(0,0,0,0.15)", flexShrink: 0 }} />
-            <span className="hidden md:block text-xs font-medium tracking-widest" style={{ color: "rgba(0,0,0,0.35)", letterSpacing: "0.1em" }}>A better deal</span>
+            <div style={{ width: "1px", height: "18px", backgroundColor: "rgba(0,0,0,0.15)", flexShrink: 0 }} />
+            <span className="hidden md:block text-sm font-medium tracking-widest" style={{ color: "rgba(0,0,0,0.35)", letterSpacing: "0.1em" }}>A better deal</span>
           </div>
           <div className="flex items-center gap-6">
-            <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>How it works</a>
-            <a href="#valuation" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Sell your car</a>
-            <a href="#quality" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Our vetting</a>
-            <a href="#faq" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>FAQ</a>
-            <a href="#waitlist" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Get in touch</a>
+            <a href="#how-it-works" className="text-base font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>How it works</a>
+            <a href="#valuation" className="text-base font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Sell your car</a>
+            <a href="#quality" className="text-base font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Our vetting</a>
+            <a href="#faq" className="text-base font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>FAQ</a>
+            <a href="#waitlist" className="text-base font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Get in touch</a>
           </div>
         </div>
       </nav>
