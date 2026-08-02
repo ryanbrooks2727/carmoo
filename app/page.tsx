@@ -226,11 +226,11 @@ export default function Home() {
             <a href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
               <div style={{
                 width: "182px",
-                height: "32.23px",
-                backgroundImage: "url('/july23black.svg')",
+                height: "22.75px",
+                backgroundImage: "url('/logoaug2.svg')",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "398.13px 398.13px",
-                backgroundPosition: "-115.65px -185.79px",
+                backgroundSize: "614.86px 614.86px",
+                backgroundPosition: "-218.9px -241.7px",
               }} aria-label="carmoo" />
             </a>
           </div>
@@ -281,13 +281,13 @@ export default function Home() {
                 <path d="M0,0 L194,0 C197,0 200,3 200,6 L200,94 C200,97 197,100 194,100 L0,100 Z" />
               </clipPath>
               <clipPath id="stripeVClip">
-                <rect x="-50" y="16.317" width="300" height="67.366" />
+                <rect x="-50" y="16" width="300" height="68" />
               </clipPath>
               <clipPath id="stripeVClipTopTrim">
-                <rect x="-50" y="17.095" width="300" height="67.365" />
+                <rect x="-50" y="14.5" width="300" height="71" />
               </clipPath>
               <clipPath id="stripeVClipBottomTrim">
-                <rect x="-50" y="16.317" width="300" height="65.811" />
+                <rect x="-50" y="17.5" width="300" height="65" />
               </clipPath>
             </defs>
             <path
@@ -295,21 +295,6 @@ export default function Home() {
               fill="url(#heroBgGradient)"
             />
             <g clipPath="url(#heroClip)">
-              {[140.74, 153.74, 166.74].map((cx, i) => {
-                const clipId = i === 0 ? "stripeVClipTopTrim" : i === 2 ? "stripeVClipBottomTrim" : "stripeVClip";
-                return (
-                  <g key={i} clipPath={`url(#${clipId})`}>
-                    <rect
-                      x={cx - 1.4}
-                      y={-60}
-                      width={2.8}
-                      height={220}
-                      fill={i % 2 === 0 ? "#7a52e6" : "#ec3fa8"}
-                      transform={`rotate(-22 ${cx} 50)`}
-                    />
-                  </g>
-                );
-              })}
               <g>
                 <rect x={214 - 13} y={-60} width={26} height={110} fill="#ffffff" transform="rotate(-22 214 50)" />
                 <rect x={214 - 13} y={50} width={26} height={110} fill="#ffffff" transform="rotate(22 214 50)" />
@@ -421,7 +406,7 @@ export default function Home() {
       <section className="py-20 px-6" style={{ backgroundColor: "#ffffff", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="font-light" style={{ fontSize: "2.75rem", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "0.75rem" }}>Why choose <Brand />?</h2>
-          <p style={{ color: "rgba(0,0,0,0.5)", fontSize: "1.05rem", marginBottom: "2.5rem" }}>We&apos;ve noticed a gap in the market.</p>
+          <p style={{ color: "rgba(0,0,0,0.5)", fontSize: "1.05rem", marginBottom: "2.5rem" }}>We&apos;ve spotted a gap in the market.</p>
 
           {/* Tab selector */}
           <div className="flex items-center justify-center gap-10" style={{ marginBottom: "3rem" }}>
@@ -797,7 +782,7 @@ export default function Home() {
       <footer className="py-12 px-6" style={{ borderTop: "1px solid rgba(0,0,0,0.08)", backgroundColor: "#ffffff" }}>
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <Image src="/july23black.svg" alt="carmoo" width={120} height={32} />
+            <Image src="/logoaug2.svg" alt="carmoo" width={120} height={32} />
           </div>
           <div className="flex gap-8 text-sm" style={{ color: "rgba(0,0,0,0.4)" }}>
             <a href="#how-it-works" className="hover:text-black transition-colors">How it works</a>
