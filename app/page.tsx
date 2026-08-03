@@ -269,7 +269,7 @@ export default function Home() {
                 <stop offset="100%" stopColor="#f2f2f2" />
               </linearGradient>
               <clipPath id="heroClip">
-                <path d="M0,3.07 L194,3.07 C197,3.07 200,6.07 200,9.07 L200,90.93 C200,93.93 197,96.93 194,96.93 L0,96.93 Z" />
+                <path d="M0,6.81 L194,6.81 C197,6.81 200,9.81 200,12.81 L200,90.93 C200,93.93 197,96.93 194,96.93 L0,96.93 Z" />
               </clipPath>
               <clipPath id="stripeVClip">
                 <rect x="-50" y="16" width="300" height="68" />
@@ -282,7 +282,7 @@ export default function Home() {
               </clipPath>
             </defs>
             <path
-              d="M0,3.07 L194,3.07 C197,3.07 200,6.07 200,9.07 L200,90.93 C200,93.93 197,96.93 194,96.93 L0,96.93 Z"
+              d="M0,6.81 L194,6.81 C197,6.81 200,9.81 200,12.81 L200,90.93 C200,93.93 197,96.93 194,96.93 L0,96.93 Z"
               fill="url(#heroBgGradient)"
             />
             <g clipPath="url(#heroClip)">
@@ -375,7 +375,7 @@ export default function Home() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <div style={{ width: "389px", height: "389px", overflow: "hidden", position: "relative" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/508x1.svg" alt="carmoo car" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(calc(-50% - 18.9px), -50%)", width: "545px", maxWidth: "none", height: "auto" }} />
+                <img src="/x158.png" alt="carmoo car" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(calc(-50% - 18.9px), -50%)", width: "450px", maxWidth: "none", height: "auto" }} />
               </div>
               <div className="flex items-center" style={{ marginTop: "0.5rem", gap: "11px" }}>
                 <div className="flex" style={{ gap: "2px" }}>
@@ -387,7 +387,7 @@ export default function Home() {
                 </div>
                 <span className="font-semibold" style={{ color: "#111111", fontSize: "1.13rem" }}>Trustpilot</span>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/aug3favicon.svg" alt="carmoo" style={{ width: "40px", height: "40px", transform: "translateX(11.34px) scale(4.25)", position: "relative", zIndex: 1 }} />
+                <img src="/logomark38.svg" alt="carmoo" style={{ width: "40px", height: "40px", transform: "translateX(11.34px) scale(4.25)", position: "relative", zIndex: 1 }} />
               </div>
             </div>
           </div>
@@ -488,7 +488,7 @@ export default function Home() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/aug4faviconwhite.svg" alt="" style={{ position: "absolute", left: "-48px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }} />
         <div className="max-w-4xl mx-auto">
-          <p className="text-white font-medium text-2xl mb-4" style={{ textTransform: "uppercase", textDecoration: "underline" }}>Market Chart</p>
+          <p className="text-white font-medium text-2xl mb-4" style={{ textTransform: "uppercase" }}>The Market</p>
           <MarketSpectrum />
         </div>
       </section>
