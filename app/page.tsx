@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const Brand = () => <span style={{ fontFamily: "var(--font-brand), sans-serif", fontWeight: 700, textTransform: "lowercase" }}>carmoo</span>;
+const Brand = () => <span style={{ fontWeight: 700, textTransform: "lowercase" }}>carmoo</span>;
 
 const CartoonCar = () => (
   <svg viewBox="0 0 220 210" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", overflow: "visible" }}>
@@ -56,44 +56,35 @@ const CartoonCar = () => (
 const MarketSpectrum = () => (
   <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto" }}>
     {/* baseline */}
-    <line x1="60" y1="150" x2="940" y2="150" stroke="rgba(0,0,0,0.15)" strokeWidth="3" strokeLinecap="round" />
-    <text x="60" y="120" fontSize="13" fontWeight="600" fill="rgba(0,0,0,0.35)" letterSpacing="0.05em">LOWER VALUE</text>
-    <text x="940" y="120" textAnchor="end" fontSize="13" fontWeight="600" fill="rgba(0,0,0,0.35)" letterSpacing="0.05em">HIGHER VALUE</text>
+    <line x1="60" y1="150" x2="940" y2="150" stroke="rgba(255,255,255,0.25)" strokeWidth="3" strokeLinecap="round" />
+    <text x="60" y="120" fontSize="15" fontWeight="700" fill="rgba(255,255,255,0.45)" letterSpacing="0.05em">LOWER VALUE</text>
+    <text x="940" y="120" textAnchor="end" fontSize="15" fontWeight="700" fill="rgba(255,255,255,0.45)" letterSpacing="0.05em">HIGHER VALUE</text>
 
     {/* Trade-in / part-ex */}
     <circle cx="160" cy="150" r="7" fill="#9ca3af" />
     <line x1="160" y1="150" x2="160" y2="182" stroke="#9ca3af" strokeWidth="2" />
-    <text x="160" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#6b7280">Trade-in / Part-Ex</text>
+    <text x="160" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#d1d5db">Trade-in / WBAC</text>
     <text x="160" y="225" textAnchor="middle" fontSize="13" fill="#9ca3af">Lowest offer</text>
 
     {/* Online instant-offer platforms */}
     <circle cx="390" cy="150" r="7" fill="#9ca3af" />
     <line x1="390" y1="150" x2="390" y2="182" stroke="#9ca3af" strokeWidth="2" />
-    <text x="390" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#6b7280">Motorway / WBAC</text>
+    <text x="390" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#d1d5db">Motorway / Carwow</text>
     <text x="390" y="225" textAnchor="middle" fontSize="13" fill="#9ca3af">Online instant offers</text>
 
     {/* carmoo — private market value */}
-    <line x1="650" y1="95" x2="650" y2="150" stroke="#111111" strokeWidth="2.5" />
-    <rect x="572" y="52" width="156" height="38" rx="19" fill="#111111" />
-    <text x="650" y="77" textAnchor="middle" fontSize="16" fontWeight="700" fill="#ffffff" letterSpacing="0.03em">carmoo</text>
-    <circle cx="650" cy="150" r="11" fill="#111111" stroke="#ffffff" strokeWidth="3" />
-    <text x="650" y="204" textAnchor="middle" fontSize="17" fontWeight="700" fill="#111111">Private Market Value</text>
-    <text x="650" y="225" textAnchor="middle" fontSize="13" fill="rgba(0,0,0,0.5)">The fair price — for everyone</text>
+    <line x1="650" y1="95" x2="650" y2="150" stroke="#ffffff" strokeWidth="2.5" />
+    <text x="650" y="75" textAnchor="middle" fontSize="16" fontWeight="700" fill="#ffffff" letterSpacing="0.03em">carmoo</text>
+    <circle cx="650" cy="150" r="11" fill="#ffffff" stroke="#111111" strokeWidth="3" />
+    <text x="650" y="204" textAnchor="middle" fontSize="17" fontWeight="700" fill="#ffffff">Private Market Value</text>
+    <text x="650" y="225" textAnchor="middle" fontSize="13" fill="rgba(255,255,255,0.6)">The fair price — for everyone</text>
 
     {/* Dealership retail */}
     <circle cx="880" cy="150" r="7" fill="#9ca3af" />
     <line x1="880" y1="150" x2="880" y2="182" stroke="#9ca3af" strokeWidth="2" />
-    <text x="880" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#6b7280">Dealership Retail</text>
+    <text x="880" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#d1d5db">Dealership Retail</text>
     <text x="880" y="225" textAnchor="middle" fontSize="13" fill="#9ca3af">Highest price</text>
 
-    {/* Diverging callouts from the carmoo point */}
-    <line x1="650" y1="150" x2="470" y2="290" stroke="#00bf63" strokeWidth="2" />
-    <circle cx="470" cy="290" r="4" fill="#00bf63" />
-    <text x="470" y="315" textAnchor="middle" fontSize="15" fontWeight="700" fill="#00bf63">Sellers earn more here</text>
-
-    <line x1="650" y1="150" x2="830" y2="290" stroke="#111111" strokeWidth="2" />
-    <circle cx="830" cy="290" r="4" fill="#111111" />
-    <text x="830" y="315" textAnchor="middle" fontSize="15" fontWeight="700" fill="#111111">Buyers pay less here</text>
   </svg>
 );
 
@@ -278,7 +269,7 @@ export default function Home() {
                 <stop offset="100%" stopColor="#f2f2f2" />
               </linearGradient>
               <clipPath id="heroClip">
-                <path d="M0,0 L194,0 C197,0 200,3 200,6 L200,94 C200,97 197,100 194,100 L0,100 Z" />
+                <path d="M0,3.07 L194,3.07 C197,3.07 200,6.07 200,9.07 L200,90.93 C200,93.93 197,96.93 194,96.93 L0,96.93 Z" />
               </clipPath>
               <clipPath id="stripeVClip">
                 <rect x="-50" y="16" width="300" height="68" />
@@ -291,7 +282,7 @@ export default function Home() {
               </clipPath>
             </defs>
             <path
-              d="M0,0 L194,0 C197,0 200,3 200,6 L200,94 C200,97 197,100 194,100 L0,100 Z"
+              d="M0,3.07 L194,3.07 C197,3.07 200,6.07 200,9.07 L200,90.93 C200,93.93 197,96.93 194,96.93 L0,96.93 Z"
               fill="url(#heroBgGradient)"
             />
             <g clipPath="url(#heroClip)">
@@ -341,7 +332,7 @@ export default function Home() {
                 {heroTab === "buying" ? (
                   <>
                     <h3 style={{ fontSize: "2.21rem", fontWeight: 500, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>&apos;Buy a car for far less&apos;</h3>
-                    <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}>Pay <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 less</strong> than dealership prices, on average*.</p>
+                    <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}>Pay <strong style={{ fontWeight: 600, color: "#111111" }}>£3,000 less</strong> than dealership prices, on average*.</p>
                     <a href="#how-it-works"
                       className="inline-block text-center font-medium rounded-xl transition-opacity hover:opacity-80"
                       style={{ backgroundColor: "#111111", color: "#fff", fontSize: "1.13rem", padding: "18px 21px" }}>
@@ -350,7 +341,7 @@ export default function Home() {
                   </>
                 ) : (
                   <>
-                    <h3 style={{ fontSize: "2.47rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>&apos;Sell my car for more than the others&apos;</h3>
+                    <h3 style={{ fontSize: "2.47rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>&apos;Sell my car for more&apos;</h3>
                     <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}><strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than Motorway, and <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than WBAC on average*.</p>
                     <div className="flex items-stretch" style={{ gap: "11px" }}>
                       <div className="flex items-center rounded-lg overflow-hidden flex-1" style={{ border: "2px solid #e8e3da" }}>
@@ -395,6 +386,8 @@ export default function Home() {
                   ))}
                 </div>
                 <span className="font-semibold" style={{ color: "#111111", fontSize: "1.13rem" }}>Trustpilot</span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/aug3favicon.svg" alt="carmoo" style={{ width: "200px", height: "200px" }} />
               </div>
             </div>
           </div>
@@ -438,17 +431,17 @@ export default function Home() {
           </div>
 
           {/* Content */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             {valueTab === "selling" ? (
               <>
-                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem" }}>
-                  When selling your personal car, we&apos;ll run some vetting checks on you and your car before presenting to private buyers. We can provide you up to thousands more than anywhere else because your car is going direct to private ownership rather than to a middleman. We also vet our private buyers and oversee your complete sale to make sure everything is taken care of.
+                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem", fontWeight: 700 }}>
+                  First we&apos;ll run some standard checks on you and your car before presenting to private buyers. We can provide up to thousands more than other online selling websites because your car is going direct to ownership rather than a middleman. We also vet our private buyers and oversee your complete sale to make sure everything is taken care of.
                 </p>
-                <div className="grid grid-cols-3 gap-16 mb-8">
+                <div className="grid grid-cols-3 gap-20 mb-8">
                   {[
-                    ["1", "Get a higher valuation", "See your car's instant value in a few seconds, then use our app to profile your vehicle. Super smooth.", "/step-valuation.jpg"],
-                    ["2", "Get approved & listed", "We'll run some quick vetting checks on you and your car, once complete your advert appears here on our carmoo website — see it live under 'Browse Cars'.", "/step-approved.jpg"],
-                    ["3", "Sell for more and with ease", "Once a private buyer reaches out, we'll vet them and then organise the viewing of your car at your home. Fully structured and overseen from start to finish. We'll remain on standby throughout your viewing to support you and the buyer. Payment will be made swiftly before your car leaves.", "/step-handover.jpg"],
+                    ["1", "Get a higher valuation", "See your car's instant value in a few seconds, then use our app to profile your vehicle.", "/step-valuation.jpg"],
+                    ["2", "Get approved & listed", "We'll run some standard checks on you and your car, once approved your advert appears here on our carmoo website — see it live under 'Browse Cars'.", "/step-approved.jpg"],
+                    ["3", "Sell for more and with ease", "Once a buyer reaches out, we'll run checks on them before arranging the viewing of your car at your home. Fully structured and overseen from start to finish. We'll remain on standby throughout, to support you and the buyer. Payment will be made swiftly before your car leaves.", "/step-handover.jpg"],
                   ].map(([num, title, desc, img]) => (
                     <div key={num}>
                       <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
@@ -456,71 +449,47 @@ export default function Home() {
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
                       <div className="rounded-full flex items-center justify-center font-medium text-white mb-1 mx-auto" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
-                      <p className="font-bold text-xs mb-1" style={{ color: "#111111" }}>{title}</p>
-                      <p className="font-bold text-xs leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
+                      <p className="text-xs mb-1" style={{ color: "#111111" }}>{title}</p>
+                      <p className="text-xs leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
                     </div>
                   ))}
                 </div>
-                <a href="#how-it-works" className="font-medium text-sm" style={{ color: "#111111", textDecoration: "none", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "6px" }}>
-                  How selling works
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
               </>
             ) : (
               <>
-                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem" }}>
-                  When buying don&apos;t stress, all our vehicles and their owners have already been vetted by us. By doing this we make sure all our cars are of a high standard of quality. It&apos;s what we do best. You can also enjoy prices that are thousands below dealerships because there is no middleman involved. Good honest private sellers selling good cars to good people. That&apos;s what we do, at <Brand />.
+                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem", fontWeight: 700 }}>
+                  When buying don&apos;t stress, our vehicles and their owners have already been vetted by us. By doing this we make sure all our cars are of a high standard and are completely HPI clear (not recorded in any accidents). You can also enjoy prices that are thousands below dealerships because there is no middleman. Good honest private sellers selling good cars to good people. That&apos;s what we do, at <Brand />.
                 </p>
-                <div className="grid grid-cols-3 gap-16 mb-8">
+                <div className="grid grid-cols-3 gap-20 mb-8">
                   {[
-                    ["1", "Browse checked listings", "/step-valuation.jpg"],
-                    ["2", "Arrange a viewing", "/step-approved.jpg"],
-                    ["3", "Buy directly", "/step-handover.jpg"],
-                  ].map(([num, title, img]) => (
+                    ["1", "Browse vetted listings", "Browse through hundreds of vetted and honest private sellers. All our cars and their owners have been checked by us to make sure everything's good. Our checks focus on vehicle quality and ownership care, to make sure only the best qualify. What's more, you'll be saving thousands compared to buying from a dealership, and in our opinion ending up with a better cared for and traceable car.", "/step-valuation.jpg"],
+                    ["2", "Arrange a viewing", "Click 'arrange a viewing'. We'll speak to you and verify your identity before swiftly connecting you with our seller. We will remain involved from start to finish and oversee the process to make sure everything is structured and taken care of. You won't be alone.", "/step-approved.jpg"],
+                    ["3", "Buy directly", "Purchase directly at the seller's verified home. We will be on standby during your viewing to answer and resolve any issues real time. Once happy, pay immediately through our secure payment system and drive away in your new car. Remember all paperwork and any outstanding finance will be sorted by us.", "/step-handover.jpg"],
+                  ].map(([num, title, desc, img]) => (
                     <div key={num}>
                       <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
                       <div className="rounded-full flex items-center justify-center font-medium text-white mb-1 mx-auto" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
-                      <p className="font-medium text-xs" style={{ color: "#111111" }}>{title}</p>
+                      <p className="text-xs mb-1" style={{ color: "#111111" }}>{title}</p>
+                      <p className="text-xs leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
                     </div>
                   ))}
                 </div>
-                <a href="#how-it-works" className="font-medium text-sm" style={{ color: "#111111", textDecoration: "none", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "6px" }}>
-                  How buying works
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
               </>
             )}
-          </div>
-
-          <div className="max-w-4xl mx-auto" style={{ marginTop: "4rem" }}>
-            <MarketSpectrum />
           </div>
         </div>
       </section>
 
       {/* STATS BAR */}
-      <section className="py-12 px-6" style={{ backgroundColor: "#111111" }}>
+      <section className="py-12 px-6" style={{ backgroundColor: "#111111", position: "relative", overflow: "hidden" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/aug4faviconwhite.svg" alt="" style={{ position: "absolute", left: "-48px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }} />
         <div className="max-w-4xl mx-auto">
-          <p className="text-center text-white font-medium text-xl md:text-2xl mb-10">Selling your car? You&apos;re leaving money on the table.</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-10">
-            {[
-              ["Always Free", "List your car. Pay nothing. Ever."],
-              ["£2,500 More", "Than We Buy Any Car or trade-in."],
-              ["£1,000 More", "Than Motorway."],
-              ["Quality Checked", "Every car reviewed before it's listed."],
-            ].map(([stat, label]) => (
-              <div key={label}>
-                <p className="text-white text-2xl md:text-3xl font-medium mb-2">{stat}</p>
-                <p className="text-sm md:text-base font-medium" style={{ color: "rgba(255,255,255,0.9)" }}>{label}</p>
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-white font-medium text-base md:text-lg max-w-2xl mx-auto">
-            Every listing checked before it goes live. Direct from the owner. Without the middleman taking their cut.
-          </p>
+          <p className="text-white font-medium text-2xl mb-4" style={{ textTransform: "uppercase", textDecoration: "underline" }}>Market Chart</p>
+          <MarketSpectrum />
         </div>
       </section>
 
@@ -569,7 +538,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <h3 className="text-2xl font-light mb-4 pb-4 border-b" style={{ color: "#111111", borderColor: "#111111" }}>Selling your car</h3>
-              <p className="leading-relaxed mb-8" style={{ color: "rgba(0,0,0,0.6)" }}>When selling your personal car, we&apos;ll run some vetting checks on you and your car before presenting to private buyers. We can provide you up to thousands more than anywhere else because your car is going direct to private ownership rather than to a middleman. We also vet our private buyers and oversee your complete sale to make sure everything is taken care of.</p>
+              <p className="leading-relaxed mb-8" style={{ color: "rgba(0,0,0,0.6)", fontWeight: 700 }}>First we&apos;ll run some standard checks on you and your car before presenting to private buyers. We can provide up to thousands more than other online selling websites because your car is going direct to ownership rather than a middleman. We also vet our private buyers and oversee your complete sale to make sure everything is taken care of.</p>
               <div className="space-y-8">
                 {[
                   ["1", "Tell us about your car", "Submit your car's details and photos. We take a quick look at the ownership history and overall condition to make sure it's one we're happy to put in front of buyers."],
