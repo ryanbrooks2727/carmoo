@@ -375,7 +375,7 @@ export default function Home() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <div style={{ width: "389px", height: "389px", overflow: "hidden", position: "relative" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/carx1.svg" alt="carmoo car" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: "596px", maxWidth: "none", height: "auto" }} />
+                <img src="/508x1.svg" alt="carmoo car" style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(calc(-50% - 18.9px), -50%)", width: "545px", maxWidth: "none", height: "auto" }} />
               </div>
               <div className="flex items-center" style={{ marginTop: "0.5rem", gap: "11px" }}>
                 <div className="flex" style={{ gap: "2px" }}>
@@ -387,7 +387,7 @@ export default function Home() {
                 </div>
                 <span className="font-semibold" style={{ color: "#111111", fontSize: "1.13rem" }}>Trustpilot</span>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/aug3favicon.svg" alt="carmoo" style={{ width: "40px", height: "40px", transform: "scale(5)", position: "relative", zIndex: 1 }} />
+                <img src="/aug3favicon.svg" alt="carmoo" style={{ width: "40px", height: "40px", transform: "translateX(11.34px) scale(4.25)", position: "relative", zIndex: 1 }} />
               </div>
             </div>
           </div>
