@@ -387,7 +387,7 @@ export default function Home() {
                 </div>
                 <span className="font-semibold" style={{ color: "#111111", fontSize: "1.13rem" }}>Trustpilot</span>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/aug3favicon.svg" alt="carmoo" style={{ width: "200px", height: "200px" }} />
+                <img src="/aug3favicon.svg" alt="carmoo" style={{ width: "40px", height: "40px", transform: "scale(5)", position: "relative", zIndex: 1 }} />
               </div>
             </div>
           </div>
