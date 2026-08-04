@@ -1,8 +1,96 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 const Brand = () => <span style={{ fontWeight: 700, textTransform: "lowercase" }}>carmoo</span>;
+
+const CONFETTI_COUNT = 55;
+const CONFETTI_COLORS = ["#f5a623", "#ff9f43", "#e8830f", "#ffb347", "#f7931e"];
+const CONFETTI_X_MIN = 10;
+const CONFETTI_X_MAX = 158;
+const CONFETTI_Y_TOP = -10;
+const CONFETTI_Y_BOTTOM = 106;
+
+function makeConfettiParticle(spreadInitially: boolean) {
+  return {
+    baseX: CONFETTI_X_MIN + Math.random() * (CONFETTI_X_MAX - CONFETTI_X_MIN),
+    y: spreadInitially ? CONFETTI_Y_TOP + Math.random() * (CONFETTI_Y_BOTTOM - CONFETTI_Y_TOP) : CONFETTI_Y_TOP - Math.random() * 20,
+    fallSpeed: 8 + Math.random() * 6,
+    swayAmp1: 3 + Math.random() * 5,
+    swayFreq1: 0.35 + Math.random() * 0.35,
+    swayPhase1: Math.random() * Math.PI * 2,
+    swayAmp2: 1 + Math.random() * 2.5,
+    swayFreq2: 0.8 + Math.random() * 0.7,
+    swayPhase2: Math.random() * Math.PI * 2,
+    rotation: Math.random() * 360,
+    spin: (Math.random() - 0.5) * 140,
+    color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+    shape: Math.floor(Math.random() * 3),
+    scale: 0.75 + Math.random() * 0.6,
+  };
+}
+
+const Confetti = () => {
+  const groupRefs = useRef<(SVGGElement | null)[]>([]);
+  const particlesRef = useRef<ReturnType<typeof makeConfettiParticle>[]>([]);
+  const [particles, setParticles] = useState<ReturnType<typeof makeConfettiParticle>[] | null>(null);
+
+  useEffect(() => {
+    const generated = Array.from({ length: CONFETTI_COUNT }, () => makeConfettiParticle(true));
+    particlesRef.current = generated;
+    setParticles(generated);
+  }, []);
+
+  useEffect(() => {
+    if (!particles) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const applyTransform = (i: number) => {
+      const p = particlesRef.current[i];
+      const x = p.baseX + Math.sin(p.swayPhase1) * p.swayAmp1 + Math.sin(p.swayPhase2) * p.swayAmp2;
+      const el = groupRefs.current[i];
+      if (!el) return;
+      el.setAttribute("transform", `translate(${x.toFixed(2)},${p.y.toFixed(2)}) rotate(${(p.rotation % 360).toFixed(1)}) scale(${p.scale.toFixed(2)})`);
+    };
+
+    particlesRef.current.forEach((_, i) => applyTransform(i));
+    if (reduceMotion) return;
+
+    let lastTime = performance.now();
+    let frameId: number;
+
+    const tick = (now: number) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+      particlesRef.current.forEach((p, i) => {
+        p.y += p.fallSpeed * dt;
+        p.swayPhase1 += p.swayFreq1 * dt;
+        p.swayPhase2 += p.swayFreq2 * dt;
+        p.rotation += p.spin * dt;
+        applyTransform(i);
+      });
+      frameId = requestAnimationFrame(tick);
+    };
+
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
+  }, [particles]);
+
+  if (!particles) return null;
+
+  return (
+    <g opacity="0.65">
+      {particles.map((p, i) => (
+        <g key={i} ref={el => { groupRefs.current[i] = el; }}>
+          {p.shape === 0
+            ? <rect x={-1.5} y={-0.7} width="3" height="1.4" fill={p.color} />
+            : p.shape === 1
+            ? <polygon points="0,-1.4 1.3,1 -1.3,1" fill={p.color} />
+            : <circle cx={0} cy={0} r="0.9" fill={p.color} />}
+        </g>
+      ))}
+    </g>
+  );
+};
 
 const CartoonCar = () => (
   <svg viewBox="0 0 220 210" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", overflow: "visible" }}>
@@ -169,11 +257,29 @@ export default function Home() {
   const [valForm, setValForm] = useState({ name: "", email: "", phone: "", reg: "", mileage: "", year: "", condition: "", finance: "" });
   const [valSubmitted, setValSubmitted] = useState(false);
   const [valLoading, setValLoading] = useState(false);
+  const [marketInView, setMarketInView] = useState(false);
+  const marketSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const el = marketSectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setMarketInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -211,7 +317,7 @@ export default function Home() {
     <main style={{ backgroundColor: "#ffffff", color: "#111111", fontFamily: "var(--font-comfortaa), sans-serif" }}>
 
       {/* NAVBAR */}
-      <nav className={`fixed left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-4"}`} style={{ top: "19px", backgroundColor: "rgba(255,255,255,0.95)", zIndex: 20000 }}>
+      <nav className={`fixed left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-4"}`} style={{ top: 0, backgroundColor: "#ffffff", zIndex: 20000 }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between" style={{ paddingLeft: "63px", paddingRight: "24px" }}>
           <div className="flex items-center gap-3">
             <a href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
@@ -225,21 +331,25 @@ export default function Home() {
               }} aria-label="carmoo" />
             </a>
           </div>
-          <div className="flex items-center gap-6">
-            <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>How it works</a>
-            <a href="#valuation" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Sell your car</a>
-            <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Buy a car</a>
-            <a href="#quality" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Our vetting</a>
-            <a href="#faq" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>FAQ</a>
-            <a href="#waitlist" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Get in touch</a>
-            <a href="#" className="text-sm font-medium hidden md:flex items-center" style={{ color: "rgba(0,0,0,0.6)", gap: "6px" }}>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" />
-              </svg>
-              Sign in
-            </a>
-          </div>
+          {scrolled ? (
+            <p className="font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)", textTransform: "lowercase", fontSize: "1.05rem" }}>..a mooch better way to buy &amp; sell your car</p>
+          ) : (
+            <div className="flex items-center gap-6">
+              <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>How it works</a>
+              <a href="#valuation" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Sell your car</a>
+              <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Buy a car</a>
+              <a href="#quality" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Our vetting</a>
+              <a href="#faq" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>FAQ</a>
+              <a href="#waitlist" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>Get in touch</a>
+              <a href="#" className="text-sm font-medium hidden md:flex items-center" style={{ color: "rgba(0,0,0,0.6)", gap: "6px" }}>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+                </svg>
+                Sign in
+              </a>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -341,7 +451,7 @@ export default function Home() {
                   </>
                 ) : (
                   <>
-                    <h3 style={{ fontSize: "2.47rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>&apos;Sell my car for more&apos;</h3>
+                    <h3 style={{ fontSize: "2.47rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>Sell my car for more</h3>
                     <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}><strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than Motorway, and <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than WBAC on average*.</p>
                     <div className="flex items-stretch" style={{ gap: "11px" }}>
                       <div className="flex items-center rounded-lg overflow-hidden flex-1" style={{ border: "2px solid #e8e3da" }}>
@@ -392,21 +502,31 @@ export default function Home() {
             </div>
           </div>
 
+          <svg
+            viewBox="0 0 200 100"
+            preserveAspectRatio="none"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 2, pointerEvents: "none" }}
+          >
+            <g clipPath="url(#heroClip)">
+              <Confetti />
+            </g>
+          </svg>
+
         </div>
       </section>
 
       {/* VALUE PROPOSITION */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#ffffff", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 style={{ fontSize: "2.75rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "0.75rem" }}>Here&apos;s how it works</h2>
+      <section className="py-32 px-6" style={{ backgroundColor: "#ffffff", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 style={{ fontSize: "3rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "0.75rem" }}>Here&apos;s how it works</h2>
 
           {/* Tab selector */}
-          <div className="flex items-center justify-center gap-10" style={{ marginBottom: "3rem" }}>
+          <div className="flex items-center justify-center gap-14" style={{ marginBottom: "3rem" }}>
             <button
               onClick={() => setValueTab("selling")}
               className="font-semibold uppercase transition-colors cursor-pointer"
               style={{
-                fontSize: "0.95rem",
+                fontSize: "1.1rem",
                 letterSpacing: "0.05em",
                 color: valueTab === "selling" ? "#111111" : "rgba(0,0,0,0.35)",
                 borderBottom: valueTab === "selling" ? "2px solid #111111" : "2px solid transparent",
@@ -419,7 +539,7 @@ export default function Home() {
               onClick={() => setValueTab("buying")}
               className="font-semibold uppercase transition-colors cursor-pointer"
               style={{
-                fontSize: "0.95rem",
+                fontSize: "1.1rem",
                 letterSpacing: "0.05em",
                 color: valueTab === "buying" ? "#111111" : "rgba(0,0,0,0.35)",
                 borderBottom: valueTab === "buying" ? "2px solid #111111" : "2px solid transparent",
@@ -431,15 +551,12 @@ export default function Home() {
           </div>
 
           {/* Content */}
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             {valueTab === "selling" ? (
               <>
-                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem", fontWeight: 700 }}>
-                  First we&apos;ll run some standard checks on you and your car before presenting to private buyers. We can provide up to thousands more than other online selling websites because your car is going direct to ownership rather than a middleman. We also vet our private buyers and oversee your complete sale to make sure everything is taken care of.
-                </p>
                 <div className="grid grid-cols-3 gap-20 mb-8">
                   {[
-                    ["1", "Get a higher valuation", "See your car's instant value in a few seconds, then use our app to profile your vehicle.", "/step-valuation.jpg"],
+                    ["1", "Get a higher valuation", "See your car's instant value in a few seconds, you can expect hundreds or thousands more than alternative auction style sites like Motorway or Carwow. If you like it, simply proceed by using our app to profile your vehicle.", "/step-valuation.jpg"],
                     ["2", "Get approved & listed", "We'll run some standard checks on you and your car, once approved your advert appears here on our carmoo website — see it live under 'Browse Cars'.", "/step-approved.jpg"],
                     ["3", "Sell for more and with ease", "Once a buyer reaches out, we'll run checks on them before arranging the viewing of your car at your home. Fully structured and overseen from start to finish. We'll remain on standby throughout, to support you and the buyer. Payment will be made swiftly before your car leaves.", "/step-handover.jpg"],
                   ].map(([num, title, desc, img]) => (
@@ -449,17 +566,17 @@ export default function Home() {
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
                       <div className="rounded-full flex items-center justify-center font-medium text-white mb-1 mx-auto" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
-                      <p className="text-xs mb-1" style={{ color: "#111111" }}>{title}</p>
-                      <p className="text-xs leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
+                      <p className="text-sm mb-1" style={{ color: "#111111" }}>{title}</p>
+                      <p className="text-sm leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
                     </div>
                   ))}
                 </div>
+                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1.15rem", fontWeight: 700 }}>
+                  When selling we&apos;ll run some standard vetting checks on you and your car before presenting to private buyers. We can offer you up to thousands more than other online selling sites because your car is going direct to ownership rather than a middleman. We also vet our private buyers and oversee your complete sale to make sure everything is taken care of.
+                </p>
               </>
             ) : (
               <>
-                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1rem", fontWeight: 700 }}>
-                  When buying don&apos;t stress, our vehicles and their owners have already been vetted by us. By doing this we make sure all our cars are of a high standard and are completely HPI clear (not recorded in any accidents). You can also enjoy prices that are thousands below dealerships because there is no middleman. Good honest private sellers selling good cars to good people. That&apos;s what we do, at <Brand />.
-                </p>
                 <div className="grid grid-cols-3 gap-20 mb-8">
                   {[
                     ["1", "Browse vetted listings", "Browse through hundreds of vetted and honest private sellers. All our cars and their owners have been checked by us to make sure everything's good. Our checks focus on vehicle quality and ownership care, to make sure only the best qualify. What's more, you'll be saving thousands compared to buying from a dealership, and in our opinion ending up with a better cared for and traceable car.", "/step-valuation.jpg"],
@@ -472,11 +589,14 @@ export default function Home() {
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
                       <div className="rounded-full flex items-center justify-center font-medium text-white mb-1 mx-auto" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
-                      <p className="text-xs mb-1" style={{ color: "#111111" }}>{title}</p>
-                      <p className="text-xs leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
+                      <p className="text-sm mb-1" style={{ color: "#111111" }}>{title}</p>
+                      <p className="text-sm leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
                     </div>
                   ))}
                 </div>
+                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1.15rem", fontWeight: 700 }}>
+                  When buying don&apos;t stress, our vehicles and their owners have already been vetted by us. By doing this we make sure all our cars are of a high standard and are completely HPI clear (not recorded in any accidents). You can also enjoy prices that are thousands below dealerships because there is no middleman. Good honest private sellers selling good cars to good people. That&apos;s what we do, at <Brand />.
+                </p>
               </>
             )}
           </div>
@@ -484,97 +604,96 @@ export default function Home() {
       </section>
 
       {/* STATS BAR */}
-      <section className="py-12 px-6" style={{ backgroundColor: "#111111", position: "relative", overflow: "hidden" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/aug4faviconwhite.svg" alt="" style={{ position: "absolute", left: "-48px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }} />
-        <div className="max-w-4xl mx-auto">
-          <p className="text-white font-medium text-2xl mb-4" style={{ textTransform: "uppercase" }}>The Market</p>
-          <MarketSpectrum />
+      <section ref={marketSectionRef} className="py-12 px-6" style={{ position: "relative", overflow: "hidden", marginBottom: "75.6px" }}>
+        <style>{`
+          @keyframes marketIconSpinIn {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(1080deg); }
+          }
+          @keyframes marketDiagramSlideIn {
+            0% { transform: translateX(-40%); opacity: 0; }
+            100% { transform: translateX(0%); opacity: 1; }
+          }
+          .market-icon-animate { animation: marketIconSpinIn 2.2s cubic-bezier(0.15, 0.65, 0.25, 1) forwards; }
+          .market-diagram-animate { animation: marketDiagramSlideIn 2.2s cubic-bezier(0.15, 0.65, 0.25, 1) forwards; }
+        `}</style>
+        <div style={{ position: "absolute", left: "18.9px", top: 0, width: "calc(100% - 37.8px)", height: "100%", backgroundColor: "#111111", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/aug4faviconwhite.svg" alt="" className={marketInView ? "market-icon-animate" : ""} style={{ position: "absolute", left: "-48px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }} />
+        </div>
+        <div className="max-w-4xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
+          <p className="text-white font-medium text-2xl mb-4" style={{ textTransform: "uppercase" }}>Our Market Position</p>
+          <div className={marketInView ? "market-diagram-animate" : ""}>
+            <MarketSpectrum />
+          </div>
         </div>
       </section>
 
       {/* WHY ELECTRIC */}
-      <section className="py-24 px-6" style={{ backgroundColor: "#f6f6f6" }}>
-        <div className="max-w-5xl mx-auto">
+      <section className="pt-24 px-6" style={{ position: "relative", overflow: "hidden", paddingBottom: "480px" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/lottery.jpeg" alt="" style={{ position: "absolute", left: "37.8px", top: 0, width: "calc(100% - 75.6px)", height: "100%", objectFit: "cover", borderRadius: "24px", zIndex: 0 }} />
+        <div className="max-w-5xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
           <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-light mb-6">Built on belief.</h2>
-              <p className="text-lg mb-5 leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>We believe electric is the future of car ownership — and we&apos;re building toward a platform that fully embraces it. Right now we&apos;re open to all vehicles while we build trust and momentum; as we grow, we&apos;ll transition to an EV-only marketplace backed by a full warranty program.</p>
-              <p className="text-lg mb-5 leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>Every seller is reviewed and every car is quality-checked before it&apos;s listed. A full warranty and finance program is on the horizon as we grow.</p>
-              <p className="text-lg leading-relaxed" style={{ color: "rgba(0,0,0,0.6)" }}>Dealerships have always charged for the reassurance they offer. We&apos;re building that same trust — through vetting, transparency and a warranty program on the way — without the middleman margin. That value goes back to the seller and the buyer, where it belongs.</p>
-            </div>
-            <div style={{ borderRadius: "20px", overflow: "hidden", aspectRatio: "4/3" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/ev-station.jpg" alt="Electric vehicle at charging station" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            </div>
-          </div>
-          <div className="grid md:grid-cols-3 gap-4">
-            {([
-              [<svg key="bolt" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:28,height:28}}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>, "Electric is the future", "We're not hedging our bets on where the market's going. Right now we're open to all vehicles, but as we grow we'll move to an EV-only platform — because we believe that's where private car ownership is headed."],
-              [<svg key="search" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:28,height:28}}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>, "Every car earns its place", "We give every vehicle a quick review before it goes live. If it doesn't meet our standard, it doesn't get listed."],
-              [<svg key="shield" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:28,height:28}}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, "Restoring trust in car sales", "Private car buying has a reputation problem. We're here to fix that — with careful vetting, full transparency, and a warranty and finance program on the way as we grow."],
-            ] as [React.ReactNode, string, string][]).map(([icon, title, desc]) => (
-              <div key={title} className="rounded-2xl p-8 text-left" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)" }}>
-                <div className="mb-4">{icon}</div>
-                <h3 className="font-medium text-lg mb-2" style={{ color: "#111111" }}>{title}</h3>
-                <p style={{ color: "rgba(0,0,0,0.5)" }} className="leading-relaxed text-sm">{desc}</p>
+            <div className="rounded-2xl p-8" style={{ backgroundColor: "#111111" }}>
+              <h3 className="font-medium mb-2" style={{ color: "#ffffff", fontSize: "1.75rem" }}><span style={{ fontSize: "2.5rem" }}>Shhhh..</span> It&apos;s not the lottery</h3>
+              <p className="font-medium mb-6 leading-relaxed" style={{ color: "#ffffff", fontSize: "1.75rem" }}>but you could get thousands more with us</p>
+              <div className="flex items-center" style={{ backgroundColor: "#ffffff", borderRadius: "9999px", padding: "4px 4px 4px 16px" }}>
+                <input
+                  type="text"
+                  placeholder="ENTER REG"
+                  value={valForm.reg}
+                  onChange={e => setValForm({ ...valForm, reg: e.target.value.toUpperCase() })}
+                  maxLength={8}
+                  className="flex-1 font-bold tracking-widest outline-none uppercase"
+                  style={{ backgroundColor: "transparent", color: "#111111", letterSpacing: "0.08em", fontSize: "0.9rem" }}
+                />
+                <button
+                  onClick={() => { const el = document.getElementById("valuation"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}
+                  aria-label="Get my quote now"
+                  className="rounded-full flex items-center justify-center flex-shrink-0 transition-opacity hover:opacity-80 cursor-pointer"
+                  style={{ backgroundColor: "#111111", width: "48px", height: "48px" }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/logoarrow.svg" alt="" style={{ width: 30, height: 30, filter: "invert(1)" }} />
+                </button>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
+      {/* BROWSE VEHICLES */}
       <section id="how-it-works" className="py-24 px-6" style={{ backgroundColor: "#ffffff" }}>
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-light mb-4">How it works</h2>
-            <p className="text-xl" style={{ color: "rgba(0,0,0,0.5)" }}>Straightforward for sellers. Reassuring for buyers.</p>
+            <h2 className="text-4xl md:text-5xl font-light mb-4">Browse vehicles</h2>
+            <p className="text-xl" style={{ color: "rgba(0,0,0,0.5)" }}>A preview of what&apos;s coming — real listings launch soon.</p>
           </div>
-          <div style={{ borderRadius: "20px", overflow: "hidden", aspectRatio: "21/8", marginBottom: "3.5rem" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/ev-interior.jpg" alt="Electric vehicle interior" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 35%" }} />
-          </div>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-light mb-4 pb-4 border-b" style={{ color: "#111111", borderColor: "#111111" }}>Selling your car</h3>
-              <p className="leading-relaxed mb-8" style={{ color: "rgba(0,0,0,0.6)", fontWeight: 700 }}>First we&apos;ll run some standard checks on you and your car before presenting to private buyers. We can provide up to thousands more than other online selling websites because your car is going direct to ownership rather than a middleman. We also vet our private buyers and oversee your complete sale to make sure everything is taken care of.</p>
-              <div className="space-y-8">
-                {[
-                  ["1", "Tell us about your car", "Submit your car's details and photos. We take a quick look at the ownership history and overall condition to make sure it's one we're happy to put in front of buyers."],
-                  ["2", "Get approved & listed", "If your car meets our standard, we create a clean, simple listing. Only quality vehicles make it onto the platform."],
-                  ["3", "Connect with genuine buyers", "Interested buyers reach out directly through your listing. No dealer middlemen, no trade-in lowballing."],
-                  ["4", "Sell with confidence", "We guide you through every step of the handover — V5, payment, everything covered."],
-                ].map(([num, title, desc]) => (
-                  <div key={num} className="flex gap-5">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center font-medium text-white flex-shrink-0 mt-1 text-sm" style={{ backgroundColor: "#111111" }}>{num}</div>
-                    <div>
-                      <p className="font-medium text-lg mb-1" style={{ color: "#111111" }}>{title}</p>
-                      <p className="leading-relaxed text-sm" style={{ color: "rgba(0,0,0,0.5)" }}>{desc}</p>
-                    </div>
-                  </div>
-                ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-left">
+            {[
+              ["2022 BMW X1 sDrive18i", "£18,995", "24,500 miles", "Bristol"],
+              ["2021 Tesla Model 3", "£22,750", "31,200 miles", "Bath"],
+              ["2020 Volkswagen Golf", "£13,450", "42,100 miles", "Exeter"],
+              ["2023 Ford Puma", "£16,995", "12,800 miles", "Cardiff"],
+            ].map(([title, price, mileage, location]) => (
+              <div key={title} className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(0,0,0,0.08)" }}>
+                <div className="flex items-center justify-center relative" style={{ aspectRatio: "4/3", backgroundColor: "#f2f2f2" }}>
+                  <span className="rounded-full font-medium" style={{ position: "absolute", top: "10px", left: "10px", backgroundColor: "#00bf63", color: "#ffffff", fontSize: "0.65rem", padding: "4px 10px", letterSpacing: "0.05em" }}>VETTED</span>
+                  <svg viewBox="0 0 64 32" style={{ width: "70%", height: "auto" }} fill="none" stroke="#111111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 22 L8 12 Q11 8 17 8 L40 8 Q46 8 49 12 L58 20" />
+                    <path d="M2 22 L60 22" />
+                    <circle cx="16" cy="24" r="4" fill="#f2f2f2" />
+                    <circle cx="46" cy="24" r="4" fill="#f2f2f2" />
+                  </svg>
+                </div>
+                <div className="p-4">
+                  <p className="font-medium text-lg mb-1" style={{ color: "#111111" }}>{price}</p>
+                  <p className="text-sm mb-1" style={{ color: "#111111" }}>{title}</p>
+                  <p className="text-sm" style={{ color: "rgba(0,0,0,0.5)" }}>{mileage} · {location}</p>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="text-2xl font-light mb-8 pb-4 border-b" style={{ color: "#00bf63", borderColor: "#00bf63" }}>Buying a car</h3>
-              <div className="space-y-8">
-                {[
-                  ["1", "Browse checked listings", "Every car on carmoo has been reviewed by us before it's listed, so you're never browsing blind."],
-                  ["2", "Find your car", "Clean listings. Honest descriptions. No fluff, no filler — just the information you actually need."],
-                  ["3", "Arrange a viewing", "We put you directly in touch with the seller to arrange a viewing that works for you both."],
-                  ["4", "Buy directly, more on the horizon", "Right now you buy directly from the seller, backed by a quality-checked listing. A full warranty and finance program is on our roadmap as we grow, alongside our move to an EV-only marketplace — get in early, before it arrives."],
-                ].map(([num, title, desc]) => (
-                  <div key={num} className="flex gap-5">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center font-medium text-white flex-shrink-0 mt-1 text-sm" style={{ backgroundColor: "#00bf63" }}>{num}</div>
-                    <div>
-                      <p className="font-medium text-lg mb-1" style={{ color: "#111111" }}>{title}</p>
-                      <p className="leading-relaxed text-sm" style={{ color: "rgba(0,0,0,0.5)" }}>{desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
