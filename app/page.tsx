@@ -706,9 +706,9 @@ export default function Home() {
               <>
                 <div className="grid grid-cols-3 gap-20 mb-8">
                   {[
-                    ["1", "Get a higher valuation", "See your car's instant value in a few seconds, you can expect hundreds or thousands more than alternative auction style sites like Motorway or Carwow. If you like it, simply proceed by using our app to profile your vehicle.", "/step-valuation.jpg"],
-                    ["2", "Get approved & listed", "We'll run some standard checks on you and your car, once approved your advert appears here on our carmoo website — see it live under 'Browse Cars'.", "/step-approved.jpg"],
-                    ["3", "Sell for more and with ease", "Once a buyer reaches out, we'll run checks on them before arranging the viewing of your car at your home. Fully structured and overseen from start to finish. We'll remain on standby throughout, to support you and the buyer. Payment will be made swiftly before your car leaves.", "/step-handover.jpg"],
+                    ["1", "Get a higher valuation", "See your higher valuation in a few seconds. Use our app to profile your vehicle.", "/step-valuation.jpg"],
+                    ["2", "Get approved & listed", "We run checks on all our private sellers. Once approved your advert will appear under 'Browse Cars'.", "/step-approved.jpg"],
+                    ["3", "Finish Up", "Before long a private buyer will reach out. We'll get to know them before making arrangements. We act as an intermediary from start to finish. And it's as simple as that. See you later, alligator.", "/step-handover.jpg"],
                   ].map(([num, title, desc, img]) => (
                     <div key={num}>
                       <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
@@ -803,7 +803,7 @@ export default function Home() {
             0% { clip-path: inset(0 100% 0 0); }
             100% { clip-path: inset(0 0% 0 0); }
           }
-          .market-diagram-animate { animation: marketDiagramSlideIn 0.9s linear forwards; }
+          .market-diagram-animate { animation: marketDiagramSlideIn 1.2s linear forwards; }
         `}</style>
         <div style={{ position: "absolute", left: "210.9px", top: 0, width: "calc(100% - 421.8px)", height: "100%", backgroundColor: "#f2f2f2", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
           <MarketIcon triggered={marketInView} />
