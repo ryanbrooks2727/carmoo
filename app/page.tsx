@@ -356,6 +356,8 @@ export default function Home() {
   const [valLoading, setValLoading] = useState(false);
   const [marketInView, setMarketInView] = useState(false);
   const marketSectionRef = useRef<HTMLElement | null>(null);
+  const [regArrowInView, setRegArrowInView] = useState(false);
+  const regArrowRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -374,6 +376,22 @@ export default function Home() {
         }
       },
       { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = regArrowRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRegArrowInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.6 }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -722,8 +740,11 @@ export default function Home() {
       </section>
 
       {/* WHY ELECTRIC */}
-      <section className="pt-24 px-6" style={{ position: "relative", overflow: "hidden", paddingBottom: "480px" }}>
-        <div style={{ position: "absolute", left: "229.8px", top: 0, width: "calc(100% - 459.6px)", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
+      <section className="pt-24 px-6" style={{ position: "relative", overflow: "hidden", paddingBottom: "220px", marginBottom: "80px" }}>
+        <style>{`@keyframes regArrowSpin { from { transform: rotate(0deg); } to { transform: rotate(1080deg); } }`}</style>
+        <div style={{ position: "absolute", left: "229.8px", top: 0, width: "calc(100% - 459.6px)", height: "100%", backgroundColor: "#ffffff", border: "2px solid #111111", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/lottery58.svg" alt="Celebrating with confetti" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
           <svg viewBox="115 104 145 145" aria-label="carmoo" style={{ position: "absolute", right: "28px", bottom: "28px", width: "60px", height: "60px" }}>
             <polygon points={MARKET_ICON_TOP.points} fill="#5700d1" />
             <polygon points={MARKET_ICON_BOTTOM.points} fill="#5700d1" />
@@ -731,9 +752,9 @@ export default function Home() {
         </div>
         <div className="max-w-5xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
           <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
-            <div className="rounded-2xl p-8" style={{ backgroundColor: "#111111" }}>
-              <h3 className="font-medium mb-2" style={{ color: "#ffffff", fontSize: "1.75rem" }}><span style={{ fontSize: "2.5rem" }}>Shhh..</span> It&apos;s not the lottery</h3>
-              <p className="font-medium mb-6 leading-relaxed" style={{ color: "#ffffff", fontSize: "1.75rem" }}>but you could get thousands more</p>
+            <div className="rounded-2xl p-6" style={{ backgroundColor: "#111111", maxWidth: "420px" }}>
+              <h3 className="font-medium mb-2" style={{ color: "#ffffff", fontSize: "1.55rem" }}><span style={{ fontSize: "2.2rem" }}>Shhh..</span> It&apos;s not the lottery</h3>
+              <p className="font-medium mb-6 leading-relaxed" style={{ color: "#ffffff", fontSize: "1.55rem" }}>but you could get thousands more</p>
               <div className="flex items-center" style={{ backgroundColor: "#ffffff", borderRadius: "9999px", padding: "4px 4px 4px 16px" }}>
                 <input
                   type="text"
@@ -748,10 +769,10 @@ export default function Home() {
                   onClick={() => { const el = document.getElementById("valuation"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}
                   aria-label="Get my quote now"
                   className="rounded-full flex items-center justify-center flex-shrink-0 transition-opacity hover:opacity-80 cursor-pointer"
-                  style={{ backgroundColor: "#111111", width: "48px", height: "48px" }}
+                  style={{ backgroundColor: "#5700d1", width: "48px", height: "48px" }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/logoarrow.svg" alt="" style={{ width: 30, height: 30, filter: "invert(1)" }} />
+                  <img ref={regArrowRef} src="/logoarrow.svg" alt="" style={{ width: 30, height: 30, filter: "invert(1)", animation: regArrowInView ? "regArrowSpin 1.1s ease-in-out both" : "none" }} />
                 </button>
               </div>
             </div>
