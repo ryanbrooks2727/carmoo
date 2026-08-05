@@ -123,7 +123,7 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const IDLE_SPEED = 0.2;
     const SETTLE_DURATION = 3;
-    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 4);
 
     const apply = () => {
       const s = state.current;
@@ -157,7 +157,7 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
       } else if (s.phase === "settling") {
         const elapsed = (now - s.settleStartTime) / 1000;
         const t = Math.min(elapsed / SETTLE_DURATION, 1);
-        const e = easeOutCubic(t);
+        const e = easeOut(t);
         s.topAngle = s.settleStartTop + (s.settleTargetTop - s.settleStartTop) * e;
         s.bottomAngle = s.settleStartBottom + (s.settleTargetBottom - s.settleStartBottom) * e;
         if (t >= 1) {
@@ -179,11 +179,15 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
 
   return (
     <svg viewBox="0 0 375 375" style={{ position: "absolute", left: "-124px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }}>
-      <g ref={topRef}>
-        <polygon points={MARKET_ICON_TOP.points} fill="#111111" />
+      <g transform="translate(-2.1 2.2)">
+        <g ref={topRef}>
+          <polygon points={MARKET_ICON_TOP.points} fill="#111111" />
+        </g>
       </g>
-      <g ref={bottomRef}>
-        <polygon points={MARKET_ICON_BOTTOM.points} fill="#111111" />
+      <g transform="translate(2.1 -2.2)">
+        <g ref={bottomRef}>
+          <polygon points={MARKET_ICON_BOTTOM.points} fill="#111111" />
+        </g>
       </g>
     </svg>
   );
