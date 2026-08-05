@@ -6,9 +6,9 @@ const Brand = () => <span style={{ fontWeight: 700, textTransform: "lowercase" }
 
 const CONFETTI_COUNT = 46;
 const CONFETTI_COLORS = ["#7a52e6", "#9b6ef3", "#6a3fd1", "#b794f6", "#8c5ce8", "#ffd166", "#ff8fa3", "#4ecdc4", "#f4a300"];
-const CONFETTI_X_MIN = 124;
-const CONFETTI_X_MAX = 176;
-const CONFETTI_Y_TOP = 18;
+const CONFETTI_X_MIN = 128;
+const CONFETTI_X_MAX = 172;
+const CONFETTI_Y_TOP = 14;
 const CONFETTI_Y_SPAWN_TOP = 60;
 const CONFETTI_Y_BOTTOM = 106;
 
@@ -47,7 +47,8 @@ const Confetti = () => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const applyTransform = (i: number) => {
       const p = particlesRef.current[i];
-      const x = p.baseX + Math.sin(p.swayPhase1) * p.swayAmp1 + Math.sin(p.swayPhase2) * p.swayAmp2;
+      // Keep sway within the car's width so pieces never stray past its edges.
+      const x = Math.max(CONFETTI_X_MIN, Math.min(CONFETTI_X_MAX, p.baseX + Math.sin(p.swayPhase1) * p.swayAmp1 + Math.sin(p.swayPhase2) * p.swayAmp2));
       const el = groupRefs.current[i];
       if (!el) return;
       el.setAttribute("transform", `translate(${x.toFixed(2)},${p.y.toFixed(2)}) rotate(${(p.rotation % 360).toFixed(1)}) scale(${p.scale.toFixed(2)})`);
