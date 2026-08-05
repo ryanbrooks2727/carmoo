@@ -4,18 +4,19 @@ import Image from "next/image";
 
 const Brand = () => <span style={{ fontWeight: 700, textTransform: "lowercase" }}>carmoo</span>;
 
-const CONFETTI_COUNT = 55;
-const CONFETTI_COLORS = ["#f5a623", "#ff9f43", "#e8830f", "#ffb347", "#f7931e"];
-const CONFETTI_X_MIN = 10;
-const CONFETTI_X_MAX = 158;
-const CONFETTI_Y_TOP = -10;
+const CONFETTI_COUNT = 46;
+const CONFETTI_COLORS = ["#7a52e6", "#9b6ef3", "#6a3fd1", "#b794f6", "#8c5ce8", "#ffd166", "#ff8fa3", "#4ecdc4", "#f4a300"];
+const CONFETTI_X_MIN = 124;
+const CONFETTI_X_MAX = 176;
+const CONFETTI_Y_TOP = 18;
+const CONFETTI_Y_SPAWN_TOP = 60;
 const CONFETTI_Y_BOTTOM = 106;
 
 function makeConfettiParticle(spreadInitially: boolean) {
   return {
     baseX: CONFETTI_X_MIN + Math.random() * (CONFETTI_X_MAX - CONFETTI_X_MIN),
-    y: spreadInitially ? CONFETTI_Y_TOP + Math.random() * (CONFETTI_Y_BOTTOM - CONFETTI_Y_TOP) : CONFETTI_Y_TOP - Math.random() * 20,
-    fallSpeed: 8 + Math.random() * 6,
+    y: spreadInitially ? CONFETTI_Y_SPAWN_TOP + Math.random() * (CONFETTI_Y_BOTTOM - CONFETTI_Y_SPAWN_TOP) : CONFETTI_Y_TOP + Math.random() * 15,
+    fallSpeed: 5 + Math.random() * 4,
     swayAmp1: 3 + Math.random() * 5,
     swayFreq1: 0.35 + Math.random() * 0.35,
     swayPhase1: Math.random() * Math.PI * 2,
@@ -36,7 +37,7 @@ const Confetti = () => {
   const [particles, setParticles] = useState<ReturnType<typeof makeConfettiParticle>[] | null>(null);
 
   useEffect(() => {
-    const generated = Array.from({ length: CONFETTI_COUNT }, () => makeConfettiParticle(true));
+    const generated = Array.from({ length: CONFETTI_COUNT }, () => makeConfettiParticle(false));
     particlesRef.current = generated;
     setParticles(generated);
   }, []);
@@ -92,6 +93,101 @@ const Confetti = () => {
   );
 };
 
+const MARKET_ICON_TOP = {
+  points: "254.597656,151.796875 233.359375,171.492188 192.425781,169.945312 193.972656,129.011719 215.210938,109.316406 213.664062,150.25",
+  cx: 217.205,
+  cy: 146.969,
+};
+const MARKET_ICON_BOTTOM = {
+  points: "120.398438,204.867188 140.003906,183.546875 180.929688,181.835938 182.644531,222.761719 163.035156,244.082031 161.324219,203.15625",
+  cx: 158.056,
+  cy: 206.708,
+};
+
+const MarketIcon = ({ triggered }: { triggered: boolean }) => {
+  const topRef = useRef<SVGGElement | null>(null);
+  const bottomRef = useRef<SVGGElement | null>(null);
+  const state = useRef({
+    topAngle: 0,
+    bottomAngle: 0,
+    phase: "idle" as "idle" | "settling" | "done",
+    settleStartTime: 0,
+    settleStartTop: 0,
+    settleStartBottom: 0,
+    settleTargetTop: 0,
+    settleTargetBottom: 0,
+  });
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const IDLE_SPEED = 5;
+    const SETTLE_DURATION = 0.2;
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    const apply = () => {
+      const s = state.current;
+      if (topRef.current) topRef.current.setAttribute("transform", `rotate(${s.topAngle.toFixed(2)} ${MARKET_ICON_TOP.cx} ${MARKET_ICON_TOP.cy})`);
+      if (bottomRef.current) bottomRef.current.setAttribute("transform", `rotate(${s.bottomAngle.toFixed(2)} ${MARKET_ICON_BOTTOM.cx} ${MARKET_ICON_BOTTOM.cy})`);
+    };
+    apply();
+
+    if (reduceMotion) return;
+
+    let lastTime = performance.now();
+    let frameId: number;
+
+    const tick = (now: number) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+      const s = state.current;
+
+      if (triggered && s.phase === "idle") {
+        s.phase = "settling";
+        s.settleStartTime = now;
+        s.settleStartTop = s.topAngle;
+        s.settleStartBottom = s.bottomAngle;
+        s.settleTargetTop = Math.ceil((s.topAngle + 0.0001) / 360) * 360 + 360 * 0;
+        s.settleTargetBottom = Math.floor((s.bottomAngle - 0.0001) / 360) * 360 - 360 * 0;
+      }
+
+      if (s.phase === "idle") {
+        s.topAngle += IDLE_SPEED * dt;
+        s.bottomAngle -= IDLE_SPEED * dt;
+      } else if (s.phase === "settling") {
+        const elapsed = (now - s.settleStartTime) / 1000;
+        const t = Math.min(elapsed / SETTLE_DURATION, 1);
+        const e = easeOutCubic(t);
+        s.topAngle = s.settleStartTop + (s.settleTargetTop - s.settleStartTop) * e;
+        s.bottomAngle = s.settleStartBottom + (s.settleTargetBottom - s.settleStartBottom) * e;
+        if (t >= 1) {
+          s.phase = "done";
+          s.topAngle = s.settleTargetTop;
+          s.bottomAngle = s.settleTargetBottom;
+        }
+      }
+
+      apply();
+      if (state.current.phase !== "done") {
+        frameId = requestAnimationFrame(tick);
+      }
+    };
+
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
+  }, [triggered]);
+
+  return (
+    <svg viewBox="0 0 375 375" style={{ position: "absolute", left: "-48px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }}>
+      <g ref={topRef}>
+        <polygon points={MARKET_ICON_TOP.points} fill="#e4e4e4" />
+      </g>
+      <g ref={bottomRef}>
+        <polygon points={MARKET_ICON_BOTTOM.points} fill="#e4e4e4" />
+      </g>
+    </svg>
+  );
+};
+
 const CartoonCar = () => (
   <svg viewBox="0 0 220 210" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto", overflow: "visible" }}>
     {/* Shadow */}
@@ -144,33 +240,33 @@ const CartoonCar = () => (
 const MarketSpectrum = () => (
   <svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto" }}>
     {/* baseline */}
-    <line x1="60" y1="150" x2="940" y2="150" stroke="rgba(255,255,255,0.25)" strokeWidth="3" strokeLinecap="round" />
-    <text x="60" y="120" fontSize="15" fontWeight="700" fill="rgba(255,255,255,0.45)" letterSpacing="0.05em">LOWER VALUE</text>
-    <text x="940" y="120" textAnchor="end" fontSize="15" fontWeight="700" fill="rgba(255,255,255,0.45)" letterSpacing="0.05em">HIGHER VALUE</text>
+    <line x1="60" y1="150" x2="940" y2="150" stroke="#111111" strokeWidth="3" strokeLinecap="round" />
+    <text x="60" y="120" fontSize="15" fontWeight="700" fill="rgba(0,0,0,0.45)" letterSpacing="0.05em">LOWER VALUE</text>
+    <text x="940" y="120" textAnchor="end" fontSize="15" fontWeight="700" fill="rgba(0,0,0,0.45)" letterSpacing="0.05em">HIGHER VALUE</text>
 
     {/* Trade-in / part-ex */}
     <circle cx="160" cy="150" r="7" fill="#9ca3af" />
     <line x1="160" y1="150" x2="160" y2="182" stroke="#9ca3af" strokeWidth="2" />
-    <text x="160" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#d1d5db">Trade-in / WBAC</text>
+    <text x="160" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#374151">Trade-in / WBAC</text>
     <text x="160" y="225" textAnchor="middle" fontSize="13" fill="#9ca3af">Lowest offer</text>
 
     {/* Online instant-offer platforms */}
     <circle cx="390" cy="150" r="7" fill="#9ca3af" />
     <line x1="390" y1="150" x2="390" y2="182" stroke="#9ca3af" strokeWidth="2" />
-    <text x="390" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#d1d5db">Motorway / Carwow</text>
+    <text x="390" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#374151">Motorway / Carwow</text>
     <text x="390" y="225" textAnchor="middle" fontSize="13" fill="#9ca3af">Online instant offers</text>
 
     {/* carmoo — private market value */}
-    <line x1="650" y1="95" x2="650" y2="150" stroke="#ffffff" strokeWidth="2.5" />
-    <text x="650" y="75" textAnchor="middle" fontSize="16" fontWeight="700" fill="#ffffff" letterSpacing="0.03em">carmoo</text>
-    <circle cx="650" cy="150" r="11" fill="#ffffff" stroke="#111111" strokeWidth="3" />
-    <text x="650" y="204" textAnchor="middle" fontSize="17" fontWeight="700" fill="#ffffff">Private Market Value</text>
-    <text x="650" y="225" textAnchor="middle" fontSize="13" fill="rgba(255,255,255,0.6)">The fair price — for everyone</text>
+    <line x1="650" y1="95" x2="650" y2="150" stroke="#111111" strokeWidth="2.5" />
+    <text x="650" y="75" textAnchor="middle" fontSize="16" fontWeight="700" fill="#111111" letterSpacing="0.03em">carmoo</text>
+    <circle cx="650" cy="150" r="11" fill="#111111" stroke="#111111" strokeWidth="3" />
+    <text x="650" y="204" textAnchor="middle" fontSize="17" fontWeight="700" fill="#111111">Private Market Value</text>
+    <text x="650" y="225" textAnchor="middle" fontSize="13" fill="rgba(0,0,0,0.6)">The fair price — for everyone</text>
 
     {/* Dealership retail */}
     <circle cx="880" cy="150" r="7" fill="#9ca3af" />
     <line x1="880" y1="150" x2="880" y2="182" stroke="#9ca3af" strokeWidth="2" />
-    <text x="880" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#d1d5db">Dealership Retail</text>
+    <text x="880" y="204" textAnchor="middle" fontSize="16" fontWeight="600" fill="#374151">Dealership Retail</text>
     <text x="880" y="225" textAnchor="middle" fontSize="13" fill="#9ca3af">Highest price</text>
 
   </svg>
@@ -250,7 +346,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [heroTab, setHeroTab] = useState<"buying" | "selling">("buying");
+  const [heroTab, setHeroTab] = useState<"buying" | "selling">("selling");
   const [valueTab, setValueTab] = useState<"selling" | "buying">("selling");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -332,7 +428,7 @@ export default function Home() {
             </a>
           </div>
           {scrolled ? (
-            <p className="font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)", textTransform: "lowercase", fontSize: "1.05rem" }}>..a mooch better way to buy &amp; sell your car</p>
+            <p className="font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)", textTransform: "lowercase", fontSize: "1.05rem" }}>..a mooch better way to buy &amp; sell</p>
           ) : (
             <div className="flex items-center gap-6">
               <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>How it works</a>
@@ -354,15 +450,13 @@ export default function Home() {
       </nav>
 
       {/* HERO + MARKET SPECTRUM (merged) */}
-      <section className="px-6" style={{ marginTop: "105px", position: "relative" }}>
+      <section className="px-6" style={{ marginTop: "105px", position: "relative", overflow: "hidden" }}>
 
-        <div className="mx-auto" style={{ width: "fit-content", maxWidth: "100%", position: "relative" }}>
-
-          <svg
-            viewBox="0 0 200 100"
-            preserveAspectRatio="none"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0 }}
-          >
+        <svg
+          viewBox="0 0 200 100"
+          preserveAspectRatio="none"
+          style={{ position: "absolute", left: "calc(50% - 590px)", width: "1180px", top: 0, height: "100%", zIndex: 0 }}
+        >
             <defs>
               <linearGradient id="heroBgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#f2f2f2" />
@@ -379,7 +473,7 @@ export default function Home() {
                 <stop offset="100%" stopColor="#f2f2f2" />
               </linearGradient>
               <clipPath id="heroClip">
-                <path d="M0,6.81 L194,6.81 C197,6.81 200,9.81 200,12.81 L200,90.93 C200,93.93 197,96.93 194,96.93 L0,96.93 Z" />
+                <polygon points="0,4.94 180,4.94 200,50 180,95.06 0,95.06" />
               </clipPath>
               <clipPath id="stripeVClip">
                 <rect x="-50" y="16" width="300" height="68" />
@@ -391,17 +485,13 @@ export default function Home() {
                 <rect x="-50" y="17.5" width="300" height="65" />
               </clipPath>
             </defs>
-            <path
-              d="M0,6.81 L194,6.81 C197,6.81 200,9.81 200,12.81 L200,90.93 C200,93.93 197,96.93 194,96.93 L0,96.93 Z"
+            <polygon
+              points="0,4.94 180,4.94 200,50 180,95.06 0,95.06"
               fill="url(#heroBgGradient)"
             />
-            <g clipPath="url(#heroClip)">
-              <g>
-                <rect x={214 - 13} y={-60} width={26} height={110} fill="#ffffff" transform="rotate(-22 214 50)" />
-                <rect x={214 - 13} y={50} width={26} height={110} fill="#ffffff" transform="rotate(22 214 50)" />
-              </g>
-            </g>
           </svg>
+
+        <div className="mx-auto" style={{ width: "fit-content", maxWidth: "100%", position: "relative" }}>
 
           {/* Tabbed Buying/Selling card + car image, balanced as a pair */}
           <div className="flex items-center justify-center" style={{ position: "relative", zIndex: 1, padding: "34px 93px", gap: "52px" }}>
@@ -441,7 +531,17 @@ export default function Home() {
               <div style={{ padding: "41px" }}>
                 {heroTab === "buying" ? (
                   <>
-                    <h3 style={{ fontSize: "2.21rem", fontWeight: 500, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>&apos;Buy a car for far less&apos;</h3>
+                    <style>{`
+                      @keyframes lessGrowIn {
+                        0%   { transform: scale(0.3); }
+                        65%  { transform: scale(1.35); }
+                        100% { transform: scale(1); }
+                      }
+                    `}</style>
+                    <h3 style={{ fontSize: "2.21rem", fontWeight: 500, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>
+                      Buy a car for{" "}
+                      <span style={{ display: "inline-block", fontSize: "1.4em", color: "#5700d1", animation: "lessGrowIn 1.6s ease-in-out both" }}>less</span>
+                    </h3>
                     <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}>Pay <strong style={{ fontWeight: 600, color: "#111111" }}>£3,000 less</strong> than dealership prices, on average*.</p>
                     <a href="#how-it-works"
                       className="inline-block text-center font-medium rounded-xl transition-opacity hover:opacity-80"
@@ -451,7 +551,17 @@ export default function Home() {
                   </>
                 ) : (
                   <>
-                    <h3 style={{ fontSize: "2.47rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>Sell my car for more</h3>
+                    <style>{`
+                      @keyframes moreGrowIn {
+                        0%   { transform: scale(0.3); }
+                        65%  { transform: scale(1.35); }
+                        100% { transform: scale(1); }
+                      }
+                    `}</style>
+                    <h3 style={{ fontSize: "2.47rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>
+                      Sell my car for{" "}
+                      <span style={{ display: "inline-block", fontSize: "1.4em", color: "#5700d1", animation: "moreGrowIn 1.6s ease-in-out both" }}>more</span>
+                    </h3>
                     <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}><strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than Motorway, and <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than WBAC on average*.</p>
                     <div className="flex items-stretch" style={{ gap: "11px" }}>
                       <div className="flex items-center rounded-lg overflow-hidden flex-1" style={{ border: "2px solid #e8e3da" }}>
@@ -496,23 +606,36 @@ export default function Home() {
                   ))}
                 </div>
                 <span className="font-semibold" style={{ color: "#111111", fontSize: "1.13rem" }}>Trustpilot</span>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logomark38.svg" alt="carmoo" style={{ width: "40px", height: "40px", transform: "translateX(11.34px) scale(4.25)", position: "relative", zIndex: 1 }} />
+                <svg viewBox="0 0 375 375" aria-label="carmoo" style={{ width: "40px", height: "40px", transform: "translateX(11.34px) scale(4.25)", position: "relative", zIndex: 1 }}>
+                  <polygon points={MARKET_ICON_TOP.points} fill="#5700d1" />
+                  <polygon points={MARKET_ICON_BOTTOM.points} fill="#5700d1" />
+                </svg>
               </div>
             </div>
           </div>
 
-          <svg
-            viewBox="0 0 200 100"
-            preserveAspectRatio="none"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 2, pointerEvents: "none" }}
-          >
-            <g clipPath="url(#heroClip)">
-              <Confetti />
-            </g>
-          </svg>
-
         </div>
+
+        <svg
+          viewBox="0 0 200 100"
+          preserveAspectRatio="none"
+          style={{ position: "absolute", left: "calc(50% - 590px)", width: "1180px", top: 0, height: "100%", zIndex: 2, pointerEvents: "none" }}
+        >
+          <defs>
+            <linearGradient id="confettiFade" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="white" />
+              <stop offset="52%" stopColor="white" />
+              <stop offset="65%" stopColor="black" />
+              <stop offset="100%" stopColor="black" />
+            </linearGradient>
+            <mask id="confettiFadeMask">
+              <rect x="0" y="0" width="200" height="100" fill="url(#confettiFade)" />
+            </mask>
+          </defs>
+          <g clipPath="url(#heroClip)" mask="url(#confettiFadeMask)">
+            <Confetti />
+          </g>
+        </svg>
       </section>
 
       {/* VALUE PROPOSITION */}
@@ -565,15 +688,12 @@ export default function Home() {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
-                      <div className="rounded-full flex items-center justify-center font-medium text-white mb-1 mx-auto" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
+                      <div className="flex items-center justify-center font-medium mb-1 mx-auto" style={{ width: "28px", height: "47px", fontSize: "0.9rem", backgroundColor: "#5700d1", color: "#ffffff", clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)", transform: "rotate(90deg)" }}><span style={{ transform: "rotate(-90deg)" }}>{num}</span></div>
                       <p className="text-sm mb-1" style={{ color: "#111111" }}>{title}</p>
                       <p className="text-sm leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
                     </div>
                   ))}
                 </div>
-                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1.15rem", fontWeight: 700 }}>
-                  When selling we&apos;ll run some standard vetting checks on you and your car before presenting to private buyers. We can offer you up to thousands more than other online selling sites because your car is going direct to ownership rather than a middleman. We also vet our private buyers and oversee your complete sale to make sure everything is taken care of.
-                </p>
               </>
             ) : (
               <>
@@ -588,56 +708,31 @@ export default function Home() {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
-                      <div className="rounded-full flex items-center justify-center font-medium text-white mb-1 mx-auto" style={{ width: "24px", height: "24px", fontSize: "0.7rem", backgroundColor: "#111111" }}>{num}</div>
+                      <div className="flex items-center justify-center font-medium mb-1 mx-auto" style={{ width: "28px", height: "47px", fontSize: "0.9rem", backgroundColor: "#5700d1", color: "#ffffff", clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)", transform: "rotate(90deg)" }}><span style={{ transform: "rotate(-90deg)" }}>{num}</span></div>
                       <p className="text-sm mb-1" style={{ color: "#111111" }}>{title}</p>
                       <p className="text-sm leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
                     </div>
                   ))}
                 </div>
-                <p style={{ color: "rgba(0,0,0,0.5)", lineHeight: 1.7, marginBottom: "1.5rem", fontSize: "1.15rem", fontWeight: 700 }}>
-                  When buying don&apos;t stress, our vehicles and their owners have already been vetted by us. By doing this we make sure all our cars are of a high standard and are completely HPI clear (not recorded in any accidents). You can also enjoy prices that are thousands below dealerships because there is no middleman. Good honest private sellers selling good cars to good people. That&apos;s what we do, at <Brand />.
-                </p>
               </>
             )}
           </div>
         </div>
       </section>
 
-      {/* STATS BAR */}
-      <section ref={marketSectionRef} className="py-12 px-6" style={{ position: "relative", overflow: "hidden", marginBottom: "75.6px" }}>
-        <style>{`
-          @keyframes marketIconSpinIn {
-            0% { transform: translateY(-50%) rotate(0deg); }
-            100% { transform: translateY(-50%) rotate(1080deg); }
-          }
-          @keyframes marketDiagramSlideIn {
-            0% { transform: translateX(-40%); opacity: 0; }
-            100% { transform: translateX(0%); opacity: 1; }
-          }
-          .market-icon-animate { animation: marketIconSpinIn 2.2s cubic-bezier(0.15, 0.65, 0.25, 1) forwards; }
-          .market-diagram-animate { animation: marketDiagramSlideIn 2.2s cubic-bezier(0.15, 0.65, 0.25, 1) forwards; }
-        `}</style>
-        <div style={{ position: "absolute", left: "18.9px", top: 0, width: "calc(100% - 37.8px)", height: "100%", backgroundColor: "#111111", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/aug4faviconwhite.svg" alt="" className={marketInView ? "market-icon-animate" : ""} style={{ position: "absolute", left: "-48px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }} />
-        </div>
-        <div className="max-w-4xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
-          <p className="text-white font-medium text-2xl mb-4" style={{ textTransform: "uppercase" }}>Our Market Position</p>
-          <div className={marketInView ? "market-diagram-animate" : ""}>
-            <MarketSpectrum />
-          </div>
-        </div>
-      </section>
-
       {/* WHY ELECTRIC */}
       <section className="pt-24 px-6" style={{ position: "relative", overflow: "hidden", paddingBottom: "480px" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/lottery.jpeg" alt="" style={{ position: "absolute", left: "37.8px", top: 0, width: "calc(100% - 75.6px)", height: "100%", objectFit: "cover", borderRadius: "24px", zIndex: 0 }} />
+        <div style={{ position: "absolute", left: "229.8px", top: 0, width: "calc(100% - 459.6px)", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
+          <svg viewBox="115 104 145 145" aria-label="carmoo" style={{ position: "absolute", right: "28px", bottom: "28px", width: "60px", height: "60px" }}>
+            <polygon points={MARKET_ICON_TOP.points} fill="#5700d1" />
+            <polygon points={MARKET_ICON_BOTTOM.points} fill="#5700d1" />
+          </svg>
+        </div>
         <div className="max-w-5xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
           <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
             <div className="rounded-2xl p-8" style={{ backgroundColor: "#111111" }}>
-              <h3 className="font-medium mb-2" style={{ color: "#ffffff", fontSize: "1.75rem" }}><span style={{ fontSize: "2.5rem" }}>Shhhh..</span> It&apos;s not the lottery</h3>
-              <p className="font-medium mb-6 leading-relaxed" style={{ color: "#ffffff", fontSize: "1.75rem" }}>but you could get thousands more with us</p>
+              <h3 className="font-medium mb-2" style={{ color: "#ffffff", fontSize: "1.75rem" }}><span style={{ fontSize: "2.5rem" }}>Shhh..</span> It&apos;s not the lottery</h3>
+              <p className="font-medium mb-6 leading-relaxed" style={{ color: "#ffffff", fontSize: "1.75rem" }}>but you could get thousands more</p>
               <div className="flex items-center" style={{ backgroundColor: "#ffffff", borderRadius: "9999px", padding: "4px 4px 4px 16px" }}>
                 <input
                   type="text"
@@ -659,6 +754,26 @@ export default function Home() {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* STATS BAR */}
+      <section ref={marketSectionRef} className="py-12 px-6" style={{ position: "relative", overflow: "hidden", marginBottom: "75.6px" }}>
+        <style>{`
+          @keyframes marketDiagramSlideIn {
+            0% { clip-path: inset(0 100% 0 0); }
+            100% { clip-path: inset(0 0% 0 0); }
+          }
+          .market-diagram-animate { animation: marketDiagramSlideIn 0.7s linear forwards; }
+        `}</style>
+        <div style={{ position: "absolute", left: "210.9px", top: 0, width: "calc(100% - 421.8px)", height: "100%", backgroundColor: "#f2f2f2", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
+          <MarketIcon triggered={marketInView} />
+        </div>
+        <div className="max-w-4xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
+          <p className="font-medium text-2xl mb-4" style={{ textTransform: "uppercase", color: "#5700d1" }}>Our Market Position</p>
+          <div className={marketInView ? "market-diagram-animate" : ""}>
+            <MarketSpectrum />
           </div>
         </div>
       </section>
