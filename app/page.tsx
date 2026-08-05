@@ -109,8 +109,8 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
   const topRef = useRef<SVGGElement | null>(null);
   const bottomRef = useRef<SVGGElement | null>(null);
   const state = useRef({
-    topAngle: 180,
-    bottomAngle: 180,
+    topAngle: 0,
+    bottomAngle: 0,
     phase: "idle" as "idle" | "settling" | "done",
     settleStartTime: 0,
     settleStartTop: 0,
@@ -122,8 +122,12 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const IDLE_SPEED = 0.2;
-    const SETTLE_DURATION = 3;
-    const easeOut = (t: number) => 1 - Math.pow(1 - t, 4);
+    const SETTLE_DURATION = 1.2;
+    const easeOut = (t: number) => {
+      if (t < 0.95) return t / 0.975;
+      const s = (t - 0.95) / 0.05;
+      return (38 + (1 - (1 - s) * (1 - s))) / 39;
+    };
 
     const apply = () => {
       const s = state.current;
@@ -148,12 +152,12 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
         s.settleStartTop = s.topAngle;
         s.settleStartBottom = s.bottomAngle;
         s.settleTargetTop = Math.ceil((s.topAngle + 0.0001) / 360) * 360 + 360 * 0;
-        s.settleTargetBottom = Math.ceil((s.bottomAngle + 0.0001) / 360) * 360;
+        s.settleTargetBottom = Math.floor((s.bottomAngle - 0.0001) / 360) * 360;
       }
 
       if (s.phase === "idle") {
         s.topAngle += IDLE_SPEED * dt;
-        s.bottomAngle += IDLE_SPEED * dt;
+        s.bottomAngle -= IDLE_SPEED * dt;
       } else if (s.phase === "settling") {
         const elapsed = (now - s.settleStartTime) / 1000;
         const t = Math.min(elapsed / SETTLE_DURATION, 1);
@@ -799,7 +803,7 @@ export default function Home() {
             0% { clip-path: inset(0 100% 0 0); }
             100% { clip-path: inset(0 0% 0 0); }
           }
-          .market-diagram-animate { animation: marketDiagramSlideIn 0.7s linear forwards; }
+          .market-diagram-animate { animation: marketDiagramSlideIn 0.9s linear forwards; }
         `}</style>
         <div style={{ position: "absolute", left: "210.9px", top: 0, width: "calc(100% - 421.8px)", height: "100%", backgroundColor: "#f2f2f2", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
           <MarketIcon triggered={marketInView} />
