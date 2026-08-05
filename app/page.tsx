@@ -109,8 +109,8 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
   const topRef = useRef<SVGGElement | null>(null);
   const bottomRef = useRef<SVGGElement | null>(null);
   const state = useRef({
-    topAngle: 0,
-    bottomAngle: 0,
+    topAngle: 180,
+    bottomAngle: 180,
     phase: "idle" as "idle" | "settling" | "done",
     settleStartTime: 0,
     settleStartTop: 0,
@@ -121,8 +121,8 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const IDLE_SPEED = 5;
-    const SETTLE_DURATION = 0.2;
+    const IDLE_SPEED = 0.2;
+    const SETTLE_DURATION = 3;
     const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
     const apply = () => {
@@ -148,12 +148,12 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
         s.settleStartTop = s.topAngle;
         s.settleStartBottom = s.bottomAngle;
         s.settleTargetTop = Math.ceil((s.topAngle + 0.0001) / 360) * 360 + 360 * 0;
-        s.settleTargetBottom = Math.floor((s.bottomAngle - 0.0001) / 360) * 360 - 360 * 0;
+        s.settleTargetBottom = Math.ceil((s.bottomAngle + 0.0001) / 360) * 360;
       }
 
       if (s.phase === "idle") {
         s.topAngle += IDLE_SPEED * dt;
-        s.bottomAngle -= IDLE_SPEED * dt;
+        s.bottomAngle += IDLE_SPEED * dt;
       } else if (s.phase === "settling") {
         const elapsed = (now - s.settleStartTime) / 1000;
         const t = Math.min(elapsed / SETTLE_DURATION, 1);
@@ -178,12 +178,12 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
   }, [triggered]);
 
   return (
-    <svg viewBox="0 0 375 375" style={{ position: "absolute", left: "-48px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }}>
+    <svg viewBox="0 0 375 375" style={{ position: "absolute", left: "-124px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }}>
       <g ref={topRef}>
-        <polygon points={MARKET_ICON_TOP.points} fill="#e4e4e4" />
+        <polygon points={MARKET_ICON_TOP.points} fill="#111111" />
       </g>
       <g ref={bottomRef}>
-        <polygon points={MARKET_ICON_BOTTOM.points} fill="#e4e4e4" />
+        <polygon points={MARKET_ICON_BOTTOM.points} fill="#111111" />
       </g>
     </svg>
   );
