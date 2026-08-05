@@ -711,7 +711,13 @@ export default function Home() {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
-                      <div className="flex items-center justify-center font-medium mb-1 mx-auto" style={{ width: "28px", height: "47px", fontSize: "0.9rem", backgroundColor: "#5700d1", color: "#ffffff", clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)", transform: "rotate(90deg)" }}><span style={{ transform: "rotate(-90deg)" }}>{num}</span></div>
+                      <div style={{ position: "relative", width: "58px", height: "32px", margin: "0 auto 4px" }}>
+                <svg viewBox="0 0 100 54" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+                  <polygon points="12,27 46,5 26,27 46,49" fill="#5700d1" />
+                  <polygon points="88,27 54,5 74,27 54,49" fill="#5700d1" />
+                </svg>
+                <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
+              </div>
                       <p className="text-sm mb-1" style={{ color: "#111111" }}>{title}</p>
                       <p className="text-sm leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
                     </div>
@@ -731,7 +737,13 @@ export default function Home() {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
-                      <div className="flex items-center justify-center font-medium mb-1 mx-auto" style={{ width: "28px", height: "47px", fontSize: "0.9rem", backgroundColor: "#5700d1", color: "#ffffff", clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)", transform: "rotate(90deg)" }}><span style={{ transform: "rotate(-90deg)" }}>{num}</span></div>
+                      <div style={{ position: "relative", width: "58px", height: "32px", margin: "0 auto 4px" }}>
+                <svg viewBox="0 0 100 54" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+                  <polygon points="12,27 46,5 26,27 46,49" fill="#5700d1" />
+                  <polygon points="88,27 54,5 74,27 54,49" fill="#5700d1" />
+                </svg>
+                <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
+              </div>
                       <p className="text-sm mb-1" style={{ color: "#111111" }}>{title}</p>
                       <p className="text-sm leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
                     </div>
@@ -749,10 +761,6 @@ export default function Home() {
         <div style={{ position: "absolute", left: "229.8px", top: 0, width: "calc(100% - 459.6px)", height: "100%", backgroundColor: "#ffffff", border: "2px solid #111111", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/lottery58.svg" alt="Celebrating with confetti" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-          <svg viewBox="115 104 145 145" aria-label="carmoo" style={{ position: "absolute", right: "28px", bottom: "28px", width: "60px", height: "60px" }}>
-            <polygon points={MARKET_ICON_TOP.points} fill="#5700d1" />
-            <polygon points={MARKET_ICON_BOTTOM.points} fill="#5700d1" />
-          </svg>
         </div>
         <div className="max-w-5xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
           <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
