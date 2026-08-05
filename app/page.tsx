@@ -713,8 +713,8 @@ export default function Home() {
                       </div>
                       <div style={{ position: "relative", width: "58px", height: "32px", margin: "0 auto 4px" }}>
                 <svg viewBox="0 0 100 54" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
-                  <polygon points="12,27 46,5 26,27 46,49" fill="#5700d1" />
-                  <polygon points="88,27 54,5 74,27 54,49" fill="#5700d1" />
+                  <polyline points="46,7 12,27 46,47" fill="none" stroke="#5700d1" strokeWidth={12} strokeLinejoin="miter" />
+                  <polyline points="54,7 88,27 54,47" fill="none" stroke="#5700d1" strokeWidth={12} strokeLinejoin="miter" />
                 </svg>
                 <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
               </div>
@@ -739,8 +739,8 @@ export default function Home() {
                       </div>
                       <div style={{ position: "relative", width: "58px", height: "32px", margin: "0 auto 4px" }}>
                 <svg viewBox="0 0 100 54" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
-                  <polygon points="12,27 46,5 26,27 46,49" fill="#5700d1" />
-                  <polygon points="88,27 54,5 74,27 54,49" fill="#5700d1" />
+                  <polyline points="46,7 12,27 46,47" fill="none" stroke="#5700d1" strokeWidth={12} strokeLinejoin="miter" />
+                  <polyline points="54,7 88,27 54,47" fill="none" stroke="#5700d1" strokeWidth={12} strokeLinejoin="miter" />
                 </svg>
                 <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
               </div>
