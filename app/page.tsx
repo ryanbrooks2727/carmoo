@@ -775,7 +775,7 @@ export default function Home() {
         <div style={{ position: "relative", height: "510px" }}>
         <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1152px, calc(100% - 48px))", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/lot123.webp?v=2" alt="Celebrating with confetti" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.68)" }} />
+          <img src="/final123.webp?v=1" alt="Celebrating with confetti" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.0)" }} />
         </div>
         <div className="max-w-5xl mx-auto" style={{ position: "relative", zIndex: 1, height: "100%", display: "flex", alignItems: "center" }}>
           <div className="grid md:grid-cols-2 gap-16 items-center" style={{ width: "100%" }}>
