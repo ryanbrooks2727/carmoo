@@ -666,7 +666,7 @@ export default function Home() {
       </section>
 
       {/* VALUE PROPOSITION */}
-      <section className="py-32 px-6" style={{ backgroundColor: "#ffffff", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
+      <section className="py-32 px-6" style={{ backgroundColor: "#ffffff", borderBottom: "1px solid rgba(0,0,0,0.06)", paddingTop: "90px" }}>
         <div className="max-w-6xl mx-auto text-center">
           <h2 style={{ fontSize: "3rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "0.75rem" }}>Here&apos;s how it works</h2>
 
@@ -706,12 +706,12 @@ export default function Home() {
               <>
                 <div className="grid grid-cols-3 gap-20 mb-8">
                   {[
-                    ["1", "Get a higher valuation", "See your higher valuation in a few seconds. Use our app to profile your vehicle.", "/step-valuation.jpg"],
-                    ["2", "Get approved & listed", "We run checks on all our private sellers. Once approved your advert will appear under 'Browse Cars'.", "/step-approved.jpg"],
-                    ["3", "Finish Up", "Before long a private buyer will reach out. We'll get to know them before making arrangements. We act as an intermediary from start to finish. And it's as simple as that. See you later, alligator.", "/step-handover.jpg"],
+                    ["1", "Higher valuation", "See your instant higher valuation. Use our app to profile your vehicle.", "/step-valuation.jpg"],
+                    ["2", "Approved & listed", "We run checks on all our private sellers. Once approved your advert will appear under 'Browse Cars'.", "/step-approved.jpg"],
+                    ["3", "Finish Up", "It won't be long before we're arranging a vetted private buyer to view your car. Funds cleared and off it goes.", "/step-handover.jpg"],
                   ].map(([num, title, desc, img]) => (
                     <div key={num}>
-                      <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
+                      <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "1/1" }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
@@ -722,8 +722,14 @@ export default function Home() {
                 </svg>
                 <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
               </div>
-                      <p className="text-sm mb-1" style={{ color: "#111111" }}>{title}</p>
-                      <p className="text-sm leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
+                      <p className="mb-2" style={{ color: "#111111", fontWeight: 700, fontSize: "1.75rem" }}>{title}</p>
+                      <p className="leading-relaxed" style={{ color: "rgba(0,0,0,0.62)", fontSize: "1.15rem" }}>
+                        {desc.split("Browse Cars").flatMap((part, i, arr) =>
+                          i < arr.length - 1
+                            ? [part, <a key={i} href="#how-it-works" onClick={(e) => { e.preventDefault(); const el = document.getElementById("how-it-works"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "#5700d1", textDecoration: "underline", cursor: "pointer" }}>Browse Cars</a>]
+                            : [part]
+                        )}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -737,7 +743,7 @@ export default function Home() {
                     ["3", "Buy directly", "Purchase directly at the seller's verified home. We will be on standby during your viewing to answer and resolve any issues real time. Once happy, pay immediately through our secure payment system and drive away in your new car. Remember all paperwork and any outstanding finance will be sorted by us.", "/step-handover.jpg"],
                   ].map(([num, title, desc, img]) => (
                     <div key={num}>
-                      <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "4/5" }}>
+                      <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "1/1" }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
@@ -748,8 +754,8 @@ export default function Home() {
                 </svg>
                 <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
               </div>
-                      <p className="text-sm mb-1" style={{ color: "#111111" }}>{title}</p>
-                      <p className="text-sm leading-relaxed" style={{ color: "rgba(0,0,0,0.55)" }}>{desc}</p>
+                      <p className="mb-2" style={{ color: "#111111", fontWeight: 700, fontSize: "1.75rem" }}>{title}</p>
+                      <p className="leading-relaxed" style={{ color: "rgba(0,0,0,0.62)", fontSize: "1.15rem" }}>{desc}</p>
                     </div>
                   ))}
                 </div>
