@@ -482,7 +482,7 @@ export default function Home() {
         <svg
           viewBox="0 0 200 100"
           preserveAspectRatio="none"
-          style={{ position: "absolute", left: "calc(50% - 590px)", width: "1180px", top: 0, height: "100%", zIndex: 0 }}
+          style={{ position: "absolute", left: "calc(50% - 590px)", width: "1180px", top: 0, height: "100%", zIndex: 0, overflow: "visible", filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.05)) drop-shadow(0 6px 20px rgba(0,0,0,0.06))" }}
         >
             <defs>
               <linearGradient id="heroBgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -514,7 +514,10 @@ export default function Home() {
             </defs>
             <polygon
               points="0,4.94 180,4.94 200,50 180,95.06 0,95.06"
-              fill="url(#heroBgGradient)"
+              fill="#ffffff"
+              stroke="rgba(0,0,0,0.08)"
+              strokeWidth="1"
+              vectorEffect="non-scaling-stroke"
             />
           </svg>
 
@@ -666,7 +669,7 @@ export default function Home() {
       </section>
 
       {/* VALUE PROPOSITION */}
-      <section className="py-32 px-6" style={{ backgroundColor: "#ffffff", borderBottom: "1px solid rgba(0,0,0,0.06)", paddingTop: "90px" }}>
+      <section className="py-32 px-6" style={{ backgroundColor: "#ffffff", paddingTop: "80px", paddingBottom: "48px" }}>
         <div className="max-w-6xl mx-auto text-center">
           <h2 style={{ fontSize: "3rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "0.75rem" }}>How it works</h2>
 
@@ -726,7 +729,7 @@ export default function Home() {
                       <p className="leading-relaxed" style={{ color: "rgba(0,0,0,0.62)", fontSize: "1.15rem" }}>
                         {desc.split("browse cars").flatMap((part, i, arr) =>
                           i < arr.length - 1
-                            ? [part, <a key={i} href="#how-it-works" onClick={(e) => { e.preventDefault(); const el = document.getElementById("how-it-works"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "#5700d1", textDecoration: "underline", cursor: "pointer" }}>browse cars</a>]
+                            ? [part, <a key={i} href="#how-it-works" onClick={(e) => { e.preventDefault(); const el = document.getElementById("how-it-works"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "#5700d1", textDecoration: "none", cursor: "pointer" }}>browse cars</a>]
                             : [part]
                         )}
                       </p>
@@ -766,11 +769,11 @@ export default function Home() {
       </section>
 
       {/* WHY ELECTRIC */}
-      <section className="pt-24 px-6" style={{ position: "relative", overflow: "hidden", paddingBottom: "220px", marginBottom: "80px" }}>
+      <section className="px-6" style={{ position: "relative", paddingTop: "64px", paddingBottom: "128px", marginBottom: "80px" }}>
         <style>{`@keyframes regArrowSpin { from { transform: rotate(0deg); } to { transform: rotate(1080deg); } }`}</style>
-        <div style={{ position: "absolute", left: "229.8px", top: 0, width: "calc(100% - 459.6px)", height: "100%", backgroundColor: "#ffffff", border: "none", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
+        <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1152px, calc(100% - 48px))", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/lottery58.svg" alt="Celebrating with confetti" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.34)" }} />
+          <img src="/lot78.svg" alt="Celebrating with confetti" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.68)" }} />
         </div>
         <div className="max-w-5xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
           <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
@@ -803,7 +806,7 @@ export default function Home() {
       </section>
 
       {/* STATS BAR */}
-      <section ref={marketSectionRef} className="py-12 px-6" style={{ position: "relative", overflow: "hidden", marginBottom: "75.6px" }}>
+      <section ref={marketSectionRef} className="px-6" style={{ position: "relative", paddingTop: "76px", paddingBottom: "76px", marginBottom: "80px" }}>
         <style>{`
           @keyframes marketDiagramSlideIn {
             0% { clip-path: inset(0 100% 0 0); }
@@ -811,7 +814,7 @@ export default function Home() {
           }
           .market-diagram-animate { animation: marketDiagramSlideIn 1.2s linear forwards; }
         `}</style>
-        <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1292px, calc(100% - 24px))", height: "100%", backgroundColor: "#f2f2f2", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
+        <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1152px, calc(100% - 48px))", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)" }}>
           <MarketIcon triggered={marketInView} />
         </div>
         <div className="max-w-4xl mx-auto" style={{ position: "relative", zIndex: 1, transform: "translateX(clamp(0px, calc((100vw - 1000px) / 6), 80px))" }}>
