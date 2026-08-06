@@ -182,7 +182,7 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
   }, [triggered]);
 
   return (
-    <svg viewBox="0 0 375 375" style={{ position: "absolute", left: "-124px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }}>
+    <svg viewBox="0 0 375 375" style={{ position: "absolute", left: "-200px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }}>
       <g transform="translate(-2.1 2.2)">
         <g ref={topRef}>
           <polygon points={MARKET_ICON_TOP.points} fill="#111111" />
@@ -455,7 +455,7 @@ export default function Home() {
             </a>
           </div>
           {scrolled ? (
-            <p className="font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)", textTransform: "lowercase", fontSize: "1.05rem" }}>..a mooch better way to buy &amp; sell</p>
+            <p className="font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)", textTransform: "lowercase", fontSize: "1.05rem" }}>..a mooch better way</p>
           ) : (
             <div className="flex items-center gap-6">
               <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>How it works</a>
@@ -569,7 +569,7 @@ export default function Home() {
                       Buy a car for{" "}
                       <span style={{ display: "inline-block", fontSize: "1.4em", color: "#5700d1", animation: "lessGrowIn 1.6s ease-in-out both" }}>less</span>
                     </h3>
-                    <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}>Pay <strong style={{ fontWeight: 600, color: "#111111" }}>£3,000 less</strong> than dealership prices, on average*.</p>
+                    <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}>Pay <strong style={{ fontWeight: 600, color: "#111111" }}>£2,800 less</strong> than dealership prices, on average*.</p>
                     <a href="#how-it-works"
                       className="inline-block text-center font-medium rounded-xl transition-opacity hover:opacity-80"
                       style={{ backgroundColor: "#111111", color: "#fff", fontSize: "1.13rem", padding: "18px 21px" }}>
@@ -668,7 +668,7 @@ export default function Home() {
       {/* VALUE PROPOSITION */}
       <section className="py-32 px-6" style={{ backgroundColor: "#ffffff", borderBottom: "1px solid rgba(0,0,0,0.06)", paddingTop: "90px" }}>
         <div className="max-w-6xl mx-auto text-center">
-          <h2 style={{ fontSize: "3rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "0.75rem" }}>Here&apos;s how it works</h2>
+          <h2 style={{ fontSize: "3rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "0.75rem" }}>How it works</h2>
 
           {/* Tab selector */}
           <div className="flex items-center justify-center gap-14" style={{ marginBottom: "3rem" }}>
@@ -707,8 +707,8 @@ export default function Home() {
                 <div className="grid grid-cols-3 gap-20 mb-8">
                   {[
                     ["1", "Higher valuation", "See your instant higher valuation. Use our app to profile your vehicle.", "/step-valuation.jpg"],
-                    ["2", "Approved & listed", "We run checks on all our private sellers. Once approved your advert will appear under Browse Cars.", "/step-approved.jpg"],
-                    ["3", "Finish Up", "We'll arrange a vetted private buyer to view your car ..Funds cleared & off it goes.", "/step-handover.jpg"],
+                    ["2", "Approved & listed", "We vet all our private sellers. Once approved your advert will appear under browse cars.", "/step-approved.jpg"],
+                    ["3", "Finish Up", "We'll arrange a vetted private buyer to view your car ..funds cleared, off it goes.", "/step-handover.jpg"],
                   ].map(([num, title, desc, img]) => (
                     <div key={num}>
                       <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "1/1" }}>
@@ -722,11 +722,11 @@ export default function Home() {
                 </svg>
                 <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
               </div>
-                      <p className="mb-2" style={{ color: "#111111", fontWeight: 600, fontSize: "1.75rem" }}>{title}</p>
+                      <p className="mb-2" style={{ color: "#111111", fontWeight: 600, fontSize: "1.6rem" }}>{title}</p>
                       <p className="leading-relaxed" style={{ color: "rgba(0,0,0,0.62)", fontSize: "1.15rem" }}>
-                        {desc.split("Browse Cars").flatMap((part, i, arr) =>
+                        {desc.split("browse cars").flatMap((part, i, arr) =>
                           i < arr.length - 1
-                            ? [part, <a key={i} href="#how-it-works" onClick={(e) => { e.preventDefault(); const el = document.getElementById("how-it-works"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "#5700d1", textDecoration: "underline", cursor: "pointer" }}>Browse Cars</a>]
+                            ? [part, <a key={i} href="#how-it-works" onClick={(e) => { e.preventDefault(); const el = document.getElementById("how-it-works"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "#5700d1", textDecoration: "underline", cursor: "pointer" }}>browse cars</a>]
                             : [part]
                         )}
                       </p>
@@ -754,7 +754,7 @@ export default function Home() {
                 </svg>
                 <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
               </div>
-                      <p className="mb-2" style={{ color: "#111111", fontWeight: 600, fontSize: "1.75rem" }}>{title}</p>
+                      <p className="mb-2" style={{ color: "#111111", fontWeight: 600, fontSize: "1.6rem" }}>{title}</p>
                       <p className="leading-relaxed" style={{ color: "rgba(0,0,0,0.62)", fontSize: "1.15rem" }}>{desc}</p>
                     </div>
                   ))}
@@ -768,9 +768,9 @@ export default function Home() {
       {/* WHY ELECTRIC */}
       <section className="pt-24 px-6" style={{ position: "relative", overflow: "hidden", paddingBottom: "220px", marginBottom: "80px" }}>
         <style>{`@keyframes regArrowSpin { from { transform: rotate(0deg); } to { transform: rotate(1080deg); } }`}</style>
-        <div style={{ position: "absolute", left: "229.8px", top: 0, width: "calc(100% - 459.6px)", height: "100%", backgroundColor: "#ffffff", border: "2px solid #111111", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
+        <div style={{ position: "absolute", left: "229.8px", top: 0, width: "calc(100% - 459.6px)", height: "100%", backgroundColor: "#ffffff", border: "none", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/lottery58.svg" alt="Celebrating with confetti" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+          <img src="/lottery58.svg" alt="Celebrating with confetti" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.34)" }} />
         </div>
         <div className="max-w-5xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
           <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
@@ -811,10 +811,10 @@ export default function Home() {
           }
           .market-diagram-animate { animation: marketDiagramSlideIn 1.2s linear forwards; }
         `}</style>
-        <div style={{ position: "absolute", left: "210.9px", top: 0, width: "calc(100% - 421.8px)", height: "100%", backgroundColor: "#f2f2f2", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
+        <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1292px, calc(100% - 24px))", height: "100%", backgroundColor: "#f2f2f2", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0 }}>
           <MarketIcon triggered={marketInView} />
         </div>
-        <div className="max-w-4xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
+        <div className="max-w-4xl mx-auto" style={{ position: "relative", zIndex: 1, transform: "translateX(clamp(0px, calc((100vw - 1000px) / 6), 80px))" }}>
           <p className="font-medium text-2xl mb-4" style={{ textTransform: "uppercase", color: "#5700d1" }}>Our Market Position</p>
           <div className={marketInView ? "market-diagram-animate" : ""}>
             <MarketSpectrum />
