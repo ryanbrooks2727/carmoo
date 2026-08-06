@@ -364,8 +364,8 @@ export default function Home() {
   const [valLoading, setValLoading] = useState(false);
   const [marketInView, setMarketInView] = useState(false);
   const marketSectionRef = useRef<HTMLElement | null>(null);
-  const [regArrowInView, setRegArrowInView] = useState(false);
-  const regArrowRef = useRef<HTMLImageElement | null>(null);
+  const [lotteryTitleInView, setLotteryTitleInView] = useState(false);
+  const lotteryTitleRef = useRef<HTMLHeadingElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -390,12 +390,12 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const el = regArrowRef.current;
+    const el = lotteryTitleRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setRegArrowInView(true);
+          setLotteryTitleInView(true);
           observer.disconnect();
         }
       },
@@ -769,14 +769,16 @@ export default function Home() {
       </section>
 
       {/* WHY ELECTRIC */}
-      <section className="px-6" style={{ position: "relative", paddingTop: "64px", paddingBottom: "128px", marginBottom: "80px" }}>
-        <style>{`@keyframes regArrowSpin { from { transform: rotate(0deg); } to { transform: rotate(1080deg); } }`}</style>
+      <section className="px-6" style={{ position: "relative", paddingTop: "0px", paddingBottom: "0px", marginBottom: "80px" }}>
+        <style>{`@keyframes moreGrowIn { 0% { transform: scale(0.3); } 65% { transform: scale(1.35); } 100% { transform: scale(1); } }`}</style>
+        <h2 ref={lotteryTitleRef} className="text-center" style={{ fontSize: "3rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "48px" }}>It&apos;s time for{" "}<span style={{ display: "inline-block", fontSize: "1.4em", color: "#5700d1", animation: lotteryTitleInView ? "moreGrowIn 1.6s ease-in-out both" : "none" }}>more</span></h2>
+        <div style={{ position: "relative", height: "510px" }}>
         <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1152px, calc(100% - 48px))", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/lot78.svg" alt="Celebrating with confetti" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.68)" }} />
+          <img src="/lot88.svg" alt="Celebrating with confetti" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.68)" }} />
         </div>
-        <div className="max-w-5xl mx-auto" style={{ position: "relative", zIndex: 1 }}>
-          <div className="grid md:grid-cols-2 gap-16 items-center mb-16">
+        <div className="max-w-5xl mx-auto" style={{ position: "relative", zIndex: 1, height: "100%", display: "flex", alignItems: "center" }}>
+          <div className="grid md:grid-cols-2 gap-16 items-center" style={{ width: "100%" }}>
             <div className="rounded-2xl p-6" style={{ backgroundColor: "#111111", maxWidth: "420px" }}>
               <h3 className="font-medium mb-2" style={{ color: "#ffffff", fontSize: "1.55rem" }}><span style={{ fontSize: "2.2rem" }}>Shhh..</span> It&apos;s not the lottery</h3>
               <p className="font-medium mb-6 leading-relaxed" style={{ color: "#ffffff", fontSize: "1.55rem" }}>but you could get thousands more</p>
@@ -797,11 +799,12 @@ export default function Home() {
                   style={{ backgroundColor: "#5700d1", width: "48px", height: "48px" }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img ref={regArrowRef} src="/logoarrow.svg" alt="" style={{ width: 30, height: 30, filter: "invert(1)", animation: regArrowInView ? "regArrowSpin 1.1s ease-in-out both" : "none" }} />
+                  <img src="/logoarrow.svg" alt="" style={{ width: 30, height: 30, filter: "invert(1)" }} />
                 </button>
               </div>
             </div>
           </div>
+        </div>
         </div>
       </section>
 
