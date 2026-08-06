@@ -182,7 +182,7 @@ const MarketIcon = ({ triggered }: { triggered: boolean }) => {
   }, [triggered]);
 
   return (
-    <svg viewBox="0 0 375 375" style={{ position: "absolute", left: "-200px", top: "50%", transform: "translateY(-50%)", width: "692px", height: "692px" }}>
+    <svg viewBox="0 0 375 375" style={{ position: "absolute", left: "-162px", top: "50%", transform: "translateY(-50%)", width: "560px", height: "560px" }}>
       <g transform="translate(-2.1 2.2)">
         <g ref={topRef}>
           <polygon points={MARKET_ICON_TOP.points} fill="#111111" />
@@ -713,16 +713,13 @@ export default function Home() {
                     ["2", "Approved & listed", "We vet all our private sellers. Once approved your advert will appear under browse cars.", "/step-approved.jpg"],
                     ["3", "Finish Up", "We'll arrange a vetted private buyer to view your car ..funds cleared, off it goes.", "/step-handover.jpg"],
                   ].map(([num, title, desc, img]) => (
-                    <div key={num}>
-                      <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "1/1" }}>
+                    <div key={num} style={{ backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)", overflow: "hidden" }}>
+                      <div style={{ aspectRatio: "1/1" }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
+                      <div style={{ padding: "18px 18px 22px" }}>
                       <div style={{ position: "relative", width: "58px", height: "32px", margin: "0 auto 4px" }}>
-                <svg viewBox="0 0 100 54" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
-                  <polyline points="46,7 12,27 46,47" fill="none" stroke="#5700d1" strokeWidth={12} strokeLinejoin="miter" />
-                  <polyline points="54,7 88,27 54,47" fill="none" stroke="#5700d1" strokeWidth={12} strokeLinejoin="miter" />
-                </svg>
                 <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
               </div>
                       <p className="mb-2" style={{ color: "#111111", fontWeight: 600, fontSize: "1.6rem" }}>{title}</p>
@@ -733,6 +730,7 @@ export default function Home() {
                             : [part]
                         )}
                       </p>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -745,20 +743,18 @@ export default function Home() {
                     ["2", "Arrange a viewing", "Click 'arrange a viewing'. We'll speak to you and verify your identity before swiftly connecting you with our seller. We will remain involved from start to finish and oversee the process to make sure everything is structured and taken care of. You won't be alone.", "/step-approved.jpg"],
                     ["3", "Buy directly", "Purchase directly at the seller's verified home. We will be on standby during your viewing to answer and resolve any issues real time. Once happy, pay immediately through our secure payment system and drive away in your new car. Remember all paperwork and any outstanding finance will be sorted by us.", "/step-handover.jpg"],
                   ].map(([num, title, desc, img]) => (
-                    <div key={num}>
-                      <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "1/1" }}>
+                    <div key={num} style={{ backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)", overflow: "hidden" }}>
+                      <div style={{ aspectRatio: "1/1" }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                       </div>
+                      <div style={{ padding: "18px 18px 22px" }}>
                       <div style={{ position: "relative", width: "58px", height: "32px", margin: "0 auto 4px" }}>
-                <svg viewBox="0 0 100 54" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
-                  <polyline points="46,7 12,27 46,47" fill="none" stroke="#5700d1" strokeWidth={12} strokeLinejoin="miter" />
-                  <polyline points="54,7 88,27 54,47" fill="none" stroke="#5700d1" strokeWidth={12} strokeLinejoin="miter" />
-                </svg>
                 <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
               </div>
                       <p className="mb-2" style={{ color: "#111111", fontWeight: 600, fontSize: "1.6rem" }}>{title}</p>
                       <p className="leading-relaxed" style={{ color: "rgba(0,0,0,0.62)", fontSize: "1.15rem" }}>{desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -771,7 +767,7 @@ export default function Home() {
       {/* WHY ELECTRIC */}
       <section className="px-6" style={{ position: "relative", paddingTop: "0px", paddingBottom: "0px", marginBottom: "80px" }}>
         <style>{`@keyframes moreGrowIn { 0% { transform: scale(0.3); } 65% { transform: scale(1.35); } 100% { transform: scale(1); } }`}</style>
-        <h2 ref={lotteryTitleRef} className="text-center" style={{ fontSize: "2.6rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "48px" }}>&apos;It&apos;s time for{" "}<span style={{ display: "inline-block", fontSize: "1.4em", color: "#5700d1", animation: lotteryTitleInView ? "moreGrowIn 1.6s ease-in-out both" : "none" }}>more</span>&apos;</h2>
+        <h2 ref={lotteryTitleRef} className="text-center" style={{ fontSize: "2.45rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "48px" }}>&apos;It&apos;s time for{" "}<span style={{ display: "inline-block", fontSize: "1.4em", color: "#5700d1", animation: lotteryTitleInView ? "moreGrowIn 1.6s ease-in-out both" : "none" }}>more</span>&apos;</h2>
         <div style={{ position: "relative", height: "510px" }}>
         <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1152px, calc(100% - 48px))", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -780,7 +776,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto" style={{ position: "relative", zIndex: 1, height: "100%", display: "flex", alignItems: "center" }}>
           <div className="grid md:grid-cols-2 gap-16 items-center" style={{ width: "100%" }}>
             <div className="rounded-2xl p-6" style={{ backgroundColor: "#111111", maxWidth: "420px" }}>
-              <h3 className="font-medium mb-2" style={{ color: "#ffffff", fontSize: "1.55rem" }}><span style={{ fontSize: "2.2rem" }}>Shhh..</span> It&apos;s not the lottery</h3>
+              <h3 className="font-medium mb-2" style={{ color: "#ffffff", fontSize: "2.2rem" }}>It&apos;s not the lottery.</h3>
               <p className="font-medium mb-6 leading-relaxed" style={{ color: "#ffffff", fontSize: "1.55rem" }}>but you could get thousands more</p>
               <div className="flex items-center" style={{ backgroundColor: "#ffffff", borderRadius: "9999px", padding: "4px 4px 4px 16px" }}>
                 <input
@@ -809,7 +805,7 @@ export default function Home() {
       </section>
 
       {/* STATS BAR */}
-      <section ref={marketSectionRef} className="px-6" style={{ position: "relative", paddingTop: "76px", paddingBottom: "76px", marginBottom: "80px" }}>
+      <section ref={marketSectionRef} className="px-6" style={{ position: "relative", paddingTop: "0px", paddingBottom: "0px", marginBottom: "80px" }}>
         <style>{`
           @keyframes marketDiagramSlideIn {
             0% { clip-path: inset(0 100% 0 0); }
@@ -817,13 +813,15 @@ export default function Home() {
           }
           .market-diagram-animate { animation: marketDiagramSlideIn 1.2s linear forwards; }
         `}</style>
-        <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1152px, calc(100% - 48px))", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)" }}>
-          <MarketIcon triggered={marketInView} />
-        </div>
-        <div className="max-w-4xl mx-auto" style={{ position: "relative", zIndex: 1, transform: "translateX(clamp(0px, calc((100vw - 1000px) / 6), 80px))" }}>
-          <p className="font-medium text-2xl mb-4" style={{ textTransform: "uppercase", color: "#5700d1" }}>Our Market Position</p>
-          <div className={marketInView ? "market-diagram-animate" : ""}>
-            <MarketSpectrum />
+        <h2 className="text-center" style={{ fontSize: "2.15rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "48px" }}>Our Market Position</h2>
+        <div style={{ position: "relative", paddingTop: "72px", paddingBottom: "72px" }}>
+          <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1152px, calc(100% - 48px))", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)" }}>
+            <MarketIcon triggered={marketInView} />
+          </div>
+          <div className="max-w-4xl mx-auto" style={{ position: "relative", zIndex: 1, transform: "translateX(clamp(0px, calc((100vw - 1000px) / 6), 80px))" }}>
+            <div className={marketInView ? "market-diagram-animate" : ""}>
+              <MarketSpectrum />
+            </div>
           </div>
         </div>
       </section>
