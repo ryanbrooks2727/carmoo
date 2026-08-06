@@ -714,9 +714,15 @@ export default function Home() {
                     ["3", "Finish Up", "We'll arrange a vetted private buyer to view your car ..funds cleared, off it goes.", "/step-handover.jpg"],
                   ].map(([num, title, desc, img]) => (
                     <div key={num} style={{ backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)", overflow: "hidden" }}>
-                      <div style={{ aspectRatio: "1/1" }}>
+                      <div style={{ aspectRatio: "1/1", position: "relative" }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        {num === "1" && (
+                          <div style={{ position: "absolute", left: "16px", bottom: "90px", backgroundColor: "rgba(17,17,17,0.55)", backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)", borderRadius: "16px", padding: "12px 16px", display: "flex", alignItems: "center", gap: "8px" }}>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00bf63" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="6 15 12 9 18 15" /></svg>
+                            <span style={{ color: "#ffffff", fontWeight: 700, fontSize: "1.15rem", letterSpacing: "-0.01em" }}>£1,500 more</span>
+                          </div>
+                        )}
                       </div>
                       <div style={{ padding: "18px 18px 22px" }}>
                       <div style={{ position: "relative", width: "58px", height: "32px", margin: "0 auto 4px" }}>
@@ -813,7 +819,7 @@ export default function Home() {
           }
           .market-diagram-animate { animation: marketDiagramSlideIn 1.2s linear forwards; }
         `}</style>
-        <h2 className="text-center" style={{ fontSize: "2.15rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "48px" }}>Our Market Position</h2>
+        <h2 className="text-center" style={{ fontSize: "2.8rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "48px" }}>Our market position</h2>
         <div style={{ position: "relative", paddingTop: "72px", paddingBottom: "72px" }}>
           <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1152px, calc(100% - 48px))", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)" }}>
             <MarketIcon triggered={marketInView} />
