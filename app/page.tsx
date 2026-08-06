@@ -707,8 +707,8 @@ export default function Home() {
                 <div className="grid grid-cols-3 gap-20 mb-8">
                   {[
                     ["1", "Higher valuation", "See your instant higher valuation. Use our app to profile your vehicle.", "/step-valuation.jpg"],
-                    ["2", "Approved & listed", "We run checks on all our private sellers. Once approved your advert will appear under 'Browse Cars'.", "/step-approved.jpg"],
-                    ["3", "Finish Up", "It won't be long before we're arranging a vetted private buyer to view your car. Funds cleared and off it goes.", "/step-handover.jpg"],
+                    ["2", "Approved & listed", "We run checks on all our private sellers. Once approved your advert will appear under Browse Cars.", "/step-approved.jpg"],
+                    ["3", "Finish Up", "We'll arrange a vetted private buyer to view your car ..Funds cleared & off it goes.", "/step-handover.jpg"],
                   ].map(([num, title, desc, img]) => (
                     <div key={num}>
                       <div className="rounded-xl overflow-hidden mb-2" style={{ aspectRatio: "1/1" }}>
@@ -722,7 +722,7 @@ export default function Home() {
                 </svg>
                 <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
               </div>
-                      <p className="mb-2" style={{ color: "#111111", fontWeight: 700, fontSize: "1.75rem" }}>{title}</p>
+                      <p className="mb-2" style={{ color: "#111111", fontWeight: 600, fontSize: "1.75rem" }}>{title}</p>
                       <p className="leading-relaxed" style={{ color: "rgba(0,0,0,0.62)", fontSize: "1.15rem" }}>
                         {desc.split("Browse Cars").flatMap((part, i, arr) =>
                           i < arr.length - 1
@@ -754,7 +754,7 @@ export default function Home() {
                 </svg>
                 <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#111111", fontSize: "0.9rem", fontWeight: 500 }}>{num}</span>
               </div>
-                      <p className="mb-2" style={{ color: "#111111", fontWeight: 700, fontSize: "1.75rem" }}>{title}</p>
+                      <p className="mb-2" style={{ color: "#111111", fontWeight: 600, fontSize: "1.75rem" }}>{title}</p>
                       <p className="leading-relaxed" style={{ color: "rgba(0,0,0,0.62)", fontSize: "1.15rem" }}>{desc}</p>
                     </div>
                   ))}
