@@ -455,7 +455,7 @@ export default function Home() {
             </a>
           </div>
           {scrolled ? (
-            <p className="font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)", textTransform: "lowercase", fontSize: "1.05rem" }}>..a mooch better way</p>
+            <p className="font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)", fontSize: "1.05rem" }}>..It&apos;s time for <span style={{ fontSize: "1.4em", color: "#5700d1", fontWeight: 600 }}>more</span></p>
           ) : (
             <div className="flex items-center gap-6">
               <a href="#how-it-works" className="text-sm font-medium hidden md:block" style={{ color: "rgba(0,0,0,0.6)" }}>How it works</a>
@@ -569,7 +569,7 @@ export default function Home() {
                       }
                     `}</style>
                     <h3 style={{ fontSize: "2.21rem", fontWeight: 500, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>
-                      Buy a car for{" "}
+                      It&apos;s time for{" "}
                       <span style={{ display: "inline-block", fontSize: "1.4em", color: "#5700d1", animation: "lessGrowIn 1.6s ease-in-out both" }}>less</span>
                     </h3>
                     <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}>Pay <strong style={{ fontWeight: 600, color: "#111111" }}>£2,800 less</strong> than dealership prices, on average*.</p>
@@ -589,10 +589,10 @@ export default function Home() {
                       }
                     `}</style>
                     <h3 style={{ fontSize: "2.47rem", fontWeight: 500, color: "#111111", lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: "0.97rem" }}>
-                      Sell my car for{" "}
+                      It&apos;s time for{" "}
                       <span style={{ display: "inline-block", fontSize: "1.4em", color: "#5700d1", animation: "moreGrowIn 1.6s ease-in-out both" }}>more</span>
                     </h3>
-                    <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}><strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than Motorway, and <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than WBAC on average*.</p>
+                    <p style={{ fontSize: "1.23rem", color: "rgba(0,0,0,0.6)", marginBottom: "1.94rem", lineHeight: 1.5 }}>Get <strong style={{ fontWeight: 600, color: "#111111" }}>£1,500 more</strong> than Motorway, and <strong style={{ fontWeight: 600, color: "#111111" }}>£2,500 more</strong> than WBAC on average*.</p>
                     <div className="flex items-stretch" style={{ gap: "11px" }}>
                       <div className="flex items-center rounded-lg overflow-hidden flex-1" style={{ border: "2px solid #e8e3da" }}>
                         <div className="font-medium text-xs" style={{ backgroundColor: "#f6f3ed", color: "#111111", padding: "15px 18px" }}>GB</div>
@@ -771,7 +771,7 @@ export default function Home() {
       {/* WHY ELECTRIC */}
       <section className="px-6" style={{ position: "relative", paddingTop: "0px", paddingBottom: "0px", marginBottom: "80px" }}>
         <style>{`@keyframes moreGrowIn { 0% { transform: scale(0.3); } 65% { transform: scale(1.35); } 100% { transform: scale(1); } }`}</style>
-        <h2 ref={lotteryTitleRef} className="text-center" style={{ fontSize: "3rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "48px" }}>It&apos;s time for{" "}<span style={{ display: "inline-block", fontSize: "1.4em", color: "#5700d1", animation: lotteryTitleInView ? "moreGrowIn 1.6s ease-in-out both" : "none" }}>more</span></h2>
+        <h2 ref={lotteryTitleRef} className="text-center" style={{ fontSize: "2.6rem", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "48px" }}>&apos;It&apos;s time for{" "}<span style={{ display: "inline-block", fontSize: "1.4em", color: "#5700d1", animation: lotteryTitleInView ? "moreGrowIn 1.6s ease-in-out both" : "none" }}>more</span>&apos;</h2>
         <div style={{ position: "relative", height: "510px" }}>
         <div style={{ position: "absolute", left: "50%", top: 0, transform: "translateX(-50%)", width: "min(1152px, calc(100% - 48px))", height: "100%", backgroundColor: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "24px", overflow: "hidden", zIndex: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.06)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
